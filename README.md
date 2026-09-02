@@ -1,88 +1,63 @@
 # DKKB
 
-**Daniel Kindl Knowledge Base** is a public, version-controlled knowledge base for software engineering.
+DKKB is the Daniel Kindl Knowledge Base. It is a public, version-controlled software engineering knowledge base for principles, architecture, patterns, recurring problems, practices, AI, LLM engineering, and personal engineering guidance.
 
-DKKB collects knowledge from literature, primary sources, practical experience, experiments, and derived engineering guidance. The repository is the source of truth. The website is a generated view of the repository.
+The Git repository is the source of truth. The website is a generated presentation layer.
 
-## Scope
+## Principles
 
-DKKB covers topics such as:
+DKKB follows these project rules:
 
-- software engineering principles
-- software architecture
-- design patterns and anti-patterns
-- recurring engineering problems
-- coding and refactoring
-- testing
-- reliability and performance
-- security
-- databases and API design
-- AI engineering
-- LLM engineering
-- personal engineering guidance
+- Markdown is the canonical knowledge format.
+- Git history preserves change history. Canonical entries represent the current understanding.
+- Guidance must state context, limits, and trade-offs.
+- Sourced knowledge, personal experience, experiments, and derived guidance must be distinguishable.
+- External material must be summarized in original wording and cited.
+- AI-generated inference must never be presented as personal experience.
+- The writing style is based on ASD-STE100 principles and adapted to software engineering.
+- Em dashes, marketing language, generic AI filler, and unnecessary buzzwords are not allowed.
+- The project must remain operable with free static infrastructure.
+- The website must not become a dependency of the knowledge itself.
 
-The project is not a collection of absolute best practices. Entries must describe context, trade-offs, limits, and evidence where these matter.
+## Content
 
-## Project principles
+The initial taxonomy covers:
 
-- Markdown is the canonical content format.
-- Git history preserves change history. Canonical entries describe the current understanding.
-- The repository must remain usable without the generated website.
-- The core project must remain operable with free infrastructure.
-- External claims require traceable sources when a source is available.
-- Personal experience must be identified as personal experience.
-- AI-assisted contributions follow the same review rules as other contributions.
-- Technical writing must follow the DKKB writing standard.
+- principles;
+- architecture;
+- patterns and anti-patterns;
+- recurring engineering problems;
+- engineering practices;
+- coding and testing;
+- reliability, performance, and security;
+- databases and API design;
+- AI and LLM engineering;
+- a personal engineering playbook;
+- glossary and references.
 
 ## Website
 
-The site uses Astro and Starlight and is designed for GitHub Pages. It is fully static. There is no backend, database, CMS, account system, or analytics dependency.
+The site uses Astro and Starlight. GitHub Pages hosts the generated static output.
 
-After the bootstrap pull request is merged and GitHub Pages is configured to use GitHub Actions, the site will be available at:
-
-`https://daniel-kindl.github.io/dkkb/`
-
-## Repository layout
-
-```text
-src/content/docs/    Canonical knowledge entries
-config/              Repository validation rules
-scripts/             Local and CI validation tools
-docs/                Project governance and authoring documentation
-.github/              GitHub workflows and contribution templates
-```
-
-The published knowledge taxonomy is under `src/content/docs/`.
-
-## Local development
-
-Requirements:
-
-- Node.js 22.12.0 or later
-- pnpm 11.25.0
+Local development requires Node.js 22.13 or later and pnpm 11.25.0.
 
 ```sh
-corepack enable
 pnpm install
-pnpm check
 pnpm dev
 ```
 
-`pnpm check` is the local equivalent of the main CI quality gate.
+Run the complete quality gate with:
 
-## Contributing
+```sh
+pnpm check
+```
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before you make a contribution. AI agents must also follow [AGENTS.md](AGENTS.md).
+## Contribution
 
-Project policies:
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before changing knowledge content. AI agents must also follow [AGENTS.md](AGENTS.md).
 
-- [Architecture](docs/ARCHITECTURE.md)
-- [Content model](docs/CONTENT_MODEL.md)
-- [Governance](docs/GOVERNANCE.md)
-- [Source policy](docs/SOURCE_POLICY.md)
-- [Writing standard](docs/WRITING_STANDARD.md)
-- [Roadmap](ROADMAP.md)
+Project policies and design decisions are in the [`docs/`](docs/) directory.
 
 ## License
 
-See [LICENSE.md](LICENSE.md). Knowledge content and project code use separate licenses.
+Knowledge content and project code use separate licenses. See [LICENSE.md](LICENSE.md) for the scope and terms.
