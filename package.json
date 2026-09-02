@@ -5,7 +5,7 @@
   "description": "Daniel Kindl Knowledge Base: a public, version-controlled software engineering knowledge base.",
   "type": "module",
   "packageManager": "pnpm@11.25.0",
-  "engines": { "node": ">=22.12.0" },
+  "engines": { "node": ">=22.13.0" },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
