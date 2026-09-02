@@ -1,0 +1,49 @@
+# Content model
+
+Each published knowledge page is a Markdown file under `src/content/docs/`.
+
+## Required frontmatter
+
+Every page must define `title`, `description`, `type`, `status`, and at least one `provenance` value.
+
+Supported entry types are `index`, `principle`, `pattern`, `anti-pattern`, `problem`, `practice`, `concept`, `decision`, `playbook`, `glossary`, and `reference`.
+
+Supported status values are `draft`, `reviewed`, `stable`, and `deprecated`.
+
+Git history stores previous versions. Do not create `v2`, `new`, or `final` copies of a canonical entry.
+
+## Provenance
+
+Supported provenance values are:
+
+- `literature`
+- `primary-source`
+- `personal-experience`
+- `experiment`
+- `derived-guidance`
+
+`personal-experience` means an observation that Daniel Kindl can substantiate from his own work. AI agents must not assign this provenance based on inference.
+
+## Optional metadata
+
+Entries can also define `confidence`, `topics`, `related`, `sources`, and `lastReviewed`.
+
+Values in `related` are canonical content IDs. Use the path below `src/content/docs/` without the `.md` suffix. For an `index.md` page, use the directory name. For example:
+
+```yaml
+related:
+  - principles/composition-over-inheritance
+  - decisions/monolith-vs-microservices
+```
+
+A related entry must exist. An entry must not reference itself or repeat the same related ID.
+
+## Decision entries
+
+A `decision` entry compares approaches that can each be valid in the right context.
+
+It should normally explain the problem, decision factors, relevant options, trade-offs, failure modes, and the conditions that favor each option. It must not reduce a contextual choice to a universal rule.
+
+## Article structure
+
+Substantial entries should explain the concept or problem, its context, important trade-offs, limits, related knowledge, and supporting evidence when these apply. Do not add empty sections only to satisfy a template.

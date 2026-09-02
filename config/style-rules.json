@@ -1,0 +1,16 @@
+{
+  "forbiddenCharacters": ["—"],
+  "forbiddenPhrases": [
+    "it is important to note",
+    "it is worth noting",
+    "in today's rapidly evolving",
+    "in the ever-evolving",
+    "delve into",
+    "game-changing",
+    "cutting-edge",
+    "seamlessly leverage",
+    "unlock the power of",
+    "navigate the landscape",
+    "key takeaway"
+  ]
+}

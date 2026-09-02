@@ -1,0 +1,25 @@
+{
+  "name": "dkkb",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Daniel Kindl Knowledge Base: a public, version-controlled software engineering knowledge base.",
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\"",
+    "validate:content": "node scripts/validate-content.mjs",
+    "check": "pnpm validate:content && pnpm lint:markdown && pnpm build"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.41.11",
+    "astro": "7.2.10"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.23.2",
+    "yaml": "2.9.0"
+  }
+}
