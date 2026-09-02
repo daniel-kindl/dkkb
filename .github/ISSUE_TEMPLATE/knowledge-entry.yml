@@ -1,0 +1,23 @@
+name: Knowledge entry
+description: Propose a new knowledge entry or a substantial expansion of an existing entry.
+title: "knowledge: "
+body:
+  - type: textarea
+    id: subject
+    attributes:
+      label: Subject
+      description: What concept, principle, pattern, problem, or practice should DKKB cover?
+    validations:
+      required: true
+  - type: textarea
+    id: gap
+    attributes:
+      label: Knowledge gap
+      description: What should a reader be able to understand or decide after reading this entry?
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Candidate sources or experience
+      description: List primary sources, literature, experiments, or relevant personal experience.
