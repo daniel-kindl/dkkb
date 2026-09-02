@@ -6,7 +6,7 @@ DKKB accepts corrections, new knowledge entries, source improvements, taxonomy c
 
 1. Search for an existing canonical entry.
 2. Update the existing entry when it already covers the subject.
-3. Create a new entry only when it represents a distinct concept or problem.
+3. Create a new entry only when it represents a distinct concept, problem, or engineering decision.
 4. Read the writing and source policies before you write substantial content.
 
 Use these project documents:
@@ -16,6 +16,14 @@ Use these project documents:
 - [Content model](docs/CONTENT_MODEL.md)
 - [Governance](docs/GOVERNANCE.md)
 
+## When an issue is required
+
+Small corrections do not need a separate issue. Examples include typos, wording corrections, broken links, source improvements, and small clarifications to an existing entry.
+
+Open an issue before work starts when a change adds a substantial canonical entry, adds a top-level category or entry type, changes the taxonomy, changes a writing or source policy, or changes project architecture or tooling.
+
+The issue should define the knowledge gap or project problem before implementation starts.
+
 ## Content rules
 
 - Use Markdown files only for canonical knowledge.
@@ -23,11 +31,32 @@ Use these project documents:
 - Add valid YAML frontmatter to each published entry.
 - Keep one canonical entry for one concept.
 - Link related knowledge instead of copying the same explanation.
+- Use canonical content IDs in `related` metadata.
 - State context and trade-offs when guidance is conditional.
 - Do not present personal experience as universal evidence.
 - Do not invent citations or source details.
 - Do not copy substantial text from copyrighted sources.
+- Do not create bookmark dumps or "awesome" lists as knowledge entries.
 - Do not add MDX unless the repository policy changes first.
+
+## Content Definition of Done
+
+A substantial entry is ready for `reviewed` or `stable` status only when the applicable checks below are satisfied:
+
+- no existing canonical entry already owns the subject;
+- the entry states the problem, purpose, or decision it helps with;
+- recommendations include relevant context and limits;
+- important trade-offs are documented;
+- factual technical claims are verified;
+- primary sources are preferred when they are available and appropriate;
+- personal experience is identified explicitly;
+- derived guidance makes its reasoning visible when needed;
+- related canonical entries are linked where useful;
+- the text follows the DKKB writing standard;
+- the entry remains useful as plain Markdown without the generated website;
+- CI passes.
+
+Not every entry needs every article section. Do not add empty sections only to satisfy this checklist.
 
 ## Change process
 
