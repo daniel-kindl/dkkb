@@ -6,7 +6,7 @@ Each published knowledge page is a Markdown file under `src/content/docs/`.
 
 Every page must define `title`, `description`, `type`, `status`, and at least one `provenance` value.
 
-Supported entry types are `index`, `principle`, `pattern`, `anti-pattern`, `problem`, `practice`, `concept`, `playbook`, `glossary`, and `reference`.
+Supported entry types are `index`, `principle`, `pattern`, `anti-pattern`, `problem`, `practice`, `concept`, `decision`, `playbook`, `glossary`, and `reference`.
 
 Supported status values are `draft`, `reviewed`, `stable`, and `deprecated`.
 
@@ -27,6 +27,22 @@ Supported provenance values are:
 ## Optional metadata
 
 Entries can also define `confidence`, `topics`, `related`, `sources`, and `lastReviewed`.
+
+Values in `related` are canonical content IDs. Use the path below `src/content/docs/` without the `.md` suffix. For an `index.md` page, use the directory name. For example:
+
+```yaml
+related:
+  - principles/composition-over-inheritance
+  - decisions/monolith-vs-microservices
+```
+
+A related entry must exist. An entry must not reference itself or repeat the same related ID.
+
+## Decision entries
+
+A `decision` entry compares approaches that can each be valid in the right context.
+
+It should normally explain the problem, decision factors, relevant options, trade-offs, failure modes, and the conditions that favor each option. It must not reduce a contextual choice to a universal rule.
 
 ## Article structure
 
