@@ -16,7 +16,7 @@ sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"
     note: Describes object composition as a major technique for reusable object-oriented design.
-lastReviewed: 2026-09-02
+lastReviewed: "2026-09-02"
 ---
 
 # Prefer composition over inheritance
@@ -39,4 +39,32 @@ Inheritance can remain the clearer design when the domain has a real subtype rel
 
 ## Failure mode
 
-Do not replace every class relationship with an interface only to follow this principle. The goal is lower coupling and clearer behavior, not a larger number of abstractions.
+A deep inheritance hierarchy can couple unrelated concerns. A change to a base class can affect subclasses that were not part of the original change.
+
+Composition can fail in a different way. Too many small abstractions can make a simple flow difficult to follow.
+
+## When to use composition
+
+Use composition when:
+
+- behavior varies independently from the object that uses it;
+- several behaviors must be combined;
+- callers need to replace a dependency;
+- inheritance would exist mainly for code reuse.
+
+## When inheritance can be clearer
+
+Inheritance can be suitable when:
+
+- the subtype relationship is real and stable;
+- callers can safely use the subtype anywhere the parent is expected;
+- shared behavior belongs to the inherited contract;
+- the hierarchy stays shallow and understandable.
+
+## Practical default
+
+Prefer composition as a default design tool. Do not replace a simple and valid subtype relationship with extra abstractions only to avoid inheritance.
+
+## Sources
+
+- Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides. *Design Patterns: Elements of Reusable Object-Oriented Software*. Addison-Wesley, 1994.
