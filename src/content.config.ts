@@ -16,7 +16,7 @@ export const collections = {
     schema: docsSchema({
       extend: z.object({
         description: z.string().min(1),
-        type: z.enum(['index','principle','pattern','anti-pattern','problem','practice','concept','playbook','glossary','reference']),
+        type: z.enum(['index','principle','pattern','anti-pattern','problem','practice','concept','decision','playbook','glossary','reference']),
         status: z.enum(['draft','reviewed','stable','deprecated']),
         confidence: z.enum(['low','medium','high']).optional(),
         provenance: z.array(z.enum(['literature','primary-source','personal-experience','experiment','derived-guidance'])).min(1),
