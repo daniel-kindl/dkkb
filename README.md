@@ -1,6 +1,6 @@
 # DKKB
 
-DKKB is the Daniel Kindl Knowledge Base. It is a public, version-controlled software engineering knowledge base for principles, architecture, patterns, recurring problems, practices, AI, LLM engineering, and personal engineering guidance.
+DKKB is the Daniel Kindl Knowledge Base. It is a public, version-controlled software engineering knowledge base for principles, architecture, engineering decisions, patterns, recurring problems, practices, AI, LLM engineering, and personal engineering guidance.
 
 The Git repository is the source of truth. The website is a generated presentation layer.
 
@@ -25,6 +25,7 @@ The initial taxonomy covers:
 
 - principles;
 - architecture;
+- engineering decisions and trade-offs;
 - patterns and anti-patterns;
 - recurring engineering problems;
 - engineering practices;
