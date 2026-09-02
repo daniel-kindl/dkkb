@@ -14,6 +14,14 @@ Summarize useful knowledge in original wording and cite the work. Do not copy su
 
 Organize canonical entries by the engineering concept, not by the chapter structure of a book.
 
+## Resource collections
+
+DKKB is not a bookmark collection or an "awesome" list.
+
+External resources should normally support a canonical knowledge entry that explains the knowledge, context, or decision. Do not create pages that only collect links without adding durable engineering value.
+
+The `references` category is for reference material that has a clear repository purpose, such as source conventions, important standards, or source notes that justify their own canonical entry.
+
 ## Personal experience
 
 Identify personal observations as personal experience. Record the relevant context and the limit of the conclusion.
