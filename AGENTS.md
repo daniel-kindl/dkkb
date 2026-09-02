@@ -20,15 +20,19 @@ Before you create an entry:
 
 1. Search for an existing entry that covers the same concept.
 2. Prefer an update to the canonical entry over duplicate content.
-3. Identify the provenance of each material claim.
-4. Use primary sources when they are practical and authoritative.
-5. Separate established knowledge from personal observations and derived guidance.
-6. State uncertainty when evidence is incomplete.
-7. Include trade-offs when a recommendation depends on context.
+3. Open or use an existing issue when `CONTRIBUTING.md` requires one for the change.
+4. Identify the provenance of each material claim.
+5. Use primary sources when they are practical and authoritative.
+6. Separate established knowledge from personal observations and derived guidance.
+7. State uncertainty when evidence is incomplete.
+8. Include trade-offs when a recommendation depends on context.
+9. Link related canonical entries with valid content IDs when useful.
 
 Never invent a citation, benchmark, incident, quotation, personal experience, or project result.
 
 Do not represent an AI-generated inference as Daniel Kindl's personal experience.
+
+Do not create bookmark dumps or "awesome" lists as knowledge entries.
 
 ## Writing
 
