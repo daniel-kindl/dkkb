@@ -1,23 +1,61 @@
 name: Knowledge entry
-description: Propose a new knowledge entry or a substantial expansion of an existing entry.
+description: Propose a new substantial canonical entry or a substantial expansion of an existing entry.
 title: "knowledge: "
 body:
-  - type: textarea
-    id: subject
+  - type: input
+    id: title
     attributes:
-      label: Subject
-      description: What concept, principle, pattern, problem, or practice should DKKB cover?
+      label: Proposed canonical title
+      description: Use the title the entry should have if it is accepted.
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Entry type
+      options:
+        - principle
+        - pattern
+        - anti-pattern
+        - problem
+        - practice
+        - concept
+        - decision
+        - playbook
+        - glossary
+        - reference
     validations:
       required: true
   - type: textarea
     id: gap
     attributes:
       label: Knowledge gap
-      description: What should a reader be able to understand or decide after reading this entry?
+      description: What problem, concept, or engineering decision should this entry help the reader understand?
+    validations:
+      required: true
+  - type: textarea
+    id: existing
+    attributes:
+      label: Existing coverage
+      description: Which existing DKKB entries are related, and why do they not already own this subject?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Proposed scope
+      description: State the intended boundaries, important trade-offs, and what should remain out of scope.
+    validations:
+      required: true
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Expected provenance
+      description: Identify expected provenance such as literature, primary sources, personal experience, experiments, or derived guidance.
     validations:
       required: true
   - type: textarea
     id: sources
     attributes:
-      label: Candidate sources or experience
-      description: List primary sources, literature, experiments, or relevant personal experience.
+      label: Candidate sources or evidence
+      description: List primary sources, literature, experiments, or relevant personal experience that should support the entry.
