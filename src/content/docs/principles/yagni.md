@@ -33,6 +33,10 @@ YAGNI is useful when a proposed abstraction, extension point, feature, or infras
 
 It does not mean ignoring known future constraints. Some decisions are expensive to reverse, and early preparation can be justified when evidence is strong.
 
+:::caution[YAGNI does not ignore known constraints]
+Do not use YAGNI to postpone work for a requirement that is already credible and expensive to retrofit. The principle targets speculative capability, not evidence-backed preparation.
+:::
+
 ## Benefits
 
 Deferring speculative work:

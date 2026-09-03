@@ -26,6 +26,14 @@ High-level policy should not be forced to depend directly on a replaceable imple
 
 Dependency inversion introduces a stable contract at the boundary. The policy and the implementation depend on that contract instead of the policy importing the implementation directly.
 
+```mermaid
+flowchart LR
+    Policy[High-level policy] --> Contract[Stable contract]
+    Implementation[Replaceable implementation] --> Contract
+```
+
+The dependency arrows point toward the contract. The policy does not need to import the concrete implementation.
+
 ## Context
 
 This principle is useful at boundaries such as persistence, external services, operating-system integration, delivery mechanisms, or algorithms with several valid implementations.
@@ -46,6 +54,10 @@ A good inverted dependency can:
 The abstraction becomes another contract to design and maintain. A weak abstraction can leak the low-level API or grow methods for only one implementation.
 
 Interfaces created only for ceremony add indirection without creating useful independence.
+
+:::caution[Do not invert every dependency]
+An abstraction is useful when it protects a meaningful policy boundary. An interface with one stable implementation can add indirection without reducing important coupling.
+:::
 
 ## Failure modes
 

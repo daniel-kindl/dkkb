@@ -25,6 +25,10 @@ DRY is about duplicated knowledge. It is not a rule that every repeated line of 
 
 A system becomes harder to change when one fact must be updated in several independent places. If those copies diverge, the system can become internally inconsistent.
 
+:::caution[Similarity is not shared knowledge]
+Two blocks can look the same today and still represent different concepts. Deduplicate because they encode one fact or rule, not only because their text is similar.
+:::
+
 ## Context
 
 Duplication matters most when several representations encode the same decision, rule, schema, constant, or business fact.

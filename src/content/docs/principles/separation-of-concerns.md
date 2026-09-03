@@ -30,6 +30,16 @@ Separate concerns so that one part of a system can be understood and changed wit
 
 A concern can be a policy, representation, integration, persistence mechanism, user interface, security rule, or other responsibility that changes for its own reasons.
 
+```mermaid
+flowchart LR
+    UI[Presentation concern] --> Contract[Application boundary]
+    Policy[Domain policy] --> Contract
+    Contract --> Persistence[Persistence concern]
+    Contract --> External[External integration]
+```
+
+The exact shape varies by system. The useful property is that one concern does not need unrelated implementation detail from another concern.
+
 ## Context
 
 Separation is valuable when concerns have different change drivers or when one concern exposes implementation detail that other parts do not need.
@@ -50,6 +60,10 @@ Good separation can:
 Every boundary has a cost. It can add interfaces, data conversion, indirection, deployment coordination, or latency.
 
 Do not split a cohesive unit only to maximize the number of modules or services.
+
+:::caution[Boundaries need a reason]
+A layer that only forwards calls does not create useful separation by itself. Prefer a boundary that hides a decision, protects a contract, or isolates a distinct change driver.
+:::
 
 ## Failure modes
 
