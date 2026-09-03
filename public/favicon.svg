@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">DKKB</title>
+  <rect width="64" height="64" rx="12" fill="#0f172a"/>
+  <g transform="translate(6.1 48) scale(.0155 -.0214)">
+    <path d="M573 1202V291H711Q947 291 1071.5 408Q1196 525 1196 748Q1196 970 1072 1086Q948 1202 711 1202ZM188 1493H594Q934 1493 1100.5 1444.5Q1267 1396 1386 1280Q1491 1179 1542 1047Q1593 915 1593 748Q1593 579 1542 446.5Q1491 314 1386 213Q1266 97 1098 48.5Q930 0 594 0H188Z" fill="#f8fafc"/>
+    <path d="M1670 1493H2055V948L2610 1493H3057L2338 786L3131 0H2649L2055 588V0H1670Z" fill="#38bdf8"/>
+  </g>
+</svg>

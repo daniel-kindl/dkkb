@@ -12,6 +12,7 @@ Read the relevant policy before a material change:
 - `docs/SOURCE_POLICY.md`
 - `docs/CONTENT_MODEL.md`
 - `docs/PRESENTATION.md`
+- `docs/DESIGN_SYSTEM.md`
 - `docs/DIAGRAMS.md`
 - `docs/GOVERNANCE.md`
 - `docs/ARCHITECTURE.md`
