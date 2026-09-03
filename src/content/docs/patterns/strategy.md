@@ -200,7 +200,7 @@ Two implementations are not interchangeable only because they share a method sig
 
 ## Related knowledge
 
-- [Prefer composition over inheritance](../principles/composition-over-inheritance.md) — explains why variable behavior is usually easier to evolve through composition than subtype hierarchies.
+- [Prefer composition over inheritance](../principles/composition-over-inheritance.md): explains why variable behavior is usually easier to evolve through composition than subtype hierarchies.
 
 ## Sources
 
