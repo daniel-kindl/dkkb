@@ -6,8 +6,8 @@ hero:
   title: DKKB
   tagline: A version-controlled software engineering knowledge base for principles, architecture, patterns, decisions, AI, LLMs, and practical engineering guidance.
   actions:
-    - text: Explore foundations
-      link: ./principles/
+    - text: Explore the knowledge base
+      link: '#explore-knowledge-base'
       icon: right-arrow
     - text: View on GitHub
       link: https://github.com/daniel-kindl/dkkb
@@ -32,30 +32,6 @@ topics:
 DKKB is a public, version-controlled source of software engineering knowledge. It records concepts, patterns, decisions, practices, and practical guidance from literature, primary sources, experiments, and derived reasoning.
 
 The goal is not to collect links or universal rules. Entries explain when an idea is useful, what it costs, where it fails, and what evidence supports it.
-
-## Start here
-
-- **[Prefer composition over inheritance](./principles/composition-over-inheritance/)** explains when composition gives behavior a cleaner boundary than inheritance.
-- **[Strategy pattern](./patterns/strategy/)** shows how interchangeable behavior can sit behind one stable contract.
-- **[Safe online data migrations](./practices/safe-online-data-migrations/)** describes how to change persisted representations without switching reads too early.
-
-## Explore the knowledge base
-
-### Foundations
-
-[Principles](./principles/) · [Architecture](./architecture/) · [Decisions](./decisions/) · [Patterns](./patterns/) · [Anti-patterns](./anti-patterns/) · [Problems](./problems/) · [Practices](./practices/)
-
-### Engineering
-
-[Coding](./coding/) · [Testing](./testing/) · [Reliability](./reliability/) · [Performance](./performance/) · [Security](./security/) · [Databases](./databases/) · [API design](./api-design/)
-
-### AI
-
-[AI engineering](./ai/) · [LLM engineering](./llm/)
-
-### Personal and reference
-
-[Playbook](./playbook/) · [Glossary](./glossary/) · [References](./references/)
 
 ## How to use DKKB
 
