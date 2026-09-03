@@ -33,6 +33,19 @@ function contentId(file) {
   return withoutExtension.endsWith('/index') ? withoutExtension.slice(0, -'/index'.length) : withoutExtension;
 }
 
+function localTargetExists(file, target) {
+  const resolved = path.resolve(path.dirname(file), target);
+  const candidates = [resolved];
+  const withoutTrailingSlash = target.replace(/\/+$/, '');
+
+  if (withoutTrailingSlash && !path.extname(withoutTrailingSlash)) {
+    const routeTarget = path.resolve(path.dirname(file), withoutTrailingSlash);
+    candidates.push(`${routeTarget}.md`, path.join(routeTarget, 'index.md'));
+  }
+
+  return candidates.some((candidate) => fs.existsSync(candidate));
+}
+
 function checkLinks(file, content) {
   for (const match of content.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
     const raw = match[1].trim().replace(/^<|>$/g, '');
@@ -46,7 +59,7 @@ function checkLinks(file, content) {
       errors.push(`${rel(file)}: invalid encoded link '${raw}'.`);
       continue;
     }
-    if (!fs.existsSync(path.resolve(path.dirname(file), decoded))) {
+    if (!localTargetExists(file, decoded)) {
       errors.push(`${rel(file)}: broken local link '${raw}'.`);
     }
   }
@@ -130,6 +143,14 @@ for (const file of contentFiles) {
     errors.push(`${rel(file)}: duplicate canonical content ID '${id}'.`);
   } else {
     entries.set(id, { file, data });
+  }
+
+  if (data?.type === 'index' && id !== 'index' && /^## Entries\s*$/m.test(body)) {
+    errors.push(`${rel(file)}: category entry lists are generated from the content collection.`);
+  }
+
+  if (/^## Related knowledge\s*$/m.test(body)) {
+    errors.push(`${rel(file)}: related knowledge is generated from 'related' frontmatter.`);
   }
 
   for (const line of body.split('\n')) {

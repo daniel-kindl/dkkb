@@ -196,10 +196,6 @@ If many callers repeat the same strategy-selection rules, the system gains anoth
 
 Two implementations are not interchangeable only because they share a method signature. They must preserve the contract that callers depend on.
 
-## Related knowledge
-
-- [Prefer composition over inheritance](../principles/composition-over-inheritance.md): explains why variable behavior is usually easier to evolve through composition than subtype hierarchies.
-
 ## Sources
 
 :::note[Provenance]

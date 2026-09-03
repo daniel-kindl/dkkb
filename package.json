@@ -12,7 +12,8 @@
     "preview": "astro preview",
     "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\"",
     "validate:content": "node scripts/validate-content.mjs",
-    "check": "pnpm validate:content && pnpm lint:markdown && pnpm build"
+    "validate:links": "node scripts/validate-built-links.mjs",
+    "check": "pnpm validate:content && pnpm lint:markdown && pnpm build && pnpm validate:links"
   },
   "dependencies": {
     "@astrojs/starlight": "0.41.11",

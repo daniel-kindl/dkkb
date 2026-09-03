@@ -17,7 +17,3 @@ editUrl: false
 # Patterns
 
 Recurring solution structures for problems that appear in software design.
-
-## Entries
-
-- [Strategy](strategy.md): Encapsulate interchangeable algorithms behind one contract so behavior can vary independently from its context.
