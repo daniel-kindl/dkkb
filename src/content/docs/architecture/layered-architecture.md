@@ -96,14 +96,6 @@ A small application with limited behavior may only need a few cohesive modules a
 
 Do not create several formal layers only to match a template. Add a layer when it owns a real responsibility or protects a useful dependency boundary.
 
-## Relationship to other DKKB entries
-
-[Architecture boundaries and dependency direction](./architecture-boundaries-and-dependency-direction/) explains the dependency rules that give a layer its value.
-
-[Separate concerns](../principles/separation-of-concerns/) explains why distinct responsibilities can justify a boundary.
-
-[Invert dependencies around policy](../principles/dependency-inversion/) applies when a high-level layer must remain independent from replaceable infrastructure.
-
 ## Sources
 
 - Frank Buschmann, Regine Meunier, Hans Rohnert, Peter Sommerlad, and Michael Stal. *Pattern-Oriented Software Architecture, Volume 1: A System of Patterns*. Wiley, 1996.
