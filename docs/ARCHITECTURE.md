@@ -68,6 +68,10 @@ Knowledge entries must remain useful as plain Markdown. Avoid framework-specific
 
 Mermaid fenced code blocks are permitted because the diagram source remains plain text and GitHub renders the same syntax. Diagrams must supplement the written explanation rather than become the only representation of essential knowledge.
 
+Starlight Markdown asides are a narrow exception to the framework-specific syntax preference. Their source is plain text, the contained information must remain understandable without Starlight styling, and they can be transformed mechanically if the site generator changes.
+
+MDX-only Starlight components such as `<Code>`, `<FileTree>`, `<Icon>`, and `<Steps>` are not permitted in canonical knowledge. Use the portable Markdown forms defined in `docs/PRESENTATION.md` instead.
+
 If the site generator changes, the knowledge should require little or no migration.
 
 ## Change policy

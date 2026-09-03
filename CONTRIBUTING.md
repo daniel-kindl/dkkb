@@ -14,6 +14,7 @@ Use these project documents:
 - [Writing standard](docs/WRITING_STANDARD.md)
 - [Source policy](docs/SOURCE_POLICY.md)
 - [Content model](docs/CONTENT_MODEL.md)
+- [Presentation conventions](docs/PRESENTATION.md)
 - [Diagram conventions](docs/DIAGRAMS.md)
 - [Governance](docs/GOVERNANCE.md)
 
@@ -34,6 +35,10 @@ The issue should define the knowledge gap or project problem before implementati
 - Link related knowledge instead of copying the same explanation.
 - Use canonical content IDs in `related` metadata.
 - State context and trade-offs when guidance is conditional.
+- Follow the approved Markdown presentation conventions when using asides, code blocks, file trees, procedures, or callouts.
+- Use Starlight Markdown asides only for short secondary information.
+- Use fenced Markdown code blocks, fenced text file trees, and normal ordered lists instead of MDX-only Starlight components.
+- Do not use Starlight component imports or custom icons in canonical entries.
 - Prefer Mermaid for technical diagrams when a diagram materially improves understanding.
 - Keep essential meaning in prose and do not rely on diagram color alone.
 - Do not use a hosted diagram-rendering service for canonical content.
@@ -56,6 +61,7 @@ A substantial entry is ready for `reviewed` or `stable` status only when the app
 - personal experience is identified explicitly;
 - derived guidance makes its reasoning visible when needed;
 - related canonical entries are linked where useful;
+- presentation features are purposeful and the entry remains understandable without Starlight-specific styling;
 - diagrams, when present, agree with the prose and remain understandable without color alone;
 - the text follows the DKKB writing standard;
 - the entry remains useful as plain Markdown without the generated website;
