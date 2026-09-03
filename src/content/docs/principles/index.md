@@ -17,7 +17,3 @@ editUrl: false
 # Principles
 
 Reusable software engineering principles and the conditions that make them useful.
-
-## Entries
-
-- [Prefer composition over inheritance](composition-over-inheritance.md): Use composition as the default when behavior can vary independently from object identity.
