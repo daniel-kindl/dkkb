@@ -58,7 +58,7 @@ const homepageRecent =
 const homepageCategories =
   isHomepage
     ? docs
-        .filter((doc) => doc.data.type === 'index' && doc.id !== entry.id && !doc.data.sidebar?.hidden)
+        .filter((doc) => doc.data.type === 'index' && doc.data.template !== 'splash' && !doc.data.sidebar?.hidden)
         .sort((left, right) => left.data.title.localeCompare(right.data.title))
     : [];
 ---
