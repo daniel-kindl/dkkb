@@ -77,7 +77,7 @@ Review diagrams in both light and dark themes after Mermaid or Starlight upgrade
 
 ## Brand mark
 
-The DKKB mark is intentionally minimal. It combines a compact `DK` monogram with a blue knowledge-bar accent on a slate field.
+The DKKB mark is intentionally minimal. It uses a centered `DK` monogram with a white `D` and blue `K` on a slate field.
 
 The mark is designed to stay legible at favicon sizes. Do not create additional generated icon sizes unless a target platform requires them. Modern browsers can use the SVG favicon directly.
 
