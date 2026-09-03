@@ -26,7 +26,7 @@ Supported provenance values are:
 
 ## Optional metadata
 
-Entries can also define `confidence`, `topics`, `related`, `sources`, and `lastReviewed`.
+Entries can also define `confidence`, `topics`, `related`, `sources`, `lastReviewed`, and `homepage`.
 
 Values in `related` are canonical content IDs. Use the path below `src/content/docs/` without the `.md` suffix. For an `index.md` page, use the directory name. For example:
 
@@ -37,6 +37,25 @@ related:
 ```
 
 A related entry must exist. An entry must not reference itself or repeat the same related ID.
+
+## Homepage discovery
+
+The homepage derives discovery content from the docs collection.
+
+Top-level `index` entries become category discovery cards automatically. Reviewed and stable entries with `lastReviewed` can appear in the recently reviewed section. Draft, deprecated, hidden, and index entries are not eligible for homepage promotion.
+
+Use `homepage` only when an entry needs explicit promotion:
+
+```yaml
+homepage:
+  startHere: true
+  featured: true
+  order: 10
+```
+
+`startHere` selects stable introductory guidance. `featured` selects entries that deserve additional visibility. `order` is a non-negative integer; lower values appear first. Entries with equal order are sorted by title so the result stays deterministic.
+
+Do not maintain a separate homepage link list. The site derives promoted links from canonical content IDs and the configured deployment base path.
 
 ## Decision entries
 
