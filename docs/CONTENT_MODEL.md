@@ -44,6 +44,14 @@ A `decision` entry compares approaches that can each be valid in the right conte
 
 It should normally explain the problem, decision factors, relevant options, trade-offs, failure modes, and the conditions that favor each option. It must not reduce a contextual choice to a universal rule.
 
+## Presentation
+
+Presentation features are optional supporting material. They must not become the only representation of essential knowledge.
+
+Canonical entries can use normal Markdown features, fenced code blocks, fenced text file trees, ordered procedures, Mermaid diagrams, and Starlight Markdown asides according to [presentation conventions](PRESENTATION.md).
+
+Starlight Markdown asides are the only approved Starlight-specific authoring syntax in canonical knowledge. Do not use MDX-only Starlight components in canonical entries.
+
 ## Diagrams
 
 Knowledge entries can use Mermaid fenced code blocks for technical diagrams when a visual relationship, sequence, state, or flow is clearer than prose alone.

@@ -11,6 +11,8 @@ Read the relevant policy before a material change:
 - `docs/WRITING_STANDARD.md`
 - `docs/SOURCE_POLICY.md`
 - `docs/CONTENT_MODEL.md`
+- `docs/PRESENTATION.md`
+- `docs/DIAGRAMS.md`
 - `docs/GOVERNANCE.md`
 - `docs/ARCHITECTURE.md`
 
@@ -36,7 +38,7 @@ Do not create bookmark dumps or "awesome" lists as knowledge entries.
 
 ## Writing
 
-Follow `docs/WRITING_STANDARD.md`.
+Follow `docs/WRITING_STANDARD.md` and `docs/PRESENTATION.md`.
 
 - Write direct technical English.
 - Prefer active voice.
@@ -45,11 +47,15 @@ Follow `docs/WRITING_STANDARD.md`.
 - Do not use an em dash.
 - Do not imitate common AI prose patterns.
 - Do not add generic introductions or conclusions.
+- Use asides only for short secondary information.
+- Use fenced code blocks, fenced text file trees, and normal ordered lists instead of MDX-only Starlight components.
+- Do not use presentation features only to make an entry look more varied.
 
 ## Repository constraints
 
 - Canonical knowledge uses `.md` files only.
 - Do not add MDX.
+- Do not import Starlight components into canonical knowledge.
 - Do not add a backend or database.
 - Do not add paid infrastructure as a core dependency.
 - Keep dependencies minimal.
