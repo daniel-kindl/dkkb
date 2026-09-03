@@ -14,6 +14,7 @@ Use these project documents:
 - [Writing standard](docs/WRITING_STANDARD.md)
 - [Source policy](docs/SOURCE_POLICY.md)
 - [Content model](docs/CONTENT_MODEL.md)
+- [Diagram conventions](docs/DIAGRAMS.md)
 - [Governance](docs/GOVERNANCE.md)
 
 ## When an issue is required
@@ -33,9 +34,12 @@ The issue should define the knowledge gap or project problem before implementati
 - Link related knowledge instead of copying the same explanation.
 - Use canonical content IDs in `related` metadata.
 - State context and trade-offs when guidance is conditional.
+- Prefer Mermaid for technical diagrams when a diagram materially improves understanding.
+- Keep essential meaning in prose and do not rely on diagram color alone.
+- Do not use a hosted diagram-rendering service for canonical content.
 - Do not present personal experience as universal evidence.
 - Do not invent citations or source details.
-- Do not copy substantial text from copyrighted sources.
+- Do not copy substantial text, diagrams, or other protected material from copyrighted sources.
 - Do not create bookmark dumps or "awesome" lists as knowledge entries.
 - Do not add MDX unless the repository policy changes first.
 
@@ -52,6 +56,7 @@ A substantial entry is ready for `reviewed` or `stable` status only when the app
 - personal experience is identified explicitly;
 - derived guidance makes its reasoning visible when needed;
 - related canonical entries are linked where useful;
+- diagrams, when present, agree with the prose and remain understandable without color alone;
 - the text follows the DKKB writing standard;
 - the entry remains useful as plain Markdown without the generated website;
 - CI passes.

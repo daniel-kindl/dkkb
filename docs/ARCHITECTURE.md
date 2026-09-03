@@ -40,8 +40,10 @@ The static site is a presentation layer. It must not become the only way to read
 - Git and GitHub for version control and collaboration
 - Markdown for canonical content
 - YAML frontmatter for structured metadata
+- Mermaid syntax for source-controlled technical diagrams in Markdown
 - Astro for static site generation
 - Starlight for documentation navigation and presentation
+- `astro-mermaid` and Mermaid for local client-side diagram rendering
 - Pagefind through Starlight for static search
 - GitHub Actions for validation and deployment
 - GitHub Pages for hosting
@@ -52,6 +54,8 @@ The build uses the Node.js version in `.nvmrc` and the pnpm version declared in 
 
 CI validates content, Markdown, and the production site before merge. The Pages workflow repeats the same quality gate before deployment.
 
+Mermaid diagrams are bundled with the site and render in the browser. DKKB does not depend on a hosted diagram-rendering service.
+
 ## Dependency policy
 
 Dependencies are maintenance obligations. Add them only when they solve a concrete requirement better than the existing toolchain or a small local script.
@@ -61,6 +65,8 @@ Presentation dependencies must not become requirements for reading or migrating 
 ## Portability
 
 Knowledge entries must remain useful as plain Markdown. Avoid framework-specific syntax in canonical content.
+
+Mermaid fenced code blocks are permitted because the diagram source remains plain text and GitHub renders the same syntax. Diagrams must supplement the written explanation rather than become the only representation of essential knowledge.
 
 If the site generator changes, the knowledge should require little or no migration.
 

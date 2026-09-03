@@ -44,6 +44,16 @@ A `decision` entry compares approaches that can each be valid in the right conte
 
 It should normally explain the problem, decision factors, relevant options, trade-offs, failure modes, and the conditions that favor each option. It must not reduce a contextual choice to a universal rule.
 
+## Diagrams
+
+Knowledge entries can use Mermaid fenced code blocks for technical diagrams when a visual relationship, sequence, state, or flow is clearer than prose alone.
+
+A diagram must support the written explanation. Essential knowledge must not exist only inside a diagram.
+
+Prefer Mermaid because its source remains plain text, Git can review it, GitHub can render it, and the generated site can render the same source. Use static diagrams only when Mermaid cannot express the subject clearly.
+
+Follow [diagram conventions](DIAGRAMS.md) for accessibility, scope, source handling, and static-asset exceptions.
+
 ## Article structure
 
 Substantial entries should explain the concept or problem, its context, important trade-offs, limits, related knowledge, and supporting evidence when these apply. Do not add empty sections only to satisfy a template.
