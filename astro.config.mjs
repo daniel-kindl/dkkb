@@ -20,7 +20,10 @@ export default defineConfig({
       autoTheme: true,
       enableLog: false,
       mermaidConfig: {
-        securityLevel: 'strict'
+        securityLevel: 'strict',
+        flowchart: {
+          htmlLabels: false
+        }
       }
     }),
     starlight({
