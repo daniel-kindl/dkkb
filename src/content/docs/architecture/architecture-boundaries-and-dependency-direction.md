@@ -106,18 +106,6 @@ A local function, type, or module can be enough when the responsibility is small
 
 Do not introduce a process boundary, network API, event stream, or abstraction layer unless it protects a decision that matters enough to justify the cost.
 
-## Relationship to architecture styles
-
-[Layered architecture](./layered-architecture/) applies dependency rules between responsibility layers.
-
-[Modular monolith](./modular-monolith/) uses internal module boundaries while retaining one deployable application.
-
-[Ports and Adapters](./ports-and-adapters/) protects application policy from external mechanisms through explicit ports.
-
-[Event-driven architecture](./event-driven-architecture/) can decouple producers and consumers through event contracts, but it adds distributed coordination concerns.
-
-[Separate concerns](../principles/separation-of-concerns/) explains when distinct responsibilities justify separation. [Invert dependencies around policy](../principles/dependency-inversion/) explains one important technique for controlling dependency direction.
-
 ## Sources
 
 - David L. Parnas. "On the Criteria To Be Used in Decomposing Systems into Modules." *Communications of the ACM*, 1972.
