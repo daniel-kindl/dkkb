@@ -105,12 +105,6 @@ Use an in-process function call when all participants belong to one module and a
 
 A queue or event bus is not automatically an architectural improvement. Its value must justify the additional failure and operational model.
 
-## Relationship to other DKKB entries
-
-[Architecture boundaries and dependency direction](./architecture-boundaries-and-dependency-direction/) explains why an event contract should sit at a deliberate boundary.
-
-[Separate concerns](../principles/separation-of-concerns/) explains why independently changing reactions can justify separate responsibilities.
-
 ## Sources
 
 - Gregor Hohpe and Bobby Woolf. *Enterprise Integration Patterns*. Addison-Wesley, 2003.
