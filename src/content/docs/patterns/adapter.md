@@ -23,6 +23,12 @@ lastReviewed: "2026-09-03"
 
 An Adapter translates between a client-facing contract and an incompatible existing interface.
 
+```mermaid
+flowchart LR
+    Client[Client] -->|Expected contract| Adapter[Adapter]
+    Adapter -->|Translate| Existing[Existing component]
+```
+
 ## Problem
 
 A useful component cannot be used directly because its API, data model, protocol, or calling convention does not match the client boundary.
@@ -34,6 +40,10 @@ Changing the component may be impossible, undesirable, or more expensive than tr
 Use an Adapter when the mismatch is structural and the underlying behavior remains appropriate.
 
 Common examples include vendor SDKs, legacy APIs, external data models, and platform-specific implementations.
+
+:::tip[Keep translation at the edge]
+A small Adapter can keep vendor types and calling conventions from spreading into policy code.
+:::
 
 ## Trade-offs
 

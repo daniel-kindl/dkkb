@@ -23,6 +23,14 @@ lastReviewed: "2026-09-03"
 
 Shotgun Surgery occurs when one conceptual change requires many small edits in many locations.
 
+```mermaid
+flowchart LR
+    Change[One conceptual change] --> A[Module A]
+    Change --> B[Module B]
+    Change --> C[Module C]
+    Change --> D[Module D]
+```
+
 ## Observable symptoms
 
 A change to one rule, field, protocol, or behavior repeatedly touches several modules that do not otherwise need to change together.
@@ -44,6 +52,10 @@ The cost of a simple conceptual change grows with the number of synchronized loc
 Find the concept that causes the files to change together. Move the knowledge or behavior behind one authoritative boundary when that boundary is cohesive.
 
 Use generated artifacts when several representations must remain synchronized from one source.
+
+:::caution[Coordinated migration is not always a smell]
+A protocol or schema migration can legitimately touch several real boundaries. The smell appears when routine changes repeatedly scatter because one concept has no clear owner.
+:::
 
 ## When not to over-correct
 

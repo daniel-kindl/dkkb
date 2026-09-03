@@ -23,6 +23,13 @@ lastReviewed: "2026-09-03"
 
 Observer lets a subject publish a change to dependent consumers without embedding each consumer's behavior in the subject.
 
+```mermaid
+flowchart LR
+    Subject[Subject] -->|Notify| ObserverA[Observer A]
+    Subject -->|Notify| ObserverB[Observer B]
+    Subject -->|Notify| ObserverC[Observer C]
+```
+
 ## Problem
 
 Several consumers need to react to a state change, and the producer should not know each concrete consumer.
@@ -38,6 +45,10 @@ The pattern is most useful when adding or removing consumers should not change t
 Observer reduces direct coupling between producer and consumers. It also makes control flow less explicit because a change can trigger work elsewhere.
 
 Ordering, failure handling, reentrancy, and subscription lifetime become part of the design.
+
+:::caution[Hidden work is still work]
+A notification can trigger expensive or state-changing behavior outside the caller's visible control flow. Keep observer effects bounded and observable.
+:::
 
 ## Failure modes
 

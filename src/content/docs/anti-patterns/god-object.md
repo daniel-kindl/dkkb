@@ -23,6 +23,16 @@ lastReviewed: "2026-09-03"
 
 A God Object owns or coordinates many responsibilities that change for unrelated reasons.
 
+```mermaid
+flowchart LR
+    FeatureA[Feature A] --> God[God object]
+    FeatureB[Feature B] --> God
+    FeatureC[Feature C] --> God
+    God --> Database[Database]
+    God --> Network[Network]
+    God --> State[Shared state]
+```
+
 ## Observable symptoms
 
 Typical symptoms include:
@@ -50,6 +60,10 @@ Because many features depend on the same object, refactoring it also becomes ris
 Split responsibilities according to cohesive behavior and distinct change drivers. Move state and policy together when they form a real domain boundary.
 
 Do not replace one large object with many tiny forwarding objects. The goal is stronger cohesion and clearer ownership, not a larger file count.
+
+:::caution[Size alone is not the smell]
+A large cohesive component is not automatically a God Object. The stronger signal is unrelated responsibilities and change drivers concentrated behind one object.
+:::
 
 ## When the label does not apply
 
