@@ -166,7 +166,13 @@ Follow the source policy when quoting protected material.
 
 DKKB uses Starlight custom CSS for small presentation adjustments. Prefer documented Starlight custom properties over selectors that depend on internal component markup.
 
-The generated site uses a moderately wider content column on wide viewports. This gives technical content, code, and diagrams more room while reducing the spare width assigned to the right table-of-contents column by Starlight's existing layout calculation.
+The generated site uses a `54rem` content width on wide viewports. This gives technical content, code, and diagrams more room than Starlight's default content width.
+
+The desktop table-of-contents column uses a dedicated `16rem` width. DKKB implements this through Starlight's supported `TwoColumnContent` component override because Starlight otherwise derives the right column width from the same sidebar width used by the left navigation.
+
+The override preserves Starlight's existing desktop breakpoint, fixed table-of-contents behavior, scrolling, border, and main-content alignment. It changes only the width calculation for the right column. The left navigation keeps Starlight's normal width.
+
+Review `src/components/TwoColumnContent.astro` against Starlight's upstream component when Starlight is upgraded. Keep the override only while Starlight does not expose a separate supported table-of-contents width setting.
 
 Responsive and mobile layout behavior remains owned by Starlight.
 
