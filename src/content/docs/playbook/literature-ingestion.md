@@ -21,6 +21,18 @@ Use literature as evidence for canonical engineering knowledge. Do not mirror a 
 
 The unit of capture is a useful claim or concept, not a chapter summary.
 
+```mermaid
+flowchart LR
+    Source[Read source] --> Capture[Capture claim and location]
+    Capture --> Search[Search DKKB for overlap]
+    Search --> Classify[Separate source claim from DKKB guidance]
+    Classify --> Canonical[Update or create canonical topic]
+    Canonical --> Verify[Verify claim against source]
+    Verify --> Publish[Publish reviewed knowledge]
+```
+
+The diagram shows the normal flow. The ordered procedure below remains authoritative when a case needs more detail.
+
 ## Capture enough source metadata
 
 Record enough information to find the source again:
@@ -60,6 +72,10 @@ A source claim describes what an author or work supports. DKKB guidance is a rec
 
 Do not silently convert one author's preference into a universal DKKB rule.
 
+:::note[Source claim and DKKB guidance are different]
+A cited author can support a technical claim without automatically defining DKKB's recommendation. When DKKB extends or combines source material, make that reasoning visible and record `derived-guidance` provenance.
+:::
+
 When DKKB extends a source, make the reasoning visible. Add `derived-guidance` provenance when that reasoning materially supports the recommendation.
 
 ## Represent conflicting sources
@@ -81,6 +97,10 @@ A disagreement is often a signal that the decision is contextual rather than a u
 Summarize in original wording. Short quotations should be exceptional and necessary for the technical point.
 
 Do not copy protected diagrams, tables, long passages, or code only because they are useful. Recreate the explanation from the underlying concept and cite the source.
+
+:::caution[Do not turn reading notes into copied material]
+The goal is to preserve the engineering knowledge, not reproduce the source. Keep quotations short and necessary, and do not copy protected diagrams, tables, code, or long passages without permission or a compatible license.
+:::
 
 ## Lightweight reading note
 
