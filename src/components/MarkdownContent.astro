@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import MermaidFlowchartViewport from './MermaidFlowchartViewport.astro';
 
 const { entry } = Astro.locals.starlightRoute;
 const docs = await getCollection('docs');
@@ -168,3 +169,5 @@ const homepageCategories =
     )
   }
 </Default>
+
+<MermaidFlowchartViewport />
