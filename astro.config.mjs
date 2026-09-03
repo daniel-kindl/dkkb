@@ -21,9 +21,7 @@ export default defineConfig({
       enableLog: false,
       mermaidConfig: {
         securityLevel: 'strict',
-        flowchart: {
-          htmlLabels: false
-        }
+        htmlLabels: false
       }
     }),
     starlight({
