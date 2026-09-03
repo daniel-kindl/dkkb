@@ -35,9 +35,9 @@ The goal is not to collect links or universal rules. Entries explain when an ide
 
 ## Start here
 
-- **[Prefer composition over inheritance](./principles/composition-over-inheritance.md)** explains when composition gives behavior a cleaner boundary than inheritance.
-- **[Strategy pattern](./patterns/strategy.md)** shows how interchangeable behavior can sit behind one stable contract.
-- **[Safe online data migrations](./practices/safe-online-data-migrations.md)** describes how to change persisted representations without switching reads too early.
+- **[Prefer composition over inheritance](./principles/composition-over-inheritance/)** explains when composition gives behavior a cleaner boundary than inheritance.
+- **[Strategy pattern](./patterns/strategy/)** shows how interchangeable behavior can sit behind one stable contract.
+- **[Safe online data migrations](./practices/safe-online-data-migrations/)** describes how to change persisted representations without switching reads too early.
 
 ## Explore the knowledge base
 
