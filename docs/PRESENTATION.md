@@ -85,7 +85,18 @@ else
 }
 ```
 
-Apply this rule to block braces. Do not force Allman placement onto braces that represent data, such as JavaScript or TypeScript object literals, when doing so would reduce clarity.
+Keep a function or method signature on one line when it remains reasonably readable. Do not split a short signature only because the function body uses Allman braces.
+
+```ts
+function compress(data: Uint8Array, strategy: CompressionStrategy): Uint8Array
+{
+    return strategy(data);
+}
+```
+
+Wrap parameters only when the signature becomes too long or multiline formatting materially improves clarity. When a signature is wrapped, put one parameter on each line and use 4-space continuation indentation. Do not add a trailing comma to a single-line parameter list.
+
+Apply the Allman rule to block braces. Do not force Allman placement onto braces that represent data, such as JavaScript or TypeScript object literals, when doing so would reduce clarity.
 
 This rule applies to original examples written for DKKB. Preserve the meaningful original form of quoted, externally sourced, generated, or tool-output code when reformatting would reduce fidelity.
 
