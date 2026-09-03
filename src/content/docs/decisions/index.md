@@ -8,6 +8,13 @@ provenance:
 topics:
   - engineering-decisions
   - trade-offs
+sidebar:
+  label: Overview
+tableOfContents: false
+prev: false
+next: false
+lastUpdated: false
+editUrl: false
 ---
 
 # Engineering decisions

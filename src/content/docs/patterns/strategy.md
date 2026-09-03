@@ -16,9 +16,7 @@ topics:
 related:
   - principles/composition-over-inheritance
 sidebar:
-  badge:
-    text: Reviewed
-    variant: success
+  label: Strategy
 sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"
