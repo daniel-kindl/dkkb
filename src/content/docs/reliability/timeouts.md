@@ -77,7 +77,7 @@ Timeouts also create uncertainty for side-effecting operations. The caller may t
 
 ## Dangerous combinations
 
-Timeouts combined with aggressive retries can create a [retry storm] through repeated attempts against a slow dependency.
+Timeouts combined with aggressive retries can create a retry storm through repeated attempts against a slow dependency.
 
 A retry should therefore fit inside an overall deadline and remain bounded by attempt count or retry budget.
 
