@@ -110,7 +110,16 @@ for (const file of contentFiles) {
 
   const body = stripCode(content.slice(match[0].length));
   const h1Headings = [...body.matchAll(/^# (.+)$/gm)].map((heading) => heading[1].trim());
-  if (h1Headings.length !== 1) {
+  const hasSplashHeroTitle =
+    data?.template === 'splash' &&
+    typeof data?.hero?.title === 'string' &&
+    data.hero.title.trim().length > 0;
+
+  if (hasSplashHeroTitle) {
+    if (h1Headings.length !== 0) {
+      errors.push(`${rel(file)}: splash entries with a hero title must not contain a Markdown H1.`);
+    }
+  } else if (h1Headings.length !== 1) {
     errors.push(`${rel(file)}: canonical entries must contain exactly one Markdown H1.`);
   } else if (h1Headings[0] !== data?.title) {
     errors.push(`${rel(file)}: Markdown H1 must match the frontmatter title exactly.`);
