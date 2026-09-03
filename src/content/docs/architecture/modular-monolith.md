@@ -70,6 +70,10 @@ Useful rules can include:
 - cycles between modules are avoided;
 - shared code remains small and intentional.
 
+:::caution[Directories do not create modules]
+A module boundary must restrict what other modules can depend on. A folder structure without dependency control is only organization.
+:::
+
 The exact enforcement mechanism depends on the language and build system.
 
 ## Suitable contexts
