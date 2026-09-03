@@ -46,6 +46,10 @@ flowchart LR
 
 The contract can be an interface, module API, protocol, event schema, data format, or another explicit agreement. The useful form depends on the boundary.
 
+:::tip[Ask what the boundary protects]
+A useful boundary protects a decision, invariant, ownership rule, trust boundary, or change driver. If it protects nothing important, it may only add indirection.
+:::
+
 ## Problem
 
 Without deliberate boundaries, implementation details spread through the system. A change to one mechanism can then force unrelated changes in consumers.
