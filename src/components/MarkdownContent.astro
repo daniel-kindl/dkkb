@@ -26,9 +26,10 @@ const isPromotable = (doc) =>
   doc.data.type !== 'index' &&
   !doc.data.sidebar?.hidden &&
   (doc.data.status === 'reviewed' || doc.data.status === 'stable');
+const isHomepage = entry.data.type === 'index' && entry.data.template === 'splash';
 
 const categoryEntries =
-  entry.data.type === 'index' && entry.id !== 'index'
+  entry.data.type === 'index' && !isHomepage
     ? docs
         .filter((doc) => {
           if (doc.data.type === 'index' || doc.data.sidebar?.hidden) return false;
@@ -43,21 +44,21 @@ const relatedEntries = (entry.data.related ?? [])
   .filter((relatedEntry) => relatedEntry !== undefined);
 
 const homepageStartHere =
-  entry.id === 'index'
+  isHomepage
     ? docs.filter((doc) => isPromotable(doc) && doc.data.homepage?.startHere).sort(compareHomepageEntries).slice(0, 6)
     : [];
 const homepageFeatured =
-  entry.id === 'index'
+  isHomepage
     ? docs.filter((doc) => isPromotable(doc) && doc.data.homepage?.featured).sort(compareHomepageEntries).slice(0, 6)
     : [];
 const homepageRecent =
-  entry.id === 'index'
+  isHomepage
     ? docs.filter((doc) => isPromotable(doc) && doc.data.lastReviewed).sort(compareRecentEntries).slice(0, 6)
     : [];
 const homepageCategories =
-  entry.id === 'index'
+  isHomepage
     ? docs
-        .filter((doc) => doc.data.type === 'index' && doc.id !== 'index' && !doc.data.sidebar?.hidden)
+        .filter((doc) => doc.data.type === 'index' && doc.id !== entry.id && !doc.data.sidebar?.hidden)
         .sort((left, right) => left.data.title.localeCompare(right.data.title))
     : [];
 ---
