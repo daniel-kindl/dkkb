@@ -145,6 +145,30 @@ for (const file of contentFiles) {
     entries.set(id, { file, data });
   }
 
+  if (data?.homepage !== undefined) {
+    const homepage = data.homepage;
+    if (homepage === null || typeof homepage !== 'object' || Array.isArray(homepage)) {
+      errors.push(`${rel(file)}: 'homepage' must be a metadata object.`);
+    } else {
+      const isPromoted = homepage.startHere === true || homepage.featured === true;
+      if (!isPromoted) {
+        errors.push(`${rel(file)}: 'homepage' must enable 'startHere' or 'featured'.`);
+      }
+      if (homepage.order !== undefined && (!Number.isInteger(homepage.order) || homepage.order < 0)) {
+        errors.push(`${rel(file)}: 'homepage.order' must be a non-negative integer.`);
+      }
+      if (isPromoted && data?.type === 'index') {
+        errors.push(`${rel(file)}: index entries must not use homepage promotion metadata.`);
+      }
+      if (isPromoted && !['reviewed', 'stable'].includes(data?.status)) {
+        errors.push(`${rel(file)}: only reviewed or stable entries can be promoted on the homepage.`);
+      }
+      if (isPromoted && data?.sidebar?.hidden === true) {
+        errors.push(`${rel(file)}: hidden entries must not be promoted on the homepage.`);
+      }
+    }
+  }
+
   if (data?.type === 'index' && id !== 'index' && /^## Entries\s*$/m.test(body)) {
     errors.push(`${rel(file)}: category entry lists are generated from the content collection.`);
   }
