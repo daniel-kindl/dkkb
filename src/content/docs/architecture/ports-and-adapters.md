@@ -54,6 +54,10 @@ Driving adapters call input ports to request behavior. Driven adapters implement
 
 Dependencies should point toward application-owned contracts when the boundary protects policy from replaceable infrastructure.
 
+:::tip[Create ports at meaningful boundaries]
+A port is useful when it protects application policy from a mechanism or makes an important interaction explicit. Do not create one for every dependency.
+:::
+
 ## Suitable contexts
 
 This style is useful when:
