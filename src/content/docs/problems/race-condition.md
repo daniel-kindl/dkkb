@@ -19,6 +19,20 @@ lastReviewed: "2026-09-03"
 
 A race condition exists when correctness depends on which concurrent operation happens first.
 
+```mermaid
+sequenceDiagram
+    participant A as Worker A
+    participant S as Shared state
+    participant B as Worker B
+    A->>S: Read value = 10
+    B->>S: Read value = 10
+    A->>S: Write value = 11
+    B->>S: Write value = 11
+    Note over A,B: One update is lost
+```
+
+The problem is not concurrency by itself. The problem is that the invariant depends on an unsafe interleaving.
+
 ## Symptoms
 
 Failures are intermittent, load-dependent, or difficult to reproduce. Lost updates, duplicated work, invalid state transitions, and stale decisions are common outcomes.
@@ -30,6 +44,10 @@ Use stress tests, deterministic concurrency tests where possible, tracing with o
 ## Mitigation
 
 Protect shared state with an appropriate synchronization or serialization mechanism. Database transactions, optimistic concurrency control, locks, queues, immutable state, or idempotent operations can each fit different boundaries.
+
+:::caution[Define the invariant first]
+A lock or transaction is not automatically correct. Identify the state transition that must remain atomic or ordered before choosing a synchronization mechanism.
+:::
 
 ## Trade-offs
 

@@ -22,6 +22,18 @@ A thundering herd occurs when many actors become ready at the same time and hit 
 
 Common triggers include cache expiry, service recovery, scheduled work, reconnect loops, and release of blocked workers.
 
+```mermaid
+flowchart LR
+    Trigger[Shared trigger] --> A[Client A]
+    Trigger --> B[Client B]
+    Trigger --> C[Client C]
+    Trigger --> D[Client D]
+    A --> Dependency[Shared dependency]
+    B --> Dependency
+    C --> Dependency
+    D --> Dependency
+```
+
 ## Symptoms
 
 Load arrives as a sharp spike. Latency rises, queues grow, timeouts increase, and the dependency can fail again immediately after recovery.
@@ -33,6 +45,10 @@ Correlate request volume, cache misses, retries, queue depth, and dependency sat
 ## Mitigation
 
 Spread work over time with jitter, request coalescing, staggered expiry, bounded concurrency, admission control, or single-flight behavior for shared cache fills.
+
+:::tip[Remove synchronization between clients]
+Jitter and staggered expiry are effective because they prevent many independent clients from making the same timing decision at once.
+:::
 
 ## Trade-offs
 

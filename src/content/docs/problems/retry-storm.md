@@ -20,6 +20,16 @@ lastReviewed: "2026-09-03"
 
 A retry storm occurs when failing or slow requests trigger enough retries to create additional load on an already unhealthy dependency.
 
+```mermaid
+flowchart LR
+    Requests[Original requests] --> Dependency[Slow or failing dependency]
+    Dependency --> Errors[Timeouts and errors]
+    Errors --> Retries[Client retries]
+    Retries --> Dependency
+```
+
+The feedback loop can keep the dependency overloaded after the original fault starts to recover.
+
 ## Symptoms
 
 Request volume rises after errors begin. Recovery takes longer than expected, and several client layers can multiply one original request into many attempts.
@@ -33,6 +43,10 @@ Measure original requests separately from retry attempts. Inspect retry counts a
 Use bounded retries, exponential backoff, jitter, retry budgets, and explicit rules for which failures are safe to retry. Prefer one retry owner in a layered call path when possible.
 
 Idempotency is required when a retry can repeat a side effect.
+
+:::danger[Retries can amplify an outage]
+Do not retry indefinitely or at every layer. A retry policy must bound attempts and load, and it must distinguish retryable failures from permanent or unsafe failures.
+:::
 
 ## Trade-offs
 

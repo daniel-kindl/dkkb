@@ -16,6 +16,31 @@ lastReviewed: "2026-09-03"
 
 The N+1 query problem occurs when one query returns N records and application code performs another query for each record.
 
+```mermaid
+sequenceDiagram
+    participant App as Application
+    participant DB as Database
+    App->>DB: Load N parent records
+    DB-->>App: N parent records
+    loop Once per parent
+        App->>DB: Load related data
+        DB-->>App: Related data
+    end
+```
+
+A common application shape looks like this:
+
+```ts title="n-plus-one.ts"
+const games = await repository.loadGames();
+
+for (const game of games)
+{
+    game.offers = await repository.loadOffers(game.id);
+}
+```
+
+The loop turns one initial query into one additional round trip per game.
+
 ## Symptoms
 
 Latency and database load grow with result size. A page that looks correct in small tests can become slow under realistic data volume.
@@ -23,6 +48,10 @@ Latency and database load grow with result size. A page that looks correct in sm
 ## Detection
 
 Count database round trips for one request. Use query logs, tracing, or ORM diagnostics to identify repeated statements that differ only by one key.
+
+:::tip[Measure round trips, not only query time]
+Each individual query can be fast while the request is slow because the application performs too many sequential database round trips.
+:::
 
 ## Mitigation
 
