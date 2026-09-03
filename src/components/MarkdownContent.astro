@@ -14,9 +14,22 @@ const routeFor = (entryId) => `${baseUrl}${entryId}/`;
 const orderFor = (doc) => doc.data.sidebar?.order ?? Number.MAX_SAFE_INTEGER;
 const compareEntries = (left, right) =>
   orderFor(left) - orderFor(right) || left.data.title.localeCompare(right.data.title);
+const homepageOrderFor = (doc) => doc.data.homepage?.order ?? 100;
+const compareHomepageEntries = (left, right) =>
+  homepageOrderFor(left) - homepageOrderFor(right) || left.data.title.localeCompare(right.data.title);
+const compareRecentEntries = (left, right) => {
+  const leftReviewed = left.data.lastReviewed ?? '';
+  const rightReviewed = right.data.lastReviewed ?? '';
+  return rightReviewed.localeCompare(leftReviewed) || left.data.title.localeCompare(right.data.title);
+};
+const isPromotable = (doc) =>
+  doc.data.type !== 'index' &&
+  !doc.data.sidebar?.hidden &&
+  (doc.data.status === 'reviewed' || doc.data.status === 'stable');
+const isHomepage = entry.data.type === 'index' && entry.data.template === 'splash';
 
 const categoryEntries =
-  entry.data.type === 'index'
+  entry.data.type === 'index' && !isHomepage
     ? docs
         .filter((doc) => {
           if (doc.data.type === 'index' || doc.data.sidebar?.hidden) return false;
@@ -29,10 +42,97 @@ const categoryEntries =
 const relatedEntries = (entry.data.related ?? [])
   .map((relatedId) => docsById.get(relatedId))
   .filter((relatedEntry) => relatedEntry !== undefined);
+
+const homepageStartHere =
+  isHomepage
+    ? docs.filter((doc) => isPromotable(doc) && doc.data.homepage?.startHere).sort(compareHomepageEntries).slice(0, 6)
+    : [];
+const homepageFeatured =
+  isHomepage
+    ? docs.filter((doc) => isPromotable(doc) && doc.data.homepage?.featured).sort(compareHomepageEntries).slice(0, 6)
+    : [];
+const homepageRecent =
+  isHomepage
+    ? docs.filter((doc) => isPromotable(doc) && doc.data.lastReviewed).sort(compareRecentEntries).slice(0, 6)
+    : [];
+const homepageCategories =
+  isHomepage
+    ? docs
+        .filter((doc) => doc.data.type === 'index' && doc.data.template !== 'splash' && !doc.data.sidebar?.hidden)
+        .sort((left, right) => left.data.title.localeCompare(right.data.title))
+    : [];
 ---
 
 <Default>
   <slot />
+
+  {
+    homepageStartHere.length > 0 && (
+      <section aria-labelledby="start-here">
+        <h2 id="start-here">Start here</h2>
+        <CardGrid>
+          {homepageStartHere.map((homepageEntry) => (
+            <LinkCard
+              title={homepageEntry.data.title}
+              href={routeFor(homepageEntry.id)}
+              description={homepageEntry.data.description}
+            />
+          ))}
+        </CardGrid>
+      </section>
+    )
+  }
+
+  {
+    homepageFeatured.length > 0 && (
+      <section aria-labelledby="featured">
+        <h2 id="featured">Featured</h2>
+        <CardGrid>
+          {homepageFeatured.map((homepageEntry) => (
+            <LinkCard
+              title={homepageEntry.data.title}
+              href={routeFor(homepageEntry.id)}
+              description={homepageEntry.data.description}
+            />
+          ))}
+        </CardGrid>
+      </section>
+    )
+  }
+
+  {
+    homepageRecent.length > 0 && (
+      <section aria-labelledby="recently-reviewed">
+        <h2 id="recently-reviewed">Recently reviewed</h2>
+        <CardGrid>
+          {homepageRecent.map((homepageEntry) => (
+            <LinkCard
+              title={homepageEntry.data.title}
+              href={routeFor(homepageEntry.id)}
+              description={homepageEntry.data.description}
+            />
+          ))}
+        </CardGrid>
+      </section>
+    )
+  }
+
+  {
+    homepageCategories.length > 0 && (
+      <section aria-labelledby="explore-knowledge-base">
+        <h2 id="explore-knowledge-base">Explore the knowledge base</h2>
+        <CardGrid>
+          {homepageCategories.map((categoryEntry) => (
+            <LinkCard
+              title={categoryEntry.data.title}
+              href={routeFor(categoryEntry.id)}
+              description={categoryEntry.data.description}
+            />
+          ))}
+        </CardGrid>
+      </section>
+    )
+  }
 
   {
     categoryEntries.length > 0 && (

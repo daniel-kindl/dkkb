@@ -17,6 +17,10 @@ related:
   - principles/composition-over-inheritance
 sidebar:
   label: Strategy
+homepage:
+  startHere: true
+  featured: true
+  order: 10
 sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"

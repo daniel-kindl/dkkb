@@ -10,6 +10,12 @@ const sourceSchema = z.object({
   note: z.string().min(1).optional(),
 });
 
+const homepageSchema = z.object({
+  startHere: z.boolean().default(false),
+  featured: z.boolean().default(false),
+  order: z.number().int().nonnegative().default(100),
+});
+
 export const collections = {
   docs: defineCollection({
     loader: docsLoader(),
@@ -24,6 +30,7 @@ export const collections = {
         related: z.array(z.string().min(1)).default([]),
         sources: z.array(sourceSchema).default([]),
         lastReviewed: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+        homepage: homepageSchema.optional(),
       })
     })
   })
