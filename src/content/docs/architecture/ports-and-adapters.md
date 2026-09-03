@@ -86,14 +86,6 @@ Direct integration is often clearer when the mechanism is small, stable, and doe
 
 Do not add a port only to make a simple dependency look architectural. Add one when it creates useful independence or makes an important contract explicit.
 
-## Relationship to other DKKB entries
-
-[Invert dependencies around policy](../principles/dependency-inversion/) describes the dependency rule that commonly supports output ports.
-
-[Architecture boundaries and dependency direction](./architecture-boundaries-and-dependency-direction/) explains how contracts and dependency direction work across architectural styles.
-
-[Separate concerns](../principles/separation-of-concerns/) explains why application policy and external mechanisms can deserve different boundaries.
-
 ## Sources
 
 - Alistair Cockburn. "Hexagonal Architecture." 2005.
