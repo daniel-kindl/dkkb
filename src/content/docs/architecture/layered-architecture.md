@@ -78,6 +78,10 @@ Layers add navigation and indirection. A request can pass through several types 
 
 A strict rule that every call must pass through every layer can create forwarding code with little value.
 
+:::caution[Do not force every request through every layer]
+A layer should exist because it owns a useful responsibility or boundary. Bypassing a layer can be correct when the dependency rules remain clear.
+:::
+
 Layers can also become horizontal technical silos. A feature change can then require edits in many directories even when the feature itself is cohesive.
 
 ## Failure modes
