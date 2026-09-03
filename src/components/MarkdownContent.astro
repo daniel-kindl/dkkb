@@ -26,7 +26,7 @@ const categoryEntries =
         .sort(compareEntries)
     : [];
 
-const relatedEntries = entry.data.related
+const relatedEntries = (entry.data.related ?? [])
   .map((relatedId) => docsById.get(relatedId))
   .filter((relatedEntry) => relatedEntry !== undefined);
 ---
