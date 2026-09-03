@@ -34,6 +34,20 @@ A safe migration commonly uses this order:
 6. Observe the new read path and keep a rollback option.
 7. Remove the legacy representation or compatibility path later.
 
+```mermaid
+flowchart TD
+    A[Legacy reader active] --> B[Introduce new representation]
+    B --> C[Start dual writes when required]
+    C --> D[Backfill existing data]
+    D --> E{Readiness checks pass?}
+    E -->|No| F[Keep legacy reader]
+    F --> G[Repair or resume migration]
+    G --> D
+    E -->|Yes| H[Switch to new reader]
+    H --> I[Observe and retain rollback]
+    I --> J[Remove migration compatibility later]
+```
+
 The exact steps depend on the system. The important constraint is that each step preserves a valid read path.
 
 ## Start dual writes before the backfill
@@ -71,6 +85,12 @@ Before the read-path switch, verify the properties that the new reader depends o
 Prefer deterministic checks that test the actual persisted state.
 
 The readiness condition should fail closed. If verification cannot prove that the new representation is ready, keep the existing reader active.
+
+:::danger[Do not treat completion as readiness]
+A completed migration job proves that the job stopped successfully. It does not prove that every invariant required by the new reader holds.
+
+Verify the persisted state before cutover.
+:::
 
 ## Keep the legacy reader during cutover
 
