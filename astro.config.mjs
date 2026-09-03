@@ -23,6 +23,7 @@ export default defineConfig({
       description: 'Daniel Kindl Knowledge Base for software engineering, architecture, AI, and LLM engineering.',
       customCss: ['./src/styles/starlight.css'],
       components: {
+        MarkdownContent: './src/components/MarkdownContent.astro',
         PageTitle: './src/components/PageTitle.astro',
         TwoColumnContent: './src/components/TwoColumnContent.astro'
       },
