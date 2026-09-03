@@ -1,4 +1,141 @@
 :root {
+  /* DKKB semantic design tokens. Keep raw palette values in this file only. */
+  --dkkb-blue-050: #eff8ff;
+  --dkkb-blue-100: #dbefff;
+  --dkkb-blue-300: #7dd3fc;
+  --dkkb-blue-400: #38bdf8;
+  --dkkb-blue-600: #0284c7;
+  --dkkb-blue-700: #0369a1;
+  --dkkb-blue-900: #0c4a6e;
+  --dkkb-blue-950: #082f49;
+
+  --dkkb-slate-050: #f8fafc;
+  --dkkb-slate-100: #f1f5f9;
+  --dkkb-slate-200: #e2e8f0;
+  --dkkb-slate-300: #cbd5e1;
+  --dkkb-slate-400: #94a3b8;
+  --dkkb-slate-500: #64748b;
+  --dkkb-slate-600: #475569;
+  --dkkb-slate-700: #334155;
+  --dkkb-slate-800: #1e293b;
+  --dkkb-slate-900: #0f172a;
+  --dkkb-slate-950: #020617;
+
+  --dkkb-radius-sm: 0.375rem;
+  --dkkb-radius-md: 0.625rem;
+  --dkkb-border-width: 1px;
+  --dkkb-focus-width: 3px;
+  --dkkb-space-1: 0.25rem;
+  --dkkb-space-2: 0.5rem;
+  --dkkb-space-3: 0.75rem;
+  --dkkb-space-4: 1rem;
+  --dkkb-space-6: 1.5rem;
+  --dkkb-space-8: 2rem;
+
+  --dkkb-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --dkkb-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Starlight theme contract. */
+  --sl-color-white: var(--dkkb-slate-050);
+  --sl-color-gray-1: var(--dkkb-slate-100);
+  --sl-color-gray-2: var(--dkkb-slate-200);
+  --sl-color-gray-3: var(--dkkb-slate-400);
+  --sl-color-gray-4: var(--dkkb-slate-500);
+  --sl-color-gray-5: var(--dkkb-slate-700);
+  --sl-color-gray-6: var(--dkkb-slate-900);
+  --sl-color-black: var(--dkkb-slate-950);
+  --sl-color-accent-low: var(--dkkb-blue-950);
+  --sl-color-accent: var(--dkkb-blue-400);
+  --sl-color-accent-high: var(--dkkb-blue-100);
+
+  --sl-font: var(--dkkb-font-sans);
+  --sl-font-mono: var(--dkkb-font-mono);
   --sl-content-width: 54rem;
   --dkkb-toc-width: 16rem;
+
+  --dkkb-color-surface: var(--sl-color-black);
+  --dkkb-color-surface-raised: var(--sl-color-gray-6);
+  --dkkb-color-border: var(--sl-color-gray-5);
+  --dkkb-color-text: var(--sl-color-white);
+  --dkkb-color-text-muted: var(--sl-color-gray-3);
+  --dkkb-color-link: var(--sl-color-accent-high);
+  --dkkb-color-focus: var(--sl-color-accent);
+}
+
+:root[data-theme='light'] {
+  --sl-color-white: var(--dkkb-slate-950);
+  --sl-color-gray-1: var(--dkkb-slate-900);
+  --sl-color-gray-2: var(--dkkb-slate-700);
+  --sl-color-gray-3: var(--dkkb-slate-600);
+  --sl-color-gray-4: var(--dkkb-slate-500);
+  --sl-color-gray-5: var(--dkkb-slate-300);
+  --sl-color-gray-6: var(--dkkb-slate-100);
+  --sl-color-gray-7: var(--dkkb-slate-050);
+  --sl-color-black: #ffffff;
+  --sl-color-accent-low: var(--dkkb-blue-100);
+  --sl-color-accent: var(--dkkb-blue-700);
+  --sl-color-accent-high: var(--dkkb-blue-950);
+
+  --dkkb-color-surface: var(--sl-color-black);
+  --dkkb-color-surface-raised: var(--sl-color-gray-7);
+  --dkkb-color-border: var(--sl-color-gray-5);
+  --dkkb-color-text: var(--sl-color-white);
+  --dkkb-color-text-muted: var(--sl-color-gray-3);
+  --dkkb-color-link: var(--sl-color-accent);
+  --dkkb-color-focus: var(--sl-color-accent);
+}
+
+html {
+  font-family: var(--dkkb-font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--dkkb-font-mono);
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: var(--dkkb-focus-width) solid var(--dkkb-color-focus);
+  outline-offset: 0.2rem;
+  border-radius: var(--dkkb-radius-sm);
+}
+
+.sl-markdown-content a:not([class]) {
+  color: var(--dkkb-color-link);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+.sl-markdown-content a:not([class]):hover {
+  text-decoration-thickness: 0.13em;
+}
+
+.sl-markdown-content :not(pre) > code {
+  border-radius: var(--dkkb-radius-sm);
+}
+
+.sl-markdown-content blockquote {
+  border-inline-start-color: var(--sl-color-gray-4);
+}
+
+.mermaid {
+  overflow-x: auto;
+  border: var(--dkkb-border-width) solid var(--dkkb-color-border);
+  border-radius: var(--dkkb-radius-md);
+  background: var(--dkkb-color-surface-raised);
+  padding: var(--dkkb-space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
