@@ -21,6 +21,10 @@ export default defineConfig({
     starlight({
       title: 'DKKB',
       description: 'Daniel Kindl Knowledge Base for software engineering, architecture, AI, and LLM engineering.',
+      customCss: ['./src/styles/starlight.css'],
+      components: {
+        PageTitle: './src/components/PageTitle.astro'
+      },
       editLink: { baseUrl: 'https://github.com/daniel-kindl/dkkb/edit/main/' },
       lastUpdated: true,
       social: [

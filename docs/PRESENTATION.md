@@ -18,6 +18,16 @@ Starlight Markdown asides are the only approved Starlight-specific authoring syn
 
 Mermaid diagram rules are defined separately in [diagram conventions](DIAGRAMS.md).
 
+## Page titles
+
+Every canonical entry must contain exactly one level-one Markdown heading. Its text must match the frontmatter `title` exactly.
+
+Keep the Markdown H1 in the canonical file. It makes the entry readable when the file is viewed directly on GitHub or in another Markdown renderer.
+
+Starlight also renders the frontmatter title by default. DKKB overrides Starlight's `PageTitle` presentation so that the generated website does not display a duplicate visible H1. The override preserves Starlight's `_top` anchor for page overview and skip navigation.
+
+Do not remove the canonical Markdown H1 to work around website presentation behavior.
+
 ## Asides
 
 Use Starlight Markdown asides for short secondary information.
@@ -152,6 +162,14 @@ Do not use blockquotes as generic callouts. Use an aside when secondary guidance
 
 Follow the source policy when quoting protected material.
 
+## Site layout
+
+DKKB uses Starlight custom CSS for small presentation adjustments. Prefer documented Starlight custom properties over selectors that depend on internal component markup.
+
+The generated site uses a moderately wider content column on wide viewports. This gives technical content, code, and diagrams more room while reducing the spare width assigned to the right table-of-contents column by Starlight's existing layout calculation.
+
+Responsive and mobile layout behavior remains owned by Starlight.
+
 ## Portability
 
 A canonical entry must remain useful when Starlight-specific styling is unavailable.
@@ -168,4 +186,6 @@ If the site generator changes, presentation syntax must be removable or transfor
 - [Starlight: File Tree](https://starlight.astro.build/components/file-tree/)
 - [Starlight: Icons](https://starlight.astro.build/components/icons/)
 - [Starlight: Steps](https://starlight.astro.build/components/steps/)
+- [Starlight: CSS and Styling](https://starlight.astro.build/guides/css-and-tailwind/)
+- [Starlight: Overriding Components](https://starlight.astro.build/guides/overriding-components/)
 - [Indentation style: Allman style](https://en.wikipedia.org/wiki/Indentation_style#Allman_style)

@@ -108,6 +108,14 @@ for (const file of contentFiles) {
     errors.push(`${rel(file)}: 'related' must be an array of canonical content IDs.`);
   }
 
+  const body = stripCode(content.slice(match[0].length));
+  const h1Headings = [...body.matchAll(/^# (.+)$/gm)].map((heading) => heading[1].trim());
+  if (h1Headings.length !== 1) {
+    errors.push(`${rel(file)}: canonical entries must contain exactly one Markdown H1.`);
+  } else if (h1Headings[0] !== data?.title) {
+    errors.push(`${rel(file)}: Markdown H1 must match the frontmatter title exactly.`);
+  }
+
   const id = contentId(file);
   if (entries.has(id)) {
     errors.push(`${rel(file)}: duplicate canonical content ID '${id}'.`);
@@ -115,7 +123,7 @@ for (const file of contentFiles) {
     entries.set(id, { file, data });
   }
 
-  for (const line of stripCode(content.slice(match[0].length)).split('\n')) {
+  for (const line of body.split('\n')) {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('|')) continue;
     if (trimmed.split(/\s+/).length > 35) {
