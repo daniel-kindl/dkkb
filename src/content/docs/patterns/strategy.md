@@ -15,6 +15,10 @@ topics:
   - extensibility
 related:
   - principles/composition-over-inheritance
+sidebar:
+  badge:
+    text: Draft
+    variant: caution
 sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"
@@ -31,6 +35,16 @@ lastReviewed: "2026-09-03"
 Strategy separates a variable algorithm or policy from the object that uses it. Each strategy provides the same contract, and the context delegates the work to the selected strategy.
 
 The pattern is useful when several implementations perform the same responsibility but differ in how they perform it.
+
+:::note[At a glance]
+**Problem:** One component owns several interchangeable implementations of the same responsibility.
+
+**Use when:** A caller must select or replace an algorithm independently from the context that uses it.
+
+**Avoid when:** The variants are few, stable, local, or not meaningfully interchangeable.
+
+**Core idea:** Put the varying behavior behind one stable contract and let the context delegate to it.
+:::
 
 ## Problem
 
@@ -122,9 +136,12 @@ Use Strategy when:
 
 ## Trade-offs
 
-Strategy isolates algorithms and lets them evolve independently. It also makes the dependency on variable behavior explicit and favors composition over inheritance.
-
-The pattern adds indirection. Object-oriented implementations can also add interfaces, classes, construction logic, and dependency wiring.
+| Benefits | Costs |
+| --- | --- |
+| Isolates algorithms so they can evolve independently. | Adds indirection between the context and the selected behavior. |
+| Makes variable behavior an explicit dependency. | Object-oriented implementations can add interfaces, classes, construction logic, and wiring. |
+| Favors composition over inheritance. | Selection responsibility still exists somewhere in the system. |
+| Supports independent testing and replacement of implementations. | A weak common contract can hide meaningful differences between implementations. |
 
 :::caution[Strategy moves selection responsibility]
 The caller or another component must still know enough to choose a strategy. Strategy separates selection from execution; it does not remove the selection problem.
@@ -183,9 +200,13 @@ Two implementations are not interchangeable only because they share a method sig
 
 ## Related knowledge
 
-- [Prefer composition over inheritance](../principles/composition-over-inheritance.md)
+- [Prefer composition over inheritance](../principles/composition-over-inheritance.md) — explains why variable behavior is usually easier to evolve through composition than subtype hierarchies.
 
 ## Sources
+
+:::note[Provenance]
+The core Strategy definition and structure are literature-backed. The guidance to use the smallest useful representation is DKKB-derived guidance.
+:::
 
 - Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides. *Design Patterns: Elements of Reusable Object-Oriented Software*. Addison-Wesley, 1994.
 - [Strategy, Refactoring.Guru](https://refactoring.guru/design-patterns/strategy)
