@@ -1,0 +1,53 @@
+<script>
+  const VIEWBOX_PADDING = 16;
+  const FLOWCHART_SELECTOR =
+    'pre.mermaid[data-processed] svg[aria-roledescription^="flowchart"]';
+
+  function fitFlowchart(svg: SVGSVGElement) {
+    requestAnimationFrame(() => {
+      const graph = svg.querySelector(':scope > g') ?? svg.querySelector('g');
+      if (!(graph instanceof SVGGraphicsElement)) return;
+
+      const bounds = graph.getBBox();
+      const values = [bounds.x, bounds.y, bounds.width, bounds.height];
+      if (!values.every(Number.isFinite) || bounds.width <= 0 || bounds.height <= 0) return;
+
+      const padding = VIEWBOX_PADDING;
+      svg.setAttribute(
+        'viewBox',
+        `${bounds.x - padding} ${bounds.y - padding} ${bounds.width + padding * 2} ${bounds.height + padding * 2}`
+      );
+    });
+  }
+
+  function fitRenderedFlowcharts() {
+    document.querySelectorAll<SVGSVGElement>(FLOWCHART_SELECTOR).forEach(fitFlowchart);
+  }
+
+  const observer = new MutationObserver((records) => {
+    for (const record of records) {
+      if (!(record.target instanceof Element)) continue;
+
+      const container = record.target.matches('pre.mermaid')
+        ? record.target
+        : record.target.closest('pre.mermaid');
+      if (!container?.hasAttribute('data-processed')) continue;
+
+      const svg = container.querySelector<SVGSVGElement>(
+        'svg[aria-roledescription^="flowchart"]'
+      );
+      if (svg) fitFlowchart(svg);
+    }
+  });
+
+  observer.observe(document.body, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ['data-processed']
+  });
+
+  fitRenderedFlowcharts();
+  document.addEventListener('astro:page-load', fitRenderedFlowcharts);
+  void document.fonts.ready.then(fitRenderedFlowcharts);
+</script>
