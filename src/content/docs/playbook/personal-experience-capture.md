@@ -21,6 +21,19 @@ Use personal experience to record what Daniel Kindl can substantiate from his ow
 
 The goal is to preserve reusable lessons without turning DKKB into a project incident log.
 
+```mermaid
+flowchart LR
+    Observe[Direct observation] --> Interpret[Interpretation]
+    Interpret --> Limit[Generalization boundary]
+    Limit --> Canonical[Canonical knowledge]
+    Observe --> Confirm{Daniel confirms personal experience?}
+    Confirm -->|Yes| Provenance[personal-experience provenance]
+    Confirm -->|No| Omit[Do not use personal-experience]
+    Provenance --> Canonical
+```
+
+The observation can support `personal-experience` provenance only after human confirmation. Interpretation and generalized guidance can require different provenance.
+
 ## Capture three layers separately
 
 ### Observation
@@ -86,6 +99,10 @@ Do not publish private logs, customer data, proprietary code, internal architect
 AI can help structure notes, search for related entries, and identify claims that need evidence. It must not decide that an event happened in Daniel's work.
 
 An AI agent must not add `personal-experience` provenance unless Daniel supplied the observation or explicitly confirmed it.
+
+:::danger[AI cannot manufacture personal experience]
+Repository history, generated summaries, inferred project state, and plausible reconstruction are not personal experience. Use `personal-experience` only after Daniel directly supplies or confirms the observation.
+:::
 
 If provenance is uncertain, omit `personal-experience` and request human confirmation before publication.
 
