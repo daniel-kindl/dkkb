@@ -21,6 +21,18 @@ lastReviewed: "2026-09-03"
 
 Retrieval-augmented generation, or RAG, supplies external information to a model for the current task instead of relying only on model parameters.
 
+```mermaid
+flowchart LR
+    Query[User or system query] --> Access[Apply access control]
+    Access --> Retrieve[Retrieve candidate evidence]
+    Retrieve --> Rank[Filter and rank]
+    Rank --> Context[Build model context]
+    Context --> Model[Generate answer]
+    Model --> Verify[Verify claims against evidence]
+```
+
+Access control belongs before retrieval so unauthorized material does not enter the model context.
+
 ## Context
 
 RAG is useful when answers depend on private data, changing information, large corpora, or evidence that should be traceable to a source.
@@ -30,6 +42,10 @@ RAG is useful when answers depend on private data, changing information, large c
 Retrieval can return irrelevant, stale, duplicated, or malicious text. A strong generator cannot recover information that retrieval failed to supply.
 
 A system can also cite retrieved material that does not support the generated claim.
+
+:::caution[Retrieval is not proof]
+Finding a document does not mean the document is correct, current, authorized, or supportive of the generated claim. Retrieval quality and claim-to-source support need separate evaluation.
+:::
 
 ## Practical guidance
 

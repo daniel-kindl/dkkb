@@ -17,11 +17,27 @@ lastReviewed: "2026-09-03"
 
 An AI agent combines model decisions with tools that can read or change external state. Tool access converts model error from text risk into action risk.
 
+```mermaid
+flowchart LR
+    Input[Task and context] --> Model[Model decision]
+    Model --> Proposal[Proposed tool action]
+    Proposal --> Validate[Validate arguments and authority]
+    Validate --> Tool[Tool execution]
+    Tool --> Verify[Verify result and invariants]
+    Verify --> Model
+```
+
+The model can propose an action. Independent controls decide whether the action is allowed and whether its result is acceptable.
+
 ## Authority boundary
 
 Grant the minimum permissions needed for the task. Separate read access from write access when practical. Keep destructive, financial, security-sensitive, or production actions behind stronger controls.
 
 Do not rely on prompt instructions as the only authorization mechanism.
+
+:::danger[Write authority changes the risk class]
+A model mistake that only produces text can often be reviewed. The same mistake with destructive or production write access can change real state before a human sees it.
+:::
 
 ## Verification boundary
 

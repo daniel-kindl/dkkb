@@ -16,11 +16,25 @@ lastReviewed: "2026-09-03"
 
 An LLM can only reason from the information available in its active context and learned parameters. More context is not automatically better context.
 
+```mermaid
+flowchart LR
+    Sources[Available information] --> Select[Select relevant material]
+    Select --> Structure[Structure instructions, data, and provenance]
+    Structure --> Context[Active context]
+    Context --> Model[Model]
+```
+
+Context engineering is the application logic that decides what information reaches the model and how that information is organized.
+
 ## Design goals
 
 Provide the information needed for the current task, make instructions and data distinguishable, and remove irrelevant material that competes for attention.
 
 Useful context can include task instructions, authoritative reference material, tool results, prior decisions, examples, and explicit output constraints.
+
+:::caution[Retrieved text is data, not authority]
+Untrusted documents, web pages, or tool output can contain instruction-like text. Separate control instructions from retrieved data and do not let untrusted content silently redefine the task.
+:::
 
 ## Failure modes
 
