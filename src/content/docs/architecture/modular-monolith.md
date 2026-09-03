@@ -52,7 +52,9 @@ The useful property is not the single process by itself. It is the combination o
 
 ## Problem
 
-A single application can become difficult to change when every feature depends on shared internals. Splitting the system into network services can reduce some forms of coupling, but it also adds coordination, latency, failure, deployment, and observability costs.
+A single application can become difficult to change when every feature depends on shared internals.
+
+Splitting the system into network services can reduce some coupling. It also adds coordination, latency, failure, deployment, and observability costs.
 
 A modular monolith addresses this trade-off by separating modules without requiring separate runtime services.
 
@@ -103,14 +105,6 @@ Common problems include:
 A small application may not need formal module boundaries. A few cohesive packages or namespaces can be enough.
 
 Use stronger module rules when the cost of cross-feature coupling becomes material. Do not create a module for every small type or operation.
-
-## Relationship to other DKKB entries
-
-[Architecture boundaries and dependency direction](./architecture-boundaries-and-dependency-direction/) explains what makes an internal module boundary meaningful.
-
-[Layered architecture](./layered-architecture/) groups code by responsibility. A modular monolith can use layers inside modules or organize primarily around capabilities.
-
-[Separate concerns](../principles/separation-of-concerns/) explains the reasoning behind independent responsibilities.
 
 ## Sources
 
