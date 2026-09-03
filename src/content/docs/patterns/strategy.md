@@ -2,7 +2,7 @@
 title: Strategy pattern
 description: Encapsulate interchangeable algorithms behind one contract so a context can vary behavior without owning each implementation.
 type: pattern
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -17,8 +17,8 @@ related:
   - principles/composition-over-inheritance
 sidebar:
   badge:
-    text: Draft
-    variant: caution
+    text: Reviewed
+    variant: success
 sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"
