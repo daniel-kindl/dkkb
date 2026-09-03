@@ -36,6 +36,7 @@ The issue should define the knowledge gap or project problem before implementati
 - Use canonical content IDs in `related` metadata.
 - State context and trade-offs when guidance is conditional.
 - Follow the approved Markdown presentation conventions when using asides, code blocks, file trees, procedures, or callouts.
+- Format DKKB-authored curly-brace code examples with Allman block braces, 4-space indentation, and spaces rather than tab characters.
 - Use Starlight Markdown asides only for short secondary information.
 - Use fenced Markdown code blocks, fenced text file trees, and normal ordered lists instead of MDX-only Starlight components.
 - Do not use Starlight component imports or custom icons in canonical entries.
@@ -62,6 +63,7 @@ A substantial entry is ready for `reviewed` or `stable` status only when the app
 - derived guidance makes its reasoning visible when needed;
 - related canonical entries are linked where useful;
 - presentation features are purposeful and the entry remains understandable without Starlight-specific styling;
+- DKKB-authored code examples follow the applicable code-style rules;
 - diagrams, when present, agree with the prose and remain understandable without color alone;
 - the text follows the DKKB writing standard;
 - the entry remains useful as plain Markdown without the generated website;

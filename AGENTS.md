@@ -49,6 +49,8 @@ Follow `docs/WRITING_STANDARD.md` and `docs/PRESENTATION.md`.
 - Do not add generic introductions or conclusions.
 - Use asides only for short secondary information.
 - Use fenced code blocks, fenced text file trees, and normal ordered lists instead of MDX-only Starlight components.
+- Format DKKB-authored curly-brace code examples with Allman block braces, 4-space indentation, and spaces rather than tab characters.
+- Preserve language correctness and meaningful original formatting when the Allman rule does not apply.
 - Do not use presentation features only to make an entry look more varied.
 
 ## Repository constraints
