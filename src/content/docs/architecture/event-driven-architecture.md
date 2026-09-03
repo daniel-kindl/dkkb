@@ -42,6 +42,10 @@ flowchart LR
 
 The producer does not need to know every consumer. This can reduce direct coordination, but it moves complexity into delivery, consistency, observability, and failure handling.
 
+:::caution[Events change coupling]
+An event bus does not remove coupling. Producers and consumers still depend on event meaning, schema, delivery behavior, and timing assumptions.
+:::
+
 ## Problem
 
 Direct request chains couple a producer to the availability, latency, and API of each downstream participant.
