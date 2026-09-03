@@ -48,9 +48,10 @@ Use fenced Markdown code blocks for source code, shell commands, configuration, 
 Always set the language when it is known and supported.
 
 ````md
-```ts title="strategy.ts" {2-4}
-interface Strategy {
-  execute(input: Input): Result;
+```ts title="strategy.ts" {3-5}
+interface Strategy
+{
+    execute(input: Input): Result;
 }
 ```
 ````
@@ -64,6 +65,33 @@ Starlight uses Expressive Code for Markdown code blocks. Its Markdown metadata c
 Keep the raw Markdown understandable without the enhanced rendering.
 
 Do not use Starlight's MDX-only `<Code>` component in canonical entries.
+
+### Code style
+
+DKKB-authored examples in curly-brace languages use Allman brace placement for code blocks.
+
+Put the opening brace of a block on its own line. Align it with the declaration, control statement, or other construct that owns the block. Put the closing brace on its own line at the same indentation level as that construct.
+
+Indent each nested block by 4 spaces. Use spaces, not tab characters, for indentation.
+
+```c
+if (condition)
+{
+    execute();
+}
+else
+{
+    recover();
+}
+```
+
+Apply this rule to block braces. Do not force Allman placement onto braces that represent data, such as JavaScript or TypeScript object literals, when doing so would reduce clarity.
+
+This rule applies to original examples written for DKKB. Preserve the meaningful original form of quoted, externally sourced, generated, or tool-output code when reformatting would reduce fidelity.
+
+Language correctness and semantic clarity take precedence over presentation. Languages that use indentation or another syntax to define blocks keep their normal structure.
+
+Code-style enforcement is a review responsibility for now. Do not add a language-aware code-fence formatter or linter only to enforce this rule unless repository usage later justifies that maintenance cost.
 
 ## File trees
 
@@ -129,3 +157,4 @@ If the site generator changes, presentation syntax must be removable or transfor
 - [Starlight: File Tree](https://starlight.astro.build/components/file-tree/)
 - [Starlight: Icons](https://starlight.astro.build/components/icons/)
 - [Starlight: Steps](https://starlight.astro.build/components/steps/)
+- [Indentation style: Allman style](https://en.wikipedia.org/wiki/Indentation_style#Allman_style)
