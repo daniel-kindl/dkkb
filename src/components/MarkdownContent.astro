@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+const { id, entry } = Astro.locals.starlightRoute;
+const docs = await getCollection('docs');
+const docsById = new Map(docs.map((doc) => [doc.id, doc]));
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const routeFor = (entryId) => `${baseUrl}${entryId}/`;
+const orderFor = (doc) => doc.data.sidebar?.order ?? Number.MAX_SAFE_INTEGER;
+const compareEntries = (left, right) =>
+  orderFor(left) - orderFor(right) || left.data.title.localeCompare(right.data.title);
+
+const categoryEntries =
+  entry.data.type === 'index' && id
+    ? docs
+        .filter((doc) => {
+          if (doc.data.type === 'index' || !doc.id.startsWith(`${id}/`)) return false;
+          return !doc.id.slice(id.length + 1).includes('/');
+        })
+        .sort(compareEntries)
+    : [];
+
+const relatedEntries = entry.data.related
+  .map((relatedId) => docsById.get(relatedId))
+  .filter((relatedEntry) => relatedEntry !== undefined);
+---
+
+<Default>
+  <slot />
+
+  {
+    categoryEntries.length > 0 && (
+      <section aria-labelledby="entries">
+        <h2 id="entries">Entries ({categoryEntries.length})</h2>
+        <CardGrid>
+          {categoryEntries.map((categoryEntry) => (
+            <LinkCard
+              title={categoryEntry.data.title}
+              href={routeFor(categoryEntry.id)}
+              description={categoryEntry.data.description}
+            />
+          ))}
+        </CardGrid>
+      </section>
+    )
+  }
+
+  {
+    relatedEntries.length > 0 && (
+      <section aria-labelledby="related-knowledge">
+        <h2 id="related-knowledge">Related knowledge</h2>
+        <CardGrid>
+          {relatedEntries.map((relatedEntry) => (
+            <LinkCard
+              title={relatedEntry.data.title}
+              href={routeFor(relatedEntry.id)}
+              description={relatedEntry.data.description}
+            />
+          ))}
+        </CardGrid>
+      </section>
+    )
+  }
+</Default>
