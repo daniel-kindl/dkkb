@@ -12,6 +12,7 @@ related:
   - reliability/retries-and-exponential-backoff
   - reliability/load-shedding-and-backpressure
   - reliability/timeouts
+  - performance/caching
 sources:
   - type: primary-source
     title: "Addressing Cascading Failures"
