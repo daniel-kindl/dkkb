@@ -11,7 +11,8 @@ topics:
   - maintainability
   - duplication
   - knowledge
-related: []
+related:
+  - anti-patterns/shotgun-surgery
 sources:
   - type: literature
     title: "The Pragmatic Programmer"

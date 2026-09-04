@@ -10,7 +10,8 @@ topics:
   - knowledge-management
   - personal-experience
   - provenance
-related: []
+related:
+  - playbook/literature-ingestion
 sources: []
 lastReviewed: "2026-09-03"
 ---

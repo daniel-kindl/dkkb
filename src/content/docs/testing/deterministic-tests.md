@@ -16,6 +16,7 @@ related:
   - testing/test-doubles
   - testing/unit-integration-and-end-to-end-tests
   - testing/testing-strategy
+  - problems/race-condition
 sources:
   - type: literature
     title: "Eradicating Non-Determinism in Tests"

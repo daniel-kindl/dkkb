@@ -15,6 +15,7 @@ related:
   - architecture/architecture-boundaries-and-dependency-direction
   - principles/dependency-inversion
   - principles/separation-of-concerns
+  - patterns/adapter
 sources:
   - type: primary-source
     title: "Hexagonal architecture"

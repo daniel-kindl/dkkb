@@ -12,7 +12,13 @@ topics:
   - modularity
   - architecture
   - coupling
-related: []
+related:
+  - architecture/architecture-boundaries-and-dependency-direction
+  - architecture/layered-architecture
+  - architecture/modular-monolith
+  - architecture/ports-and-adapters
+  - architecture/event-driven-architecture
+  - anti-patterns/god-object
 sources:
   - type: primary-source
     title: "On the role of scientific thought"

@@ -11,7 +11,9 @@ topics:
   - anti-patterns
   - maintainability
   - change-coupling
-related: []
+related:
+  - principles/dry
+  - anti-patterns/god-object
 sources:
   - type: literature
     title: "Refactoring: Improving the Design of Existing Code"

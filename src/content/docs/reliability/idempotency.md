@@ -15,6 +15,8 @@ related:
   - reliability/retries-and-exponential-backoff
   - reliability/timeouts
   - problems/retry-storm
+  - reliability/circuit-breakers
+  - problems/race-condition
 sources:
   - type: primary-source
     title: "RFC 9110: HTTP Semantics, Section 9.2.2 Idempotent Methods"

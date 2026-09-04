@@ -11,7 +11,9 @@ topics:
   - object-oriented-design
   - coupling
   - extensibility
-related: []
+related:
+  - patterns/strategy
+  - principles/dependency-inversion
 sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"

@@ -7,7 +7,8 @@ confidence: high
 provenance:
   - derived-guidance
 topics: [llm, context, prompting]
-related: []
+related:
+  - llm/retrieval-augmented-generation
 sources: []
 lastReviewed: "2026-09-03"
 ---
