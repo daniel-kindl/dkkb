@@ -11,7 +11,8 @@ topics:
   - design-patterns
   - integration
   - boundaries
-related: []
+related:
+  - architecture/ports-and-adapters
 sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"

@@ -10,7 +10,8 @@ topics:
   - knowledge-management
   - literature
   - provenance
-related: []
+related:
+  - playbook/personal-experience-capture
 sources: []
 lastReviewed: "2026-09-03"
 ---

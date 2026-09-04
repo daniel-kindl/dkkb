@@ -11,7 +11,8 @@ topics:
   - design-patterns
   - events
   - coupling
-related: []
+related:
+  - architecture/event-driven-architecture
 sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"

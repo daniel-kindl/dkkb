@@ -10,6 +10,7 @@ provenance:
 topics: [llm, retrieval, rag]
 related:
   - llm/context-engineering
+  - llm/evaluation-and-hallucination
 sources:
   - type: literature
     title: "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"

@@ -11,7 +11,10 @@ topics:
   - anti-patterns
   - cohesion
   - coupling
-related: []
+related:
+  - principles/separation-of-concerns
+  - architecture/architecture-boundaries-and-dependency-direction
+  - anti-patterns/shotgun-surgery
 sources:
   - type: literature
     title: "AntiPatterns: Refactoring Software, Architectures, and Projects in Crisis"
