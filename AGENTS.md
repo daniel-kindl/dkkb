@@ -69,3 +69,17 @@ Follow `docs/WRITING_STANDARD.md` and `docs/PRESENTATION.md`.
 ## Validation
 
 Run `pnpm check` after a material change.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live as GitHub issues in `daniel-kindl/dkkb`, managed with the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five canonical triage roles, each label string equal to its name. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `CONTEXT.md` and `docs/adr/` at the repository root. See `docs/agents/domain.md`.
