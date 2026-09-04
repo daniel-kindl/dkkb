@@ -18,6 +18,7 @@ related:
   - reliability/circuit-breakers
   - problems/thundering-herd
   - problems/retry-storm
+  - performance/bounded-work
 sources:
   - type: literature
     title: "Site Reliability Engineering: Addressing Cascading Failures"
