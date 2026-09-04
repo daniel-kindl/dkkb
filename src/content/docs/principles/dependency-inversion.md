@@ -13,6 +13,10 @@ topics:
   - coupling
 related:
   - principles/composition-over-inheritance
+  - architecture/architecture-boundaries-and-dependency-direction
+  - architecture/layered-architecture
+  - architecture/ports-and-adapters
+  - testing/test-doubles
 sources:
   - type: literature
     title: "Agile Software Development: Principles, Patterns, and Practices"

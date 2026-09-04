@@ -1,6 +1,5 @@
 ---
 title: You aren't gonna need it
-summary: Implement capabilities when there is evidence that they are needed, not only because they may be useful later.
 description: Implement capabilities when there is evidence that they are needed, not only because they may be useful later.
 type: principle
 status: draft

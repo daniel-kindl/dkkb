@@ -8,7 +8,9 @@ provenance:
   - literature
   - derived-guidance
 topics: [concurrency, correctness]
-related: []
+related:
+  - reliability/idempotency
+  - testing/deterministic-tests
 sources:
   - type: literature
     title: "The Art of Multiprocessor Programming"

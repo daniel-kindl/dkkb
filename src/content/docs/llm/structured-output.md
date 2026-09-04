@@ -7,7 +7,8 @@ confidence: high
 provenance:
   - derived-guidance
 topics: [llm, contracts, validation]
-related: []
+related:
+  - llm/evaluation-and-hallucination
 sources: []
 lastReviewed: "2026-09-03"
 ---

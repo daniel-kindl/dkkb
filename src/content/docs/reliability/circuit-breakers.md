@@ -16,6 +16,7 @@ related:
   - reliability/retries-and-exponential-backoff
   - reliability/load-shedding-and-backpressure
   - problems/retry-storm
+  - reliability/idempotency
 sources:
   - type: literature
     title: "Release It! Design and Deploy Production-Ready Software"

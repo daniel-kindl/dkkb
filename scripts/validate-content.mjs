@@ -121,6 +121,13 @@ for (const file of contentFiles) {
     errors.push(`${rel(file)}: 'related' must be an array of canonical content IDs.`);
   }
 
+  // A reviewed or stable entry carries a review-freshness claim. Homepage promotion
+  // and readers both rely on 'lastReviewed' to judge whether that claim is current.
+  // Index pages are generated overviews, not reviewed knowledge, so they are exempt.
+  if (data?.type !== 'index' && ['reviewed', 'stable'].includes(data?.status) && !data?.lastReviewed) {
+    errors.push(`${rel(file)}: status '${data?.status}' entries must define 'lastReviewed'.`);
+  }
+
   const body = stripCode(content.slice(match[0].length));
   const h1Headings = [...body.matchAll(/^# (.+)$/gm)].map((heading) => heading[1].trim());
   const hasSplashHeroTitle =
