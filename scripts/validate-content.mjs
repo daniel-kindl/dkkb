@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import YAML from 'yaml';
+import { walk, toPosixPath } from './lib/fs.mjs';
 
 const root = process.cwd();
 const contentRoot = path.join(root, 'src', 'content', 'docs');
@@ -10,16 +11,8 @@ const rules = JSON.parse(fs.readFileSync(path.join(root, 'config', 'style-rules.
 const errors = [];
 const warnings = [];
 
-function walk(directory) {
-  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    if (entry.isDirectory() && ignored.has(entry.name)) return [];
-    const fullPath = path.join(directory, entry.name);
-    return entry.isDirectory() ? walk(fullPath) : [fullPath];
-  });
-}
-
 function rel(file) {
-  return path.relative(root, file).split(path.sep).join('/');
+  return toPosixPath(path.relative(root, file));
 }
 
 function stripCode(text) {
@@ -65,7 +58,7 @@ function checkLinks(file, content) {
   }
 }
 
-const repositoryFiles = walk(root);
+const repositoryFiles = walk(root, { ignored });
 for (const file of repositoryFiles.filter((f) => f.endsWith('.mdx'))) {
   errors.push(`${rel(file)}: MDX is not allowed. Use Markdown.`);
 }
@@ -83,7 +76,7 @@ for (const file of repositoryFiles.filter((f) => f.endsWith('.md'))) {
   }
 }
 
-const contentFiles = walk(contentRoot).filter((f) => f.endsWith('.md'));
+const contentFiles = walk(contentRoot, { ignored }).filter((f) => f.endsWith('.md'));
 const entries = new Map();
 
 for (const file of contentFiles) {

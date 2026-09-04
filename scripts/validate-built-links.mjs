@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { walk, toPosixPath as slash } from './lib/fs.mjs';
 
 const root = process.cwd();
 const distRoot = path.join(root, 'dist');
@@ -8,17 +9,6 @@ const siteConfig = JSON.parse(
   fs.readFileSync(path.join(root, 'config', 'site.json'), 'utf8')
 );
 const errors = [];
-
-function walk(directory) {
-  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    const fullPath = path.join(directory, entry.name);
-    return entry.isDirectory() ? walk(fullPath) : [fullPath];
-  });
-}
-
-function slash(value) {
-  return value.split(path.sep).join('/');
-}
 
 function normalizeBase(base) {
   const trimmed = String(base ?? '').trim().replace(/^\/+|\/+$/g, '');
