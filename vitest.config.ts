@@ -5,6 +5,6 @@ import { defineConfig } from 'vitest/config';
 // virtual-module resolution is needed here.
 export default defineConfig({
   test: {
-    include: ['src/**/*.test.ts'],
+    include: ['src/**/*.test.ts', 'scripts/**/*.test.mjs'],
   },
 });
