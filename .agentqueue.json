@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "baseBranch": "main",
+  "issueLabel": "ready-for-agent",
+  "checks": [
+    "pnpm check"
+  ],
+  "requiredChecks": [
+    "Quality"
+  ],
+  "requireCiChecks": true,
+  "reviewPolicy": "optional",
+  "mergeWithoutReview": true,
+  "autoMerge": true,
+  "mergeMethod": "squash",
+  "maxParallel": 1,
+  "maxRetries": 2,
+  "maxFixRounds": 2
+}
