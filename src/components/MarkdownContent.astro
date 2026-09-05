@@ -1,173 +1,64 @@
 ---
 import { getCollection } from 'astro:content';
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
-import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 import MermaidFlowchartViewport from './MermaidFlowchartViewport.astro';
+import EntryGrid from './EntryGrid.astro';
+import {
+  selectHomepageSections,
+  selectCategoryEntries,
+  selectRelatedEntries,
+} from '../lib/entries';
 
 const { entry } = Astro.locals.starlightRoute;
 const docs = await getCollection('docs');
-const docsById = new Map(docs.map((doc) => [doc.id, doc]));
 const baseUrl = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
 const routeFor = (entryId) => `${baseUrl}${entryId}/`;
-const orderFor = (doc) => doc.data.sidebar?.order ?? Number.MAX_SAFE_INTEGER;
-const compareEntries = (left, right) =>
-  orderFor(left) - orderFor(right) || left.data.title.localeCompare(right.data.title);
-const homepageOrderFor = (doc) => doc.data.homepage?.order ?? 100;
-const compareHomepageEntries = (left, right) =>
-  homepageOrderFor(left) - homepageOrderFor(right) || left.data.title.localeCompare(right.data.title);
-const compareRecentEntries = (left, right) => {
-  const leftReviewed = left.data.lastReviewed ?? '';
-  const rightReviewed = right.data.lastReviewed ?? '';
-  return rightReviewed.localeCompare(leftReviewed) || left.data.title.localeCompare(right.data.title);
-};
-const isPromotable = (doc) =>
-  doc.data.type !== 'index' &&
-  !doc.data.sidebar?.hidden &&
-  (doc.data.status === 'reviewed' || doc.data.status === 'stable');
+const toCard = (doc) => ({
+  title: doc.data.title,
+  href: routeFor(doc.id),
+  description: doc.data.description,
+});
+
 const isHomepage = entry.data.type === 'index' && entry.data.template === 'splash';
 
+const { startHere, featured, recent, categories } = isHomepage
+  ? selectHomepageSections(docs)
+  : { startHere: [], featured: [], recent: [], categories: [] };
+
 const categoryEntries =
-  entry.data.type === 'index' && !isHomepage
-    ? docs
-        .filter((doc) => {
-          if (doc.data.type === 'index' || doc.data.sidebar?.hidden) return false;
-          if (!doc.id.startsWith(`${entry.id}/`)) return false;
-          return !doc.id.slice(entry.id.length + 1).includes('/');
-        })
-        .sort(compareEntries)
-    : [];
+  entry.data.type === 'index' && !isHomepage ? selectCategoryEntries(docs, entry) : [];
 
-const relatedEntries = (entry.data.related ?? [])
-  .map((relatedId) => docsById.get(relatedId))
-  .filter((relatedEntry) => relatedEntry !== undefined);
-
-const homepageStartHere =
-  isHomepage
-    ? docs.filter((doc) => isPromotable(doc) && doc.data.homepage?.startHere).sort(compareHomepageEntries).slice(0, 6)
-    : [];
-const homepageFeatured =
-  isHomepage
-    ? docs.filter((doc) => isPromotable(doc) && doc.data.homepage?.featured).sort(compareHomepageEntries).slice(0, 6)
-    : [];
-const homepageRecent =
-  isHomepage
-    ? docs.filter((doc) => isPromotable(doc) && doc.data.lastReviewed).sort(compareRecentEntries).slice(0, 6)
-    : [];
-const homepageCategories =
-  isHomepage
-    ? docs
-        .filter((doc) => doc.data.type === 'index' && doc.data.template !== 'splash' && !doc.data.sidebar?.hidden)
-        .sort((left, right) => left.data.title.localeCompare(right.data.title))
-    : [];
+const relatedEntries = selectRelatedEntries(docs, entry);
 ---
 
 <Default>
   <slot />
 
-  {
-    homepageStartHere.length > 0 && (
-      <section aria-labelledby="start-here">
-        <h2 id="start-here">Start here</h2>
-        <CardGrid>
-          {homepageStartHere.map((homepageEntry) => (
-            <LinkCard
-              title={homepageEntry.data.title}
-              href={routeFor(homepageEntry.id)}
-              description={homepageEntry.data.description}
-            />
-          ))}
-        </CardGrid>
-      </section>
-    )
-  }
-
-  {
-    homepageFeatured.length > 0 && (
-      <section aria-labelledby="featured">
-        <h2 id="featured">Featured</h2>
-        <CardGrid>
-          {homepageFeatured.map((homepageEntry) => (
-            <LinkCard
-              title={homepageEntry.data.title}
-              href={routeFor(homepageEntry.id)}
-              description={homepageEntry.data.description}
-            />
-          ))}
-        </CardGrid>
-      </section>
-    )
-  }
-
-  {
-    homepageRecent.length > 0 && (
-      <section aria-labelledby="recently-reviewed">
-        <h2 id="recently-reviewed">Recently reviewed</h2>
-        <CardGrid>
-          {homepageRecent.map((homepageEntry) => (
-            <LinkCard
-              title={homepageEntry.data.title}
-              href={routeFor(homepageEntry.id)}
-              description={homepageEntry.data.description}
-            />
-          ))}
-        </CardGrid>
-      </section>
-    )
-  }
-
-  {
-    homepageCategories.length > 0 && (
-      <section aria-labelledby="explore-knowledge-base">
-        <h2 id="explore-knowledge-base">Explore the knowledge base</h2>
-        <CardGrid>
-          {homepageCategories.map((categoryEntry) => (
-            <LinkCard
-              title={categoryEntry.data.title}
-              href={routeFor(categoryEntry.id)}
-              description={categoryEntry.data.description}
-            />
-          ))}
-        </CardGrid>
-      </section>
-    )
-  }
-
-  {
-    categoryEntries.length > 0 && (
-      <section aria-labelledby="entries">
-        <h2 id="entries">Entries ({categoryEntries.length})</h2>
-        <CardGrid>
-          {categoryEntries.map((categoryEntry) => (
-            <LinkCard
-              title={categoryEntry.data.title}
-              href={routeFor(categoryEntry.id)}
-              description={categoryEntry.data.description}
-            />
-          ))}
-        </CardGrid>
-      </section>
-    )
-  }
-
-  {
-    relatedEntries.length > 0 && (
-      <section aria-labelledby="related-knowledge">
-        <h2 id="related-knowledge">Related knowledge</h2>
-        <CardGrid>
-          {relatedEntries.map((relatedEntry) => (
-            <LinkCard
-              title={relatedEntry.data.title}
-              href={routeFor(relatedEntry.id)}
-              description={relatedEntry.data.description}
-            />
-          ))}
-        </CardGrid>
-      </section>
-    )
-  }
+  <EntryGrid heading="Start here" headingId="start-here" entries={startHere.map(toCard)} />
+  <EntryGrid heading="Featured" headingId="featured" entries={featured.map(toCard)} />
+  <EntryGrid
+    heading="Recently reviewed"
+    headingId="recently-reviewed"
+    entries={recent.map(toCard)}
+  />
+  <EntryGrid
+    heading="Explore the knowledge base"
+    headingId="explore-knowledge-base"
+    entries={categories.map(toCard)}
+  />
+  <EntryGrid
+    heading={`Entries (${categoryEntries.length})`}
+    headingId="entries"
+    entries={categoryEntries.map(toCard)}
+  />
+  <EntryGrid
+    heading="Related knowledge"
+    headingId="related-knowledge"
+    entries={relatedEntries.map(toCard)}
+  />
 </Default>
 
 <MermaidFlowchartViewport />
