@@ -1,0 +1,24 @@
+---
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+interface Props {
+  heading: string;
+  headingId: string;
+  entries: { title: string; href: string; description?: string }[];
+}
+
+const { heading, headingId, entries } = Astro.props;
+---
+
+{
+  entries.length > 0 && (
+    <section aria-labelledby={headingId}>
+      <h2 id={headingId}>{heading}</h2>
+      <CardGrid>
+        {entries.map((entry) => (
+          <LinkCard title={entry.title} href={entry.href} description={entry.description} />
+        ))}
+      </CardGrid>
+    </section>
+  )
+}
