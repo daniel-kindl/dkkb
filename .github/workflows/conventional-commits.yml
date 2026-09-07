@@ -29,3 +29,5 @@ jobs:
             chore
             perf
             revert
+          subjectPattern: '^(?!.*\.$).+$'
+          subjectPatternError: The description must not end with a period.
