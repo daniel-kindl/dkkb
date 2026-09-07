@@ -82,6 +82,68 @@ Not every entry needs every article section. Do not add empty sections only to s
 
 Direct changes to `main` are not part of the normal workflow.
 
+## Commit messages and pull request titles
+
+DKKB uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages and pull request titles.
+
+Use this form:
+
+```text
+type(scope): description
+```
+
+The scope is optional:
+
+```text
+type: description
+```
+
+The allowed types are:
+
+- `feat`: add a user-visible capability or knowledge feature;
+- `fix`: correct an existing behavior, document, link, or validation rule;
+- `docs`: change documentation without changing behavior;
+- `refactor`: restructure code or content without changing intended behavior;
+- `test`: add or change tests;
+- `build`: change build or package configuration;
+- `ci`: change continuous integration or repository automation;
+- `chore`: make maintenance changes that do not fit another type;
+- `perf`: improve performance without changing intended behavior;
+- `revert`: revert an earlier change.
+
+Use a scope when it identifies a clear area of the change. Use a short lowercase identifier such as `content`, `site`, `docs`, `ci`, or `repo`. Omit the scope when the change affects the repository broadly or when a scope would add noise. Do not use an issue number as a scope.
+
+Use a concise description after the colon. Do not end the description with a period. Keep the description meaningful without requiring the reader to open the issue.
+
+Use `!` before the colon to mark a breaking change:
+
+```text
+feat!: replace the content metadata contract
+feat(content)!: replace the content metadata contract
+```
+
+A commit can also use a `BREAKING CHANGE:` footer when its full message supports footers. A pull request title is one line, so use `!` when the title is the canonical squash-merge message.
+
+Valid DKKB examples:
+
+- `docs: document Conventional Commits`
+- `ci: validate pull request titles`
+- `fix(content): preserve glossary links`
+- `feat(site): add topic navigation`
+- `refactor!: replace the entry metadata contract`
+
+Invalid DKKB examples:
+
+- `Add commit rules` because it has no type;
+- `documentation: add commit rules` because `documentation` is not an allowed type;
+- `docs - add commit rules` because it does not use the required separator;
+- `feat (site): add topic navigation` because it has a space before the scope;
+- `fix: correct typo.` because the description ends with a period.
+
+The repository uses squash merges. The pull request title is the canonical commit message for the squash merge, and the repository's squash-merge setting must use the pull request title as the default commit message. Individual commits should also follow this convention so branch history remains readable, but DKKB does not require separate commit-message metadata when the pull request title already supplies the canonical squash commit.
+
+The `Conventional Commits` workflow validates pull request titles when a pull request is opened, edited, reopened, or synchronized. It validates the type and Conventional Commits structure. The workflow does not replace technical review or prove that the change is correctly classified.
+
 ## Dependencies
 
 Do not add a dependency unless it provides a clear project requirement that cannot be met reasonably with the current toolchain or a small local script.
