@@ -3,7 +3,6 @@ name: Pages
 on:
   push:
     branches: [main]
-  workflow_dispatch:
 
 concurrency:
   group: pages-${{ github.ref }}
@@ -39,6 +38,8 @@ jobs:
   deploy:
     name: Deploy
     needs: build
+    outputs:
+      page-url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
@@ -51,3 +52,18 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+  verify:
+    name: Verify
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - name: Verify deployed site
+        env:
+          PAGE_URL: ${{ needs.deploy.outputs.page-url }}
+        run: |
+          test -n "$PAGE_URL"
+          curl --fail --silent --show-error --location \
+            --retry 5 --retry-delay 5 --retry-all-errors --max-time 30 \
+            "$PAGE_URL" > /dev/null
