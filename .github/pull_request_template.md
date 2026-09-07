@@ -23,7 +23,7 @@ Describe important limits or trade-offs. Write `Not applicable` when none apply.
 ## Validation
 
 - [ ] `pnpm check` passes.
-- [ ] The final branch state is current with `main), or conflicts and branch updates are addressed.
+- [ ] The final branch state is current with `main`, or conflicts and branch updates are addressed.
 - [ ] Required review is complete, or the maintainer recorded an explicit waiver for a small correction.
 - [ ] I searched for an existing canonical entry before I added new knowledge.
 - [ ] New or changed claims have appropriate provenance.
