@@ -28,11 +28,11 @@ The release version is stored in `version.txt` for automation. Git tags and GitH
 
 ## Required repository setup
 
-Configure a repository secret named `RELEASE_PLEASE_TOKEN` before relying on the workflow. Use a least-privilege fine-grained token that can read repository metadata and read/write repository contents, issues, pull requests, tags, and releases as required by Release Please. Do not grant package publication or deployment credentials.
+Configure a repository secret named `RELEASE_PLEASE_TOKEN` before merging a generated release pull request. Use a least-privilege fine-grained token that can read repository metadata and read/write repository contents, issues, pull requests, tags, and releases as required by Release Please. Do not grant package publication or deployment credentials.
 
-The token is intentional: GitHub's built-in `GITHUB_TOKEN` prevents events created by the workflow from starting later workflows, so a generated release pull request would not receive the normal Quality check automatically. Also enable **Allow GitHub Actions to create and approve pull requests** in the repository Actions settings.
+The workflow falls back to GitHub's built-in `GITHUB_TOKEN` when the secret is missing, so a missing repository secret does not make the `main` check red. GitHub's built-in token prevents events created by the workflow from starting later workflows, however, so a release pull request created during fallback will not receive the normal Quality check automatically and must not be merged until the PAT is configured. Also enable **Allow GitHub Actions to create and approve pull requests** in the repository Actions settings.
 
-If the secret is missing or invalid, the workflow fails without creating a partial release. Correct the repository configuration and rerun the workflow; do not move or reuse a published tag.
+An invalid non-empty token still fails the workflow. Correct the repository configuration and rerun the workflow; do not move or reuse a published tag.
 
 ## Reruns and recovery
 
