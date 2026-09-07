@@ -4,7 +4,6 @@ All notable changes to DKKB will be documented in this file.
 
 ## [0.2.0](https://github.com/daniel-kindl/dkkb/compare/v0.1.0...v0.2.0) (2026-09-07)
 
-
 ### Features
 
 * **docs:** adopt Mermaid diagrams ([#12](https://github.com/daniel-kindl/dkkb/issues/12)) ([4c7fee3](https://github.com/daniel-kindl/dkkb/commit/4c7fee3a1b0a9e75aa392c35d72d3b28dec45ca3))
@@ -14,7 +13,6 @@ All notable changes to DKKB will be documented in this file.
 * **site:** derive navigation from frontmatter and validate built links ([#29](https://github.com/daniel-kindl/dkkb/issues/29)) ([c74e88e](https://github.com/daniel-kindl/dkkb/commit/c74e88e9a645506a39ccb010895d84edd53e069d))
 * **site:** improve knowledge entry presentation ([#25](https://github.com/daniel-kindl/dkkb/issues/25)) ([4e2b59b](https://github.com/daniel-kindl/dkkb/commit/4e2b59bbfed75a20f59fb56c4267b9ecd130f50b))
 * **site:** redesign DKKB homepage ([#28](https://github.com/daniel-kindl/dkkb/issues/28)) ([24c2330](https://github.com/daniel-kindl/dkkb/commit/24c23300d59642b6f3a686ebab154e473c0894b6))
-
 
 ### Bug Fixes
 
