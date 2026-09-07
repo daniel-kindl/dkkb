@@ -80,7 +80,7 @@ A reviewer can then ask two different questions:
 - Did the internal structure improve without changing behavior?
 - Does the new behavior satisfy the requested contract?
 
-Small commits or focused pull requests make those questions easier to answer. The repository's [Conventional Commits](../practices/conventional-commits/) guidance can describe intent, but a commit type is not proof that behavior stayed unchanged.
+Small commits or focused pull requests make those questions easier to answer. The repository's [Conventional Commits](/dkkb/practices/conventional-commits/) guidance can describe intent, but a commit type is not proof that behavior stayed unchanged.
 
 ## Trade-offs
 
@@ -105,7 +105,7 @@ Unsafe refactoring often includes:
 - keeping a compatibility layer without a removal condition;
 - continuing after the diff no longer has one clear purpose.
 
-Use [deterministic tests](../testing/deterministic-tests/) when time, randomness, scheduling, or shared state can obscure whether behavior changed.
+Use [deterministic tests](/dkkb/testing/deterministic-tests/) when time, randomness, scheduling, or shared state can obscure whether behavior changed.
 
 ## Interaction with architecture and review
 

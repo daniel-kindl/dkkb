@@ -80,7 +80,7 @@ Validate at the boundary that first has enough information to make the decision.
 
 Duplicate checks can be justified when they protect different boundaries. Do not treat an upstream check as proof that every later caller is safe.
 
-The [secure defaults and fail-closed behavior](../security/secure-defaults-and-fail-closed-behavior/) entry applies the same boundary idea to security decisions.
+The [secure defaults and fail-closed behavior](/dkkb/security/secure-defaults-and-fail-closed-behavior/) entry applies the same boundary idea to security decisions.
 
 ## Trade-offs
 
@@ -104,7 +104,7 @@ Hidden or weak invariants cause:
 - error messages that describe a downstream symptom instead of the violated contract;
 - security decisions based on unvalidated or ambiguous input.
 
-A validation check in application code cannot replace an atomic database constraint when concurrent writers can create the same invalid state. See [race condition](../problems/race-condition/) for the ordering problem.
+A validation check in application code cannot replace an atomic database constraint when concurrent writers can create the same invalid state. See [race condition](/dkkb/problems/race-condition/) for the ordering problem.
 
 ## Interaction with testing and review
 

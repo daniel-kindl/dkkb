@@ -88,7 +88,7 @@ Place effects at clear edges around a core decision:
 
 This structure does not require separate services or strict functional programming. It reduces the number of places where hidden state and ordering can affect the result.
 
-The [idempotency](../reliability/idempotency/) entry is useful when an explicit effect can be retried. The [safe online data migrations](../practices/safe-online-data-migrations/) entry shows how a multi-step operational sequence can be made visible and verifiable.
+The [idempotency](/dkkb/reliability/idempotency/) entry is useful when an explicit effect can be retried. The [safe online data migrations](/dkkb/practices/safe-online-data-migrations/) entry shows how a multi-step operational sequence can be made visible and verifiable.
 
 ## Trade-offs
 
@@ -113,13 +113,13 @@ Hidden effects and temporal coupling often produce:
 - race conditions around check-then-act sequences;
 - changes that require edits in distant setup code.
 
-Use [deterministic tests](../testing/deterministic-tests/) to expose uncontrolled time, randomness, scheduling, and shared state.
+Use [deterministic tests](/dkkb/testing/deterministic-tests/) to expose uncontrolled time, randomness, scheduling, and shared state.
 
 ## Interaction with architecture and review
 
 An explicit effect makes dependency direction and ownership easier to review. A reviewer can ask who owns the write, whether the operation is retryable, and which state transition it represents.
 
-A function boundary is not automatically a good architecture boundary. Use [separation of concerns](../principles/separation-of-concerns/) when the effect and the policy have different change drivers.
+A function boundary is not automatically a good architecture boundary. Use [separation of concerns](/dkkb/principles/separation-of-concerns/) when the effect and the policy have different change drivers.
 
 ## Practical guidance
 

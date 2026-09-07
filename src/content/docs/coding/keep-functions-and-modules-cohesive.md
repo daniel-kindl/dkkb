@@ -73,7 +73,7 @@ Modules often make good boundaries for:
 - one persistence decision;
 - one policy with several supporting operations.
 
-A boundary that only forwards calls can add navigation cost without increasing cohesion. Use [separation of concerns](../principles/separation-of-concerns/) to decide whether the split protects a real distinction.
+A boundary that only forwards calls can add navigation cost without increasing cohesion. Use [separation of concerns](/dkkb/principles/separation-of-concerns/) to decide whether the split protects a real distinction.
 
 ## Trade-offs
 
@@ -81,7 +81,7 @@ Small functions can be easier to test and review. Excessive extraction can make 
 
 A module with one public operation can still be cohesive if it protects a meaningful contract. A module with many public operations can still be cohesive if they form one stable domain boundary.
 
-Do not force unrelated concepts together because their code currently looks similar. The [DRY principle](../principles/dry/) concerns duplicated knowledge, not every repeated shape.
+Do not force unrelated concepts together because their code currently looks similar. The [DRY principle](/dkkb/principles/dry/) concerns duplicated knowledge, not every repeated shape.
 
 :::caution[Size is a signal, not the rule]
 A long function can indicate several responsibilities, but a short function can still mix unrelated policies. Judge the boundary by responsibility and change reason.
@@ -105,7 +105,7 @@ A cohesive unit gives tests a clear subject and reduces setup that is unrelated 
 
 Cohesion is not a reason to create a separate service or process. Deployment boundaries add latency, failure modes, operational cost, and data-contract work. Keep a cohesive unit in the same module or application when a separate deployment boundary adds no useful independence.
 
-The [composition over inheritance](../principles/composition-over-inheritance/) principle can support cohesion by keeping behavior in focused collaborators rather than growing a hierarchy with mixed responsibilities.
+The [composition over inheritance](/dkkb/principles/composition-over-inheritance/) principle can support cohesion by keeping behavior in focused collaborators rather than growing a hierarchy with mixed responsibilities.
 
 ## Practical guidance
 

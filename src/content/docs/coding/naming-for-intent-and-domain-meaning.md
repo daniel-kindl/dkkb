@@ -92,7 +92,7 @@ Poor naming produces:
 - names that describe an old implementation after the implementation changes;
 - inconsistent terms for one domain concept.
 
-A precise name cannot repair a function with several unrelated responsibilities. Combine naming with [separation of concerns](../principles/separation-of-concerns/) and [cohesive functions and modules](./keep-functions-and-modules-cohesive/).
+A precise name cannot repair a function with several unrelated responsibilities. Combine naming with [separation of concerns](/dkkb/principles/separation-of-concerns/) and [cohesive functions and modules](/dkkb/coding/keep-functions-and-modules-cohesive/).
 
 ## Interaction with testing and review
 
