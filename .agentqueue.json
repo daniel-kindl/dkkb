@@ -9,9 +9,9 @@
     "Quality"
   ],
   "requireCiChecks": true,
-  "reviewPolicy": "optional",
-  "mergeWithoutReview": true,
-  "autoMerge": true,
+  "reviewPolicy": "required",
+  "mergeWithoutReview": false,
+  "autoMerge": false,
   "mergeMethod": "squash",
   "maxParallel": 1,
   "maxRetries": 2,

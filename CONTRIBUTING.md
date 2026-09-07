@@ -82,6 +82,65 @@ Not every entry needs every article section. Do not add empty sections only to s
 
 Direct changes to `main` are not part of the normal workflow.
 
+## Pull request workflow
+
+The normal contribution lifecycle is:
+
+1. Select an open issue with no unresolved blocker.
+2. Create a short-lived topic branch from the latest `main`, following the [branch model](docs/GOVERNANCE.md).
+3. Make one coherent change and keep the branch focused on the selected issue.
+4. Run `pnpm check` and inspect the result.
+5. Open a pull request against `main` with the required title and body information.
+6. Keep the pull request in draft state until the change is ready for review.
+7. Resolve review comments, update the branch when needed, and wait for required checks.
+8. Squash merge after the required review and validation state is complete.
+9. Verify that the issue, branch, and deployment state have the expected result.
+
+### Issue and branch selection
+
+Work on one issue per branch and pull request unless a maintainer explicitly groups tightly coupled changes. Do not start work on an issue with an open blocker. If a new blocker appears, record it on the issue or pull request and stop at the boundary of the blocked work.
+
+Create issue-backed branches from the latest `main`. Use the branch names defined in [repository governance](docs/GOVERNANCE.md). The pull request should link the issue with a closing reference such as `Fixes #123` when the change completely resolves it.
+
+### Keeping a branch current
+
+Before final validation, update the topic branch when `main` has moved in a way that can affect the change.
+
+- Prefer rebasing an unpublished branch that has one owner.
+- Use `git push --force-with-lease` after rebasing an owned branch.
+- Do not rebase or force-push a branch that another contributor actively uses.
+- Merge the current `main` into a shared branch when rewriting its history would be unsafe.
+- Resolve conflicts on the topic branch, explain non-obvious resolutions in the pull request, and run `pnpm check` again.
+
+A pull request must not be merged while its conflicts are unresolved or while its validation result belongs to an obsolete branch state.
+
+### Pull request expectations
+
+Every pull request must:
+
+- target `main` unless an explicitly documented release or hotfix flow requires another base;
+- use a Conventional Commit title;
+- describe the purpose, change, evidence or provenance, trade-offs, and validation;
+- link the issue or explain why no issue is required;
+- state whether the pull request is ready for review;
+- keep required checks and review conversations visible.
+
+Use a draft pull request for incomplete work, unresolved design decisions, failing validation, or work that is not ready for external review. Mark it ready only after the author has completed the intended scope and recorded the remaining risks.
+
+### Review and validation gates
+
+The `Quality` check and `pnpm check` are required validation gates. The final pull request commit must pass them. A maintainer must approve the change or explicitly record a review waiver for a small, low-risk correction. AI agents cannot approve their own pull requests or waive review.
+
+Knowledge, architecture, tooling, and workflow changes require review of correctness, scope, provenance, security, and maintenance cost. Review comments must be resolved before merge unless the maintainer explicitly records why a comment remains unresolved.
+
+### Merge and cleanup
+
+DKKB uses squash merging. The pull request title is the canonical squash-merge commit message. Merge commits and rebase-and-merge are not part of the normal workflow.
+
+Only an authorized maintainer may merge a pull request. An AI agent may claim an issue, create or update a branch, make changes, run validation, open a pull request, and respond to review comments. An AI agent must not merge, enable auto-merge, approve its own pull request, or close the issue unless the active task explicitly authorizes that action.
+
+After a squash merge, GitHub should delete the topic branch automatically. The closing reference should close the issue when the merge completes. If automatic cleanup or issue closure does not occur, the maintainer verifies and corrects it separately.
+
 ## Commit messages and pull request titles
 
 DKKB uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages and pull request titles.

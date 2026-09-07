@@ -59,7 +59,7 @@ Topic branches may use force-push with lease when their owner must rebase or rev
 
 ### Hotfixes
 
-A hotfix starts from the latest `main` and uses a `fix/<issue>-<description>` branch. It follows the normal pull request and quality-gate path, but it may receive expedited review when the public site is affected. After the squash merge, the normal `main) deployment path provides the release path.
+A hotfix starts from the latest `main` and uses a `fix/<issue>-<description>` branch. It follows the normal pull request and quality-gate path, but it may receive expedited review when the public site is affected. After the squash merge, the normal `main` deployment path provides the release path.
 
 A hotfix does not require a permanent `hotfix` branch.
 
