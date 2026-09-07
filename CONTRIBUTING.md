@@ -100,7 +100,7 @@ The normal contribution lifecycle is:
 
 Work on one issue per branch and pull request unless a maintainer explicitly groups tightly coupled changes. Do not start work on an issue with an open blocker. If a new blocker appears, record it on the issue or pull request and stop at the boundary of the blocked work.
 
-Create issue-backed branches from the latest `main`. Use the branch names defined in [repository governance](docs/GOVERNANCE.md). The pull request should link the issue with a closing reference such as `Fixes #123) when the change completely resolves it.
+Create issue-backed branches from the latest `main`. Use the branch names defined in [repository governance](docs/GOVERNANCE.md). The pull request should link the issue with a closing reference such as `Fixes #123` when the change completely resolves it.
 
 ### Keeping a branch current
 
@@ -118,7 +118,7 @@ A pull request must not be merged while its conflicts are unresolved or while it
 
 Every pull request must:
 
-- target `main) unless an explicitly documented release or hotfix flow requires another base;
+- target `main` unless an explicitly documented release or hotfix flow requires another base;
 - use a Conventional Commit title;
 - describe the purpose, change, evidence or provenance, trade-offs, and validation;
 - link the issue or explain why no issue is required;
