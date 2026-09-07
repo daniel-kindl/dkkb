@@ -55,17 +55,17 @@ Examples:
 - Close and delete abandoned branches when their work is no longer active.
 - Do not delete `main`.
 
-Topic branches may use force-push with lease when their owner must rebase or revise unpublished history. Do not force-push `main), a shared long-lived branch, or a branch that another contributor is actively using.
+Topic branches may use force-push with lease when their owner must rebase or revise unpublished history. Do not force-push `main`, a shared long-lived branch, or a branch that another contributor is actively using.
 
 ### Hotfixes
 
-A hotfix starts from the latest `main) and uses a `fix/<issue>-<description>` branch. It follows the normal pull request and quality-gate path, but it may receive expedited review when the public site is affected. After the squash merge, the normal `main) deployment path provides the release path.
+A hotfix starts from the latest `main` and uses a `fix/<issue>-<description>` branch. It follows the normal pull request and quality-gate path, but it may receive expedited review when the public site is affected. After the squash merge, the normal `main) deployment path provides the release path.
 
 A hotfix does not require a permanent `hotfix` branch.
 
 ### Release preparation
 
-DKKB does not use permanent release branches. Release preparation uses a short-lived topic branch from `main), then merges the validated result into `main). Tags and GitHub Releases must identify a specific validated `main) commit.
+DKKB does not use permanent release branches. Release preparation uses a short-lived topic branch from `main`, then merges the validated result into `main`. Tags and GitHub Releases must identify a specific validated `main` commit.
 
 The version policy, tag format, and release automation are defined separately by [issue #104](https://github.com/daniel-kindl/dkkb/issues/104). This branch model does not prescribe version numbers or release-note generation.
 
