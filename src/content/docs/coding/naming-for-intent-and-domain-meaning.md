@@ -56,7 +56,7 @@ The name `selectBestOffer` communicates an operation. A name such as `process` o
 
 Names should also expose important units and states:
 
-- `timeoutMs) is clearer than `timeout` when several time units exist;
+- `timeoutMs` is clearer than `timeout` when several time units exist;
 - `publishedAt` is clearer than `date` when the lifecycle event matters;
 - `normalizedTitle` is clearer than `title2` when the value has a transformation contract.
 
@@ -68,7 +68,7 @@ Local names can rely on nearby context. Public names cannot rely on the reader o
 
 Use domain terms consistently across function names, data fields, API contracts, and tests. If two names refer to the same concept, changing the term only to avoid repetition makes the system harder to search and discuss.
 
-Do not hide a different concept behind one convenient name. A `price) that can mean either the current price or the historical observed price creates ambiguity at every call site. Give the concepts separate names or define one explicit contract.
+Do not hide a different concept behind one convenient name. A `price` that can mean either the current price or the historical observed price creates ambiguity at every call site. Give the concepts separate names or define one explicit contract.
 
 :::tip[Name the decision, not the mechanics]
 A name such as `loadVisibleOffers` communicates a policy. A name such as `queryRows` exposes only one implementation step.
@@ -78,7 +78,7 @@ A name such as `loadVisibleOffers` communicates a policy. A name such as `queryR
 
 Long names can make code harder to scan. A name should carry the context that the reader needs at that boundary, not every detail known by the implementation.
 
-Common words such as `id) or `value) can be correct in a narrow scope. They become weak when several identifiers or values are visible at the same time.
+Common words such as `id` or `value` can be correct in a narrow scope. They become weak when several identifiers or values are visible at the same time.
 
 Renaming a public field or API operation can break consumers. Treat names at external boundaries as compatibility decisions and use an explicit migration when the contract must change.
 

@@ -69,7 +69,7 @@ function calculateSalePrice(price: Money, discount: Percentage): Money
 }
 ```
 
-A later change can extract `calculateDiscountAmount) if that creates a useful contract. Extracting every expression before the behavior is understood creates movement without clarity.
+A later change can extract `calculateDiscountAmount` if that creates a useful contract. Extracting every expression before the behavior is understood creates movement without clarity.
 
 ## Keep change types separate when useful
 
