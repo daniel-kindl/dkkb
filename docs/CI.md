@@ -7,7 +7,7 @@ This document defines what DKKB validates, when validation runs, and which workf
 | Workflow | Events | Responsibility | Merge gate |
 | --- | --- | --- | --- |
 | `CI` | Pull requests, pushes to `main`, `v*` tags, and manual dispatch | Run the repository quality gate | The `Quality` job is the required pull request check |
-| `Pages` | Pushes to `main` and manual dispatch | Validate and build the site, then deploy the Pages artifact | Not a replacement for the `Quality` check |
+| `Pages` | Pushes to `main` | Validate and build the site, deploy the Pages artifact, and verify the public URL | Not a replacement for the `Quality` check |
 
 DKKB has no persistent `dev`, `develop`, release, or hotfix branch. The branch model is documented in [repository governance](GOVERNANCE.md). A future long-lived branch must be added to workflow triggers deliberately and documented here.
 
@@ -43,11 +43,11 @@ Pull request runs share a group for the pull request and cancel an older in-prog
 
 Runs for `main`, version tags, and manual dispatch are not canceled after they start. They provide evidence for integrated or published refs and must not disappear because another ref started validation.
 
-Pages runs use a workflow-and-ref concurrency group and do not cancel an in-progress deployment attempt. Pages repeats `pnpm check` because it can be manually dispatched and must validate the exact source from which it creates the deployment artifact. This is intentional duplication between an independent deployment workflow and the merge gate.
+Pages runs use a workflow-and-ref concurrency group and do not cancel an in-progress deployment attempt. Pages repeats `pnpm check` because it owns the build artifact used for deployment and must validate the exact source from which it creates that artifact. This is intentional duplication between an independent deployment workflow and the merge gate. The deployment workflow is not manually dispatchable, which prevents an arbitrary branch from being published as production.
 
 ## Deployment boundary
 
-CI validates code and content. Pages builds and publishes the site. CI does not deploy, and Pages does not create releases. The environment and promotion policy is tracked separately in [issue #108](https://github.com/daniel-kindl/dkkb/issues/108).
+CI validates code and content. Pages builds, publishes, and verifies the site. CI does not deploy, and Pages does not create releases. The full environment and promotion policy is documented in [deployment environments and promotion](DEPLOYMENT.md).
 
 ## Sources
 
