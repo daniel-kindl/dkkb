@@ -61,7 +61,7 @@ Topic branches may use force-push with lease when their owner must rebase or rev
 
 A hotfix starts from the latest `main` and uses a `fix/<issue>-<description>` branch. It follows the normal pull request and quality-gate path, but it may receive expedited review when the public site is affected. After the squash merge, the normal `main` deployment path provides the release path.
 
-A hotfix does not require a permanent `hotfix` branch.
+A hotfix does not require a permanent `hotfix` branch. It still reaches production through the next reviewed Release Please pull request, unless the project explicitly defines an emergency deployment exception.
 
 ### Release preparation
 
@@ -151,7 +151,7 @@ The workflow:
 - updates `version.txt` and [`CHANGELOG.md`](../CHANGELOG.md) in the release pull request;
 - applies the pre-1.0 rule that breaking changes increment the minor version;
 - creates the immutable `vX.Y.Z` tag and GitHub Release only after the release pull request is merged;
-- does not publish a package or deploy production.
+- does not publish a package; the separate Pages workflow deploys production only after the release pull request merges.
 
 The release pull request must pass the normal Quality check and receive maintainer review. The workflow uses the `RELEASE_PLEASE_TOKEN` repository secret because resources created with GitHub's built-in token do not trigger follow-up workflows. Configure that secret with the least-privilege repository token described in [the release operations guide](RELEASES.md), and enable GitHub Actions to create and approve pull requests in repository settings.
 

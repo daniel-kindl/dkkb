@@ -9,9 +9,9 @@ DKKB publishes site releases from `main` with a reviewed Release Please pull req
 3. The release pull request updates `version.txt` and [`CHANGELOG.md`](../CHANGELOG.md). Review the generated notes for public impact, breaking changes, and migration guidance.
 4. A maintainer confirms the Quality check passes and merges the release pull request.
 5. Release Please creates the immutable `vX.Y.Z` tag and the corresponding GitHub Release on the release pull request's merge commit.
-6. The Pages workflow remains separate and deploys only pushes to `main`.
+6. The Pages workflow remains separate and deploys only after this release pull request merges into `main`.
 
-Release Please does not publish a package and does not deploy production. A release is a public record of a validated `main` commit; it is not a second deployment path.
+Release Please does not publish a package or deploy production. The separate Pages workflow publishes the exact release merge commit after this release pull request merges. A release is a public record of that validated `main` commit.
 
 ## Version rules
 
