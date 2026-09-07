@@ -6,7 +6,7 @@ DKKB publishes site releases from `main` with a reviewed Release Please pull req
 
 1. A change is merged into `main` with the normal pull request, review, and Quality check path.
 2. The Release Please workflow reads the Conventional Commit history and opens or updates one release pull request.
-3. The release pull request updates `version.txt` and `CHANGELOG.md`. Review the generated notes for public impact, breaking changes, and migration guidance.
+3. The release pull request updates `version.txt` and [`CHANGELOG.md`](../CHANGELOG.md). Review the generated notes for public impact, breaking changes, and migration guidance.
 4. A maintainer confirms the Quality check passes and merges the release pull request.
 5. Release Please creates the immutable `vX.Y.Z` tag and the corresponding GitHub Release on the release pull request's merge commit.
 6. The Pages workflow remains separate and deploys only pushes to `main`.
@@ -20,9 +20,9 @@ The manifest starts at `0.1.0`. The workflow uses the documented DKKB SemVer pol
 - `fix` commits normally produce a patch release;
 - `feat` commits normally produce a minor release;
 - breaking changes use a minor increment while the project is below `1.0.0`;
-- breaking changes use a major increment from `1.0.0) onward;
+- breaking changes use a major increment from `1.0.0` onward;
 - `docs`, `refactor`, `test`, `build`, `ci`, `chore`, and `perf` do not release by themselves unless their public effect warrants it;
-- stable tags use `vX.Y.Z); intentional pre-releases remain explicitly managed as `vX.Y.Z-alpha.N`, `vX.Y.Z-beta.N`, or `vX.Y.Z-rc.N`.
+- stable tags use `vX.Y.Z`; intentional pre-releases remain explicitly managed as `vX.Y.Z-alpha.N`, `vX.Y.Z-beta.N`, or `vX.Y.Z-rc.N`.
 
 The release version is stored in `version.txt` for automation. Git tags and GitHub Releases are the authoritative public records. Published tags are never moved or deleted.
 
