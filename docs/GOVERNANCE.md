@@ -69,7 +69,7 @@ DKKB does not use permanent release branches. Release preparation uses a short-l
 
 The version and release policy is defined in the [versioning and release policy](#versioning-and-release-policy) below. Release automation implementation is tracked by [issue #109](https://github.com/daniel-kindl/dkkb/issues/109).
 
-Branches and deployment environments are separate concepts. A topic branch is not automatically a shared development environment, and a `dev` branch is not required for a staging environment. The environment and promotion policy is tracked separately by [issue #108](https://github.com/daniel-kindl/dkkb/issues/108).
+Branches and deployment environments are separate concepts. A topic branch is not automatically a shared development environment, and a `dev` branch is not required for a staging environment. The environment and promotion policy is defined in [deployment environments and promotion](DEPLOYMENT.md) and tracked by [issue #108](https://github.com/daniel-kindl/dkkb/issues/108).
 
 ## Versioning and release policy
 
