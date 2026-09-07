@@ -90,7 +90,7 @@ Private scripts, intermediate commits, internal implementation details, and depe
 
 Use the normal SemVer form `MAJOR.MINOR.PATCH` without leading zeroes. The `v` prefix is a Git tag convention, not part of the SemVer value.
 
-DKKB remains in major version zero during initial development. The first published release should use `0.1.0). While the major version is zero, the public contract is not considered stable and incompatible changes may require a minor-version increment.
+DKKB remains in major version zero during initial development. The first published release should use `0.1.0`. While the major version is zero, the public contract is not considered stable and incompatible changes may require a minor-version increment.
 
 Git tags and GitHub Releases are the authoritative public release records. DKKB does not use `package.json`'s private package version as a second public release authority. A future automation state file may support release generation, but it must not override the tag and GitHub Release that identify the published state.
 
@@ -100,7 +100,7 @@ Classify a release by the highest-impact change included in the published state:
 
 | Change | Version impact | DKKB examples |
 | --- | --- | --- |
-| Incompatible public change | Major after `1.0.0); minor while still in `0.y.z` | remove a stable route without a redirect, remove required frontmatter, or change a documented contributor contract incompatibly |
+| Incompatible public change | Major after `1.0.0`; minor while still in `0.y.z` | remove a stable route without a redirect, remove required frontmatter, or change a documented contributor contract incompatibly |
 | Backward-compatible addition | Minor | add a canonical knowledge area, add a new stable route, add optional metadata, or add a backward-compatible site capability |
 | Backward-compatible correction | Patch | fix a factual error, broken link, typo, styling defect, or accessibility defect without changing the public contract |
 | No public effect | No release by itself | internal refactoring, tests, CI maintenance, dependency maintenance, or build changes that do not alter the published site or contributor contract |
@@ -112,7 +112,7 @@ Commit and pull request types provide intent, not an automatic version decision:
 - `docs` is classified by its public effect. A new canonical entry can be minor, while a correction can be patch;
 - `refactor`, `test`, `build`, `ci`, `chore`, and `perf` do not create a release by themselves unless their result changes the public contract or published site;
 - `revert` is classified by the public effect of the resulting state;
-- `!` or a `BREAKING CHANGE:` footer indicates an incompatible change and requires a major release after `1.0.0), or the corresponding minor increment during major version zero.
+- `!` or a `BREAKING CHANGE:` footer indicates an incompatible change and requires a major release after `1.0.0`, or the corresponding minor increment during major version zero.
 
 A single release can contain several change types. Use the highest applicable impact, and do not hide a breaking change behind a lower-impact commit type.
 
@@ -126,7 +126,7 @@ v0.2.0-beta.1
 v1.0.0-rc.1
 ```
 
-Do not publish a pre-release for every pull request or every commit. Use `alpha) for incomplete evaluation, `beta) for a broader but still unstable evaluation, and `rc` when the intended stable scope is complete and only final validation remains.
+Do not publish a pre-release for every pull request or every commit. Use `alpha` for incomplete evaluation, `beta` for a broader but still unstable evaluation, and `rc` when the intended stable scope is complete and only final validation remains.
 
 Pre-release versions have lower precedence than the associated normal version. Build metadata is not used in DKKB release tags because it does not change version precedence. A published tag is immutable. A correction to a pre-release or normal release creates a new version.
 
@@ -135,9 +135,9 @@ Pre-release versions have lower precedence than the associated normal version. B
 Use these tag formats:
 
 - stable release: `vX.Y.Z`;
-- pre-release: `vX.Y.Z-alpha.N`, `vX.Y.Z-beta.N`, or `vX.Y.Z-rc.N).
+- pre-release: `vX.Y.Z-alpha.N`, `vX.Y.Z-beta.N`, or `vX.Y.Z-rc.N`.
 
-Create the tag on the exact validated commit on `main) that is being released. Do not move or delete a published tag. Create one GitHub Release for each published tag and mark pre-releases with GitHub's pre-release flag.
+Create the tag on the exact validated commit on `main` that is being released. Do not move or delete a published tag. Create one GitHub Release for each published tag and mark pre-releases with GitHub's pre-release flag.
 
 Release notes should include the released version, the release date, user-visible site and knowledge changes, important fixes, breaking changes, upgrade or migration notes when needed, and links to the contributing pull requests. DKKB does not publish a package as part of a site release.
 
@@ -145,7 +145,7 @@ Release notes should include the released version, the release date, user-visibl
 
 Recommend [release-please](https://github.com/googleapis/release-please-action) for issue #109. It matches the existing squash-merge and Conventional Commits model because it maintains a release pull request, derives release notes from accepted history, and creates the tag and GitHub Release only when the release pull request is merged.
 
-Issue #109 should implement the simple root-site configuration with a dedicated `version.txt) and `CHANGELOG.md), pin the action to an immutable commit, use least-privilege permissions, keep the release pull request subject to the normal Quality check and maintainer review, and ensure the created release is bound to the validated `main` commit. The release workflow must not publish packages or silently deploy production.
+Issue #109 should implement the simple root-site configuration with a dedicated `version.txt` and `CHANGELOG.md`, pin the action to an immutable commit, use least-privilege permissions, keep the release pull request subject to the normal Quality check and maintainer review, and ensure the created release is bound to the validated `main` commit. The release workflow must not publish packages or silently deploy production.
 
 Until #109 implements that automation, no version file is authoritative. The tags and GitHub Releases remain the only public release records.
 
