@@ -8,6 +8,7 @@ This document defines what DKKB validates, when validation runs, and which workf
 | --- | --- | --- | --- |
 | `CI` | Pull requests, pushes to `main`, `v*` tags, and manual dispatch | Run the repository quality gate | The `Quality` job is the required pull request check |
 | `Pages` | Pushes to `main` | Validate and build the site, deploy the Pages artifact, and verify the public URL | Not a replacement for the `Quality` check |
+| `Release Please` | Pushes to `main` | Prepare a reviewed release pull request, then create the tag and GitHub Release after it merges | Not a merge gate; the release PR uses the normal `Quality` check |
 
 DKKB has no persistent `dev`, `develop`, release, or hotfix branch. The branch model is documented in [repository governance](GOVERNANCE.md). A future long-lived branch must be added to workflow triggers deliberately and documented here.
 
@@ -47,7 +48,7 @@ Pages runs use a workflow-and-ref concurrency group and do not cancel an in-prog
 
 ## Deployment boundary
 
-CI validates code and content. Pages builds, publishes, and verifies the site. CI does not deploy, and Pages does not create releases. The full environment and promotion policy is documented in [deployment environments and promotion](DEPLOYMENT.md).
+CI validates code and content. Pages builds, publishes, and verifies the site. Release Please prepares and publishes GitHub Releases after an approved release pull request. No workflow publishes packages, and release automation does not deploy production. The full environment and promotion policy is documented in [deployment environments and promotion](DEPLOYMENT.md).
 
 ## Sources
 
