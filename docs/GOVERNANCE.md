@@ -141,13 +141,21 @@ Create the tag on the exact validated commit on `main` that is being released. D
 
 Release notes should include the released version, the release date, user-visible site and knowledge changes, important fixes, breaking changes, upgrade or migration notes when needed, and links to the contributing pull requests. DKKB does not publish a package as part of a site release.
 
-### Automation recommendation
+### Release automation
 
-Recommend [release-please](https://github.com/googleapis/release-please-action) for issue #109. It matches the existing squash-merge and Conventional Commits model because it maintains a release pull request, derives release notes from accepted history, and creates the tag and GitHub Release only when the release pull request is merged.
+DKKB uses [release-please](https://github.com/googleapis/release-please-action) to prepare releases from the validated `main` history. The [release workflow](../.github/workflows/release-please.yml) runs after pushes to `main` and maintains one release pull request at a time.
 
-Issue #109 should implement the simple root-site configuration with a dedicated `version.txt` and `CHANGELOG.md`, pin the action to an immutable commit, use least-privilege permissions, keep the release pull request subject to the normal Quality check and maintainer review, and ensure the created release is bound to the validated `main` commit. The release workflow must not publish packages or silently deploy production.
+The workflow:
 
-Until #109 implements that automation, no version file is authoritative. The tags and GitHub Releases remain the only public release records.
+- parses accepted Conventional Commits;
+- updates `version.txt` and [`CHANGELOG.md`](../CHANGELOG.md) in the release pull request;
+- applies the pre-1.0 rule that breaking changes increment the minor version;
+- creates the immutable `vX.Y.Z` tag and GitHub Release only after the release pull request is merged;
+- does not publish a package or deploy production.
+
+The release pull request must pass the normal Quality check and receive maintainer review. The workflow uses the `RELEASE_PLEASE_TOKEN` repository secret because resources created with GitHub's built-in token do not trigger follow-up workflows. Configure that secret with the least-privilege repository token described in [the release operations guide](RELEASES.md), and enable GitHub Actions to create and approve pull requests in repository settings.
+
+`version.txt` is the release automation's current version marker and the manifest records the same starting version. The immutable tags and GitHub Releases remain the authoritative public records for published states.
 
 ## Merge policy
 
