@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - chore/sync-canonical-labels-20260907
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -11,6 +14,7 @@ permissions:
 
 jobs:
   sync:
+    if: github.head_ref == 'chore/sync-canonical-labels-20260907' || github.ref_name == 'chore/sync-canonical-labels-20260907'
     name: Sync canonical labels
     runs-on: ubuntu-latest
     timeout-minutes: 5
