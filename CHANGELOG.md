@@ -2,6 +2,20 @@
 
 All notable changes to DKKB will be documented in this file.
 
+## [0.4.0](https://github.com/daniel-kindl/dkkb/compare/v0.3.0...v0.4.0) (2026-09-08)
+
+
+### Features
+
+* **ai:** publish machine-friendly knowledge index ([#185](https://github.com/daniel-kindl/dkkb/issues/185)) ([08dab8b](https://github.com/daniel-kindl/dkkb/commit/08dab8b27effa94d9645ff5312f3e775d24f1a86))
+* **knowledge-graph:** add relationship explorer ([#177](https://github.com/daniel-kindl/dkkb/issues/177)) ([2074418](https://github.com/daniel-kindl/dkkb/commit/2074418561009521b98c903abc39420763e2ec83))
+* **search:** index canonical metadata ([#183](https://github.com/daniel-kindl/dkkb/issues/183)) ([6124d2b](https://github.com/daniel-kindl/dkkb/commit/6124d2bd1cf4d238b0d104213e0fbde75ed327ff))
+
+
+### Bug Fixes
+
+* **release:** prevent generated changelog lint failures ([#182](https://github.com/daniel-kindl/dkkb/issues/182)) ([206284f](https://github.com/daniel-kindl/dkkb/commit/206284f390516b3275974b3370c06c482dadee8b))
+
 ## [0.3.0](https://github.com/daniel-kindl/dkkb/compare/v0.2.0...v0.3.0) (2026-09-08)
 
 ### Features
