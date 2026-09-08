@@ -2,6 +2,13 @@
 
 All notable changes to DKKB will be documented in this file.
 
+## [0.4.1](https://github.com/daniel-kindl/dkkb/compare/v0.4.0...v0.4.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* **accessibility:** audit custom site surfaces ([#191](https://github.com/daniel-kindl/dkkb/issues/191)) ([c1f214d](https://github.com/daniel-kindl/dkkb/commit/c1f214d2b6c5b5a070179be80044f88cfddc5613))
+
 ## [0.4.0](https://github.com/daniel-kindl/dkkb/compare/v0.3.0...v0.4.0) (2026-09-08)
 
 
