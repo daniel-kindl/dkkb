@@ -1,6 +1,6 @@
 ---
-title: Glossary
-description: Definitions for terms that need a stable meaning across DKKB.
+title: Technical glossary
+description: Concise definitions for advanced software-engineering terms used across DKKB.
 type: index
 status: stable
 provenance:
@@ -14,6 +14,8 @@ lastUpdated: false
 editUrl: false
 ---
 
-# Glossary
+# Technical glossary
 
-Definitions for terms that need a stable meaning across DKKB.
+Concise definitions for advanced software-engineering terms used across DKKB.
+
+Glossary pages explain what a term means. Full DKKB entries remain the canonical place for design guidance, trade-offs, failure modes, and operational practice.

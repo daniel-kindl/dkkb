@@ -27,6 +27,7 @@ export const collections = {
         confidence: z.enum(['low','medium','high']).optional(),
         provenance: z.array(z.enum(['literature','primary-source','personal-experience','experiment','derived-guidance'])).min(1),
         topics: z.array(z.string().min(1)).default([]),
+        aliases: z.array(z.string().min(1)).default([]),
         related: z.array(z.string().min(1)).default([]),
         sources: z.array(sourceSchema).default([]),
         lastReviewed: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),

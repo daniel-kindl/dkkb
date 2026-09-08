@@ -26,7 +26,9 @@ Supported provenance values are:
 
 ## Optional metadata
 
-Entries can also define `confidence`, `topics`, `related`, `sources`, `lastReviewed`, and `homepage`.
+Entries can also define `confidence`, `topics`, `aliases`, `related`, `sources`, `lastReviewed`, and `homepage`.
+
+`aliases` is reserved for `glossary` entries. It stores alternate names or abbreviations for one canonical glossary term. Aliases are case-insensitively unique across the glossary and must not duplicate the canonical title.
 
 Values in `related` are canonical content IDs. Use the path below `src/content/docs/` without the `.md` suffix. For an `index.md` page, use the directory name. For example:
 
@@ -37,6 +39,33 @@ related:
 ```
 
 A related entry must exist. An entry must not reference itself or repeat the same related ID.
+
+## Glossary entries
+
+A glossary entry answers what a technical term means. It does not own the full engineering guidance for using that concept.
+
+Each term has one canonical Markdown page under `src/content/docs/glossary/` with `type: glossary`. The file name defines the stable canonical route. Choose a durable term name before publication and avoid route renames without a migration need.
+
+A glossary entry should normally include:
+
+- a concise definition;
+- why the term matters, when useful;
+- a nearby term or common confusion, when useful;
+- links to deeper DKKB entries through `related` metadata;
+- appropriate provenance and sources.
+
+Keep glossary entries short. If the subject needs design guidance, trade-offs, failure modes, or operational detail, create or link a normal canonical entry instead of expanding the glossary page into a full article.
+
+Aliases use this shape:
+
+```yaml
+aliases:
+  - LLM
+```
+
+Alias comparison ignores case and surrounding or repeated whitespace. An alias must resolve to only one glossary entry. The validator rejects duplicate aliases, title collisions, and aliases on non-glossary entries.
+
+See the [glossary authoring and linking policy](GLOSSARY.md) for linking rules.
 
 ## Homepage discovery
 

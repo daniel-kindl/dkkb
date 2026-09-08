@@ -7,6 +7,7 @@ import {
   checkLinks,
   checkEntry,
   checkReferentialIntegrity,
+  checkGlossaryAliases,
 } from './lib/content-rules.mjs';
 
 const root = process.cwd();
@@ -35,6 +36,7 @@ for (const file of contentFiles) {
 }
 
 merge(checkReferentialIntegrity(entries));
+merge(checkGlossaryAliases(entries));
 
 if (warnings.length) {
   console.warn('Content warnings:');
