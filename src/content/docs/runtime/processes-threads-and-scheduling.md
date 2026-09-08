@@ -26,9 +26,9 @@ lastReviewed: "2026-09-08"
 
 # Processes, threads, and scheduling
 
-A process is an operating-system isolation and resource container for a running program.
+A [process](../glossary/process.md) is an operating-system isolation and resource container for a running program.
 
-A thread is an execution unit inside a process. Threads in one process normally share the process address space and many process resources.
+A [thread](../glossary/thread.md) is an execution unit inside a process. Threads in one process normally share the process address space and many process resources.
 
 These concepts solve different problems.
 
@@ -54,7 +54,7 @@ The existing concurrency section owns [locks and critical sections](../concurren
 
 ## Scheduler
 
-The scheduler decides which runnable thread receives CPU time on which processor.
+The [scheduler](../glossary/scheduler.md) decides which runnable thread receives CPU time on which processor.
 
 When runnable work exceeds available CPUs, threads take turns. Scheduling policy considers priorities, fairness, affinity, latency, and other operating-system rules.
 
