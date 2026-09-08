@@ -27,7 +27,7 @@ lastReviewed: "2026-09-08"
 
 # Cross-site scripting and cross-site request forgery
 
-Cross-site scripting and cross-site request forgery both involve browser trust boundaries, but they are different attack classes.
+[Cross-site scripting](../glossary/cross-site-scripting.md) and [cross-site request forgery](../glossary/cross-site-request-forgery.md) both involve browser trust boundaries, but they are different attack classes.
 
 XSS causes attacker-controlled content to execute in a trusted page context.
 

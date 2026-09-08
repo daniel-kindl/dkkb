@@ -10,6 +10,14 @@ Normal DKKB entries answer: **How should an engineer reason about or use this co
 
 Do not copy a full canonical article into the glossary.
 
+## Curated vocabulary growth
+
+The glossary was established with an initial 40-term engineering seed and then expanded with 60 terms harvested from the reviewed distributed-systems, networking, messaging, runtime, and application-security foundations.
+
+That second wave brings the glossary to 100 canonical terms. The count is an outcome of the current knowledge base, not a quota. Future terms must still be justified by actual DKKB usage or by a clear comprehension need.
+
+Prefer extending an existing canonical term with an alias when a new spelling, acronym, or synonym does not represent a distinct concept.
+
 ## One term, one page
 
 Create each glossary term as one Markdown page under `src/content/docs/glossary/` with `type: glossary`.

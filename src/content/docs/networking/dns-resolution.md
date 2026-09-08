@@ -27,13 +27,13 @@ lastReviewed: "2026-09-08"
 
 # DNS resolution
 
-The Domain Name System maps hierarchical names to records such as IP addresses, mail servers, and service metadata.
+The [Domain Name System](../glossary/domain-name-system.md) maps hierarchical names to records such as IP addresses, mail servers, and service metadata.
 
 DNS is distributed and heavily cached. A name lookup is therefore a protocol interaction with freshness and failure behavior, not a local string-to-address function.
 
 ## Resolution path
 
-An application usually asks a local resolver for a name. That resolver may answer from cache or query other DNS servers until it can return an answer, a negative result, or an error.
+An application usually asks a [local resolver](../glossary/dns-resolver.md) for a name. That resolver may answer from cache or query other DNS servers until it can return an answer, a negative result, or an error.
 
 A simplified path is:
 
