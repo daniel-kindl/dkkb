@@ -57,7 +57,7 @@ const payload = JSON.stringify({
     <svg
       data-graph-svg
       viewBox="0 0 960 560"
-      role="img"
+      role="group"
       aria-label="Focused DKKB relationship graph"
     >
       <defs>
@@ -78,7 +78,7 @@ const payload = JSON.stringify({
     </svg>
   </div>
 
-  <div class="graph-textual" aria-live="polite">
+  <div class="graph-textual">
     <h2>Focused relationships</h2>
     <ul data-graph-list></ul>
   </div>
@@ -303,7 +303,7 @@ const payload = JSON.stringify({
   .graph-controls select {
     width: 100%;
     padding: 0.55rem 0.65rem;
-    border: 1px solid var(--sl-color-gray-5);
+    border: 1px solid var(--dkkb-color-border);
     border-radius: 0.4rem;
     background: var(--sl-color-bg);
     color: var(--sl-color-text);
@@ -315,7 +315,7 @@ const payload = JSON.stringify({
 
   .graph-viewport {
     overflow-x: auto;
-    border: 1px solid var(--sl-color-gray-5);
+    border: 1px solid var(--dkkb-color-border);
     border-radius: 0.6rem;
     background: var(--sl-color-bg-nav);
   }
@@ -349,6 +349,11 @@ const payload = JSON.stringify({
   :global(.graph-node-focus circle) {
     fill: var(--sl-color-accent-low);
     stroke-width: 3;
+  }
+
+  :global([data-graph-nodes] a:focus-visible .graph-node circle) {
+    stroke: var(--dkkb-color-focus);
+    stroke-width: 5;
   }
 
   :global(.graph-node text) {

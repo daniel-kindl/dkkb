@@ -55,7 +55,7 @@
 
   --dkkb-color-surface: var(--sl-color-black);
   --dkkb-color-surface-raised: var(--sl-color-gray-6);
-  --dkkb-color-border: var(--sl-color-gray-5);
+  --dkkb-color-border: var(--sl-color-gray-4);
   --dkkb-color-text: var(--sl-color-white);
   --dkkb-color-text-muted: var(--sl-color-gray-3);
   --dkkb-color-link: var(--sl-color-accent-high);
@@ -78,7 +78,7 @@
 
   --dkkb-color-surface: var(--sl-color-black);
   --dkkb-color-surface-raised: var(--sl-color-gray-7);
-  --dkkb-color-border: var(--sl-color-gray-5);
+  --dkkb-color-border: var(--sl-color-gray-4);
   --dkkb-color-text: var(--sl-color-white);
   --dkkb-color-text-muted: var(--sl-color-gray-3);
   --dkkb-color-link: var(--sl-color-accent);
