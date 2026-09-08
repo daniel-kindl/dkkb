@@ -13,7 +13,7 @@ topics:
   - usability
 sources:
   - type: primary-source
-    title: "ISO 9241-210:2019 Ergonomics of human-system interaction — Part 210: Human-centred design for interactive systems"
+    title: "ISO 9241-210:2019 Ergonomics of human-system interaction, Part 210: Human-centred design for interactive systems"
     note: Defines human-centred design principles and activities for interactive systems.
 lastReviewed: "2026-09-08"
 ---
@@ -48,4 +48,4 @@ Design still requires judgment across user needs, accessibility, technical const
 
 ## Sources
 
-- ISO. *ISO 9241-210:2019 Ergonomics of human-system interaction — Part 210: Human-centred design for interactive systems*. 2019.
+- ISO. *ISO 9241-210:2019 Ergonomics of human-system interaction, Part 210: Human-centred design for interactive systems*. 2019.
