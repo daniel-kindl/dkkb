@@ -14,7 +14,7 @@ topics:
 related:
   - reliability/retries-and-exponential-backoff
   - problems/retry-storm
-  - observability/alert-design-and-actionable-signals
+  - observability/actionable-alerts
   - messaging/delivery-semantics-and-idempotent-consumers
 sources:
   - type: literature
