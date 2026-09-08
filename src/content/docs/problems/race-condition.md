@@ -9,6 +9,9 @@ provenance:
   - derived-guidance
 topics: [concurrency, correctness]
 related:
+  - concurrency/concurrent-state-transitions-and-lost-updates
+  - concurrency/locks-mutexes-and-critical-sections
+  - concurrency/optimistic-concurrency-and-compare-and-set
   - reliability/idempotency
   - testing/deterministic-tests
 sources:
