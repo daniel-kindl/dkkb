@@ -3,11 +3,17 @@ import { getCollection } from 'astro:content';
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
 import MermaidFlowchartViewport from './MermaidFlowchartViewport.astro';
 import EntryGrid from './EntryGrid.astro';
+import GlossaryBrowser from './GlossaryBrowser.astro';
 import {
   selectHomepageSections,
   selectCategoryEntries,
   selectRelatedEntries,
 } from '../lib/entries';
+import {
+  selectGlossaryBacklinks,
+  selectGlossaryEntries,
+  type MarkdownSource,
+} from '../lib/glossary';
 
 const { entry } = Astro.locals.starlightRoute;
 const docs = await getCollection('docs');
@@ -23,14 +29,30 @@ const toCard = (doc) => ({
 });
 
 const isHomepage = entry.data.type === 'index' && entry.data.template === 'splash';
+const isGlossaryIndex = entry.id === 'glossary' && entry.data.type === 'index';
+const isGlossaryTerm = entry.data.type === 'glossary';
 
 const { startHere, featured, recent, categories } = isHomepage
   ? selectHomepageSections(docs)
   : { startHere: [], featured: [], recent: [], categories: [] };
 
 const categoryEntries =
-  entry.data.type === 'index' && !isHomepage ? selectCategoryEntries(docs, entry) : [];
+  entry.data.type === 'index' && !isHomepage && !isGlossaryIndex
+    ? selectCategoryEntries(docs, entry)
+    : [];
 
+const glossaryEntries = isGlossaryIndex ? selectGlossaryEntries(docs) : [];
+const rawMarkdown = import.meta.glob('../content/docs/**/*.md', {
+  eager: true,
+  import: 'default',
+  query: '?raw',
+}) as Record<string, string>;
+const markdownSources: MarkdownSource[] = isGlossaryTerm
+  ? Object.entries(rawMarkdown).map(([path, content]) => ({ path, content }))
+  : [];
+const glossaryBacklinks = isGlossaryTerm
+  ? selectGlossaryBacklinks(docs, markdownSources, entry.id)
+  : [];
 const relatedEntries = selectRelatedEntries(docs, entry);
 ---
 
@@ -53,6 +75,19 @@ const relatedEntries = selectRelatedEntries(docs, entry);
     heading={`Entries (${categoryEntries.length})`}
     headingId="entries"
     entries={categoryEntries.map(toCard)}
+  />
+  <GlossaryBrowser
+    entries={glossaryEntries.map((doc) => ({
+      title: doc.data.title,
+      href: routeFor(doc.id),
+      description: doc.data.description,
+      aliases: doc.data.aliases ?? [],
+    }))}
+  />
+  <EntryGrid
+    heading="Used in DKKB"
+    headingId="used-in-dkkb"
+    entries={glossaryBacklinks.map(toCard)}
   />
   <EntryGrid
     heading="Related knowledge"
