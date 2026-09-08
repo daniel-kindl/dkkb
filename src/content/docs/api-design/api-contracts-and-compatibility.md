@@ -36,7 +36,7 @@ lastReviewed: "2026-09-05"
 
 # API contracts and compatibility
 
-An API contract is the promise a service makes to its clients about how to call it and what to expect back.
+An [API contract](../glossary/api-contract.md) is the promise a service makes to its clients about how to call it and what to expect back.
 
 The contract covers the operations, the inputs they accept, the outputs they return, the errors they can raise, and the guarantees around them.
 
