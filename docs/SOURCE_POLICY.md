@@ -8,6 +8,10 @@ Prefer standards, specifications, official documentation, primary technical sour
 
 Community discussion can support observations about practice. It is not automatic proof of a technical claim.
 
+Source count is not a quality score. One authoritative source can support a claim better than several redundant secondary sources.
+
+Use `pnpm audit:sources` to surface source/provenance inconsistencies and editorial review hints. The audit method and its deterministic-versus-semantic boundary are documented in `docs/SOURCE_AUDIT.md`.
+
 ## Literature
 
 Summarize useful knowledge in original wording and cite the work. Do not copy substantial protected passages, diagrams, tables, or code without permission or a compatible license.
