@@ -32,9 +32,9 @@ lastReviewed: "2026-09-03"
 
 # Retries and exponential backoff
 
-A retry repeats an operation after a failure that may be temporary.
+A [retry](../glossary/retry.md) repeats an operation after a failure that may be temporary.
 
-Exponential backoff increases the delay between later attempts. Jitter adds randomness so many clients do not retry at the same instant.
+[Exponential backoff](../glossary/exponential-backoff.md) increases the delay between later attempts. Jitter adds randomness so many clients do not retry at the same instant.
 
 Retries can improve success during short faults. They can also amplify an outage when they are applied without limits.
 
