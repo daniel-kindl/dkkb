@@ -14,7 +14,7 @@ topics:
   - health-checks
 related:
   - reliability/circuit-breakers
-  - observability/alert-design-and-actionable-signals
+  - observability/actionable-alerts
   - delivery/rollback-roll-forward-and-release-verification
 sources:
   - type: literature
