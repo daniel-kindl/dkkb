@@ -66,20 +66,23 @@ describe('selectGlossaryBacklinks', () => {
     title: 'Large language model',
   });
 
-  it('derives backlinks only from actual Markdown links and sorts them by title', () => {
+  it('derives backlinks from source-relative, route-relative, and absolute Markdown links', () => {
     const alpha = doc('llm/alpha', { title: 'Alpha' });
+    const beta = doc('llm/beta', { title: 'Beta' });
     const zeta = doc('llm/zeta', { title: 'Zeta' });
     const plainMention = doc('llm/plain', { title: 'Plain mention' });
-    const docs = [target, zeta, plainMention, alpha];
+    const docs = [target, zeta, plainMention, beta, alpha];
     const sources = [
       source('glossary/large-language-model', '# Large language model\n'),
       source('llm/alpha', 'An [LLM](../glossary/large-language-model.md) is used here.\n'),
+      source('llm/beta', 'An [LLM](../../glossary/large-language-model/) is used here.\n'),
       source('llm/zeta', 'See [the term](/dkkb/glossary/large-language-model/).\n'),
       source('llm/plain', 'LLM is only plain text here.\n'),
     ];
 
     expect(ids(selectGlossaryBacklinks(docs, sources, target.id))).toEqual([
       'llm/alpha',
+      'llm/beta',
       'llm/zeta',
     ]);
   });

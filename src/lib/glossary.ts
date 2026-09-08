@@ -108,6 +108,11 @@ function cleanDestination(destination: string): string | null {
   }
 }
 
+function sourceId(sourcePath: string): string | null {
+  const relative = contentRelativePath(sourcePath);
+  return relative ? contentIdFromPath(relative) : null;
+}
+
 function linkTargetsContentId(sourcePath: string, destination: string, targetId: string): boolean {
   const cleaned = cleanDestination(destination);
   if (!cleaned) return false;
@@ -122,15 +127,15 @@ function linkTargetsContentId(sourcePath: string, destination: string, targetId:
 
   const lastSlash = sourceRelative.lastIndexOf('/');
   const sourceDirectory = lastSlash >= 0 ? sourceRelative.slice(0, lastSlash) : '';
-  const resolved = normalizeSegments(`${sourceDirectory}/${cleaned}`);
-  if (!resolved) return false;
+  const sourceResolved = normalizeSegments(`${sourceDirectory}/${cleaned}`);
+  if (sourceResolved && contentIdFromPath(sourceResolved) === targetId) return true;
 
-  return contentIdFromPath(resolved) === targetId;
-}
+  const id = sourceId(sourcePath);
+  if (!id) return false;
 
-function sourceId(sourcePath: string): string | null {
-  const relative = contentRelativePath(sourcePath);
-  return relative ? contentIdFromPath(relative) : null;
+  const routeBase = id === 'index' ? '' : id;
+  const routeResolved = normalizeSegments(`${routeBase}/${cleaned}`);
+  return routeResolved ? contentIdFromPath(routeResolved) === targetId : false;
 }
 
 export function selectGlossaryBacklinks(
