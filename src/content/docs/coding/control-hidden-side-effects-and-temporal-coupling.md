@@ -2,7 +2,7 @@
 title: Control hidden side effects and temporal coupling
 description: Make state changes and required operation order visible so callers can reason about behavior.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -24,6 +24,7 @@ sources:
   - type: literature
     title: "Working Effectively with Legacy Code"
     note: Michael Feathers discusses seams and dependency control for code whose behavior is difficult to isolate.
+lastReviewed: "2026-09-08"
 ---
 
 # Control hidden side effects and temporal coupling

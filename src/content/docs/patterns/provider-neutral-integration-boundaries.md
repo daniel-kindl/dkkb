@@ -2,7 +2,7 @@
 title: Design provider-neutral integration boundaries
 description: Expose external capabilities through application-owned contracts when provider details should not define the domain.
 type: pattern
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - derived-guidance
@@ -16,7 +16,10 @@ related:
   - architecture/ports-and-adapters
   - architecture/architecture-boundaries-and-dependency-direction
   - principles/dependency-inversion
-lastReviewed: "2026-09-03"
+homepage:
+  featured: true
+  order: 40
+lastReviewed: "2026-09-08"
 ---
 
 # Design provider-neutral integration boundaries

@@ -2,7 +2,7 @@
 title: Logs, metrics, and traces
 description: Use complementary telemetry signals to understand events, aggregate behavior, and request paths.
 type: concept
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -27,6 +27,7 @@ sources:
     title: "Monitoring Distributed Systems"
     url: "https://sre.google/sre-book/monitoring-distributed-systems/"
     note: The Google SRE book explains monitoring system behavior with time-series data, logs, and request-oriented evidence.
+lastReviewed: "2026-09-08"
 ---
 
 # Logs, metrics, and traces

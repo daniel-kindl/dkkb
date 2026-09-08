@@ -2,7 +2,7 @@
 title: Preserve provenance during canonicalization
 description: Keep source and transformation context when external values are merged into a canonical model.
 type: practice
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - derived-guidance
@@ -12,7 +12,7 @@ topics:
   - canonicalization
   - external-integrations
 related: []
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Preserve provenance during canonicalization

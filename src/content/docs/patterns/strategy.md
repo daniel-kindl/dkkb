@@ -18,7 +18,6 @@ related:
 sidebar:
   label: Strategy
 homepage:
-  startHere: true
   featured: true
   order: 10
 sources:

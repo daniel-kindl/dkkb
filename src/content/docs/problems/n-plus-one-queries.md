@@ -2,7 +2,7 @@
 title: N+1 query problem
 description: One query loads a collection and then additional queries load related data once per item.
 type: problem
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - derived-guidance
@@ -12,7 +12,7 @@ related:
   - performance/latency-vs-throughput
   - performance/caching
 sources: []
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # N+1 query problem

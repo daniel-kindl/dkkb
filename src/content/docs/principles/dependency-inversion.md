@@ -2,7 +2,7 @@
 title: Invert dependencies around policy
 description: Keep high-level policy from depending directly on replaceable low-level implementation details when that separation has engineering value.
 type: principle
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -17,11 +17,14 @@ related:
   - architecture/layered-architecture
   - architecture/ports-and-adapters
   - testing/test-doubles
+homepage:
+  startHere: true
+  order: 50
 sources:
   - type: literature
     title: "Agile Software Development: Principles, Patterns, and Practices"
     note: Robert C. Martin describes the Dependency Inversion Principle and dependency direction around abstractions.
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Invert dependencies around policy

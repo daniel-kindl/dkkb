@@ -2,7 +2,7 @@
 title: Observer pattern
 description: Notify dependent consumers when a subject changes without hard-coding each consumer into the subject.
 type: pattern
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -17,7 +17,7 @@ sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"
     note: Defines Observer as a one-to-many dependency in which changes notify dependent objects.
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Observer pattern

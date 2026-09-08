@@ -2,15 +2,18 @@
 title: Bound AI agents by authority and verification
 description: Give an agent only the tools and authority needed for its task, and verify consequential actions at explicit boundaries.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - derived-guidance
 topics: [ai, agents, tool-use, security, software-development]
 related:
   - llm/evaluation-and-hallucination
+homepage:
+  featured: true
+  order: 20
 sources: []
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Bound AI agents by authority and verification

@@ -2,7 +2,7 @@
 title: Refactor in behavior-preserving steps
 description: Improve internal structure through small changes that keep observable behavior stable and reviewable.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -27,6 +27,7 @@ sources:
   - type: literature
     title: "Refactoring: Improving the Design of Existing Code"
     note: The book presents small, named transformations supported by tests and repeated feedback.
+lastReviewed: "2026-09-08"
 ---
 
 # Refactor in behavior-preserving steps

@@ -2,7 +2,7 @@
 title: Design actionable alerts
 description: Alert only when a signal requires a timely response from a named owner.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -22,6 +22,7 @@ sources:
     title: "Practical Alerting from Time-Series Data"
     url: "https://sre.google/sre-book/practical-alerting/"
     note: The Google SRE book explains alert quality, signal selection, paging, and the cost of alert fatigue.
+lastReviewed: "2026-09-08"
 ---
 
 # Design actionable alerts

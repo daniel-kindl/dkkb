@@ -2,15 +2,18 @@
 title: Context engineering for LLM systems
 description: Deliberately select and structure the information a model receives instead of treating the context window as an unbounded memory store.
 type: concept
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - derived-guidance
 topics: [llm, context, prompting]
 related:
   - llm/retrieval-augmented-generation
+homepage:
+  featured: true
+  order: 30
 sources: []
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Context engineering for LLM systems

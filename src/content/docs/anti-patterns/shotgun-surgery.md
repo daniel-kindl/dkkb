@@ -2,7 +2,7 @@
 title: Shotgun surgery
 description: One conceptual change requires many small edits across unrelated locations because the knowledge is poorly localized.
 type: anti-pattern
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -18,7 +18,7 @@ sources:
   - type: literature
     title: "Refactoring: Improving the Design of Existing Code"
     note: Martin Fowler describes Shotgun Surgery as a change smell where one modification requires many small edits across classes.
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Shotgun surgery

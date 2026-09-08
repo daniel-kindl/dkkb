@@ -2,7 +2,7 @@
 title: Thundering herd
 description: Many clients or workers react to the same event at once and overload a shared dependency.
 type: problem
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -17,7 +17,7 @@ sources:
   - type: primary-source
     title: "Addressing Cascading Failures"
     url: "https://sre.google/sre-book/addressing-cascading-failures/"
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Thundering herd

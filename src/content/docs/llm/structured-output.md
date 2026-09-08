@@ -2,7 +2,7 @@
 title: Structured LLM output
 description: Constrain model output to a machine-checkable schema when downstream software depends on its structure.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - derived-guidance
@@ -10,7 +10,7 @@ topics: [llm, contracts, validation]
 related:
   - llm/evaluation-and-hallucination
 sources: []
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Structured LLM output

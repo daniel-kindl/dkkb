@@ -2,7 +2,7 @@
 title: Keep functions and modules cohesive
 description: Group behavior that belongs together and give each boundary a focused responsibility.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -25,6 +25,7 @@ sources:
   - type: literature
     title: "Clean Code: A Handbook of Agile Software Craftsmanship"
     note: Robert C. Martin discusses focused functions and the cost of functions that mix several levels of responsibility.
+lastReviewed: "2026-09-08"
 ---
 
 # Keep functions and modules cohesive

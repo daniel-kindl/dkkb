@@ -2,7 +2,7 @@
 title: Race condition
 description: System behavior depends on the relative timing or interleaving of concurrent operations.
 type: problem
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -14,7 +14,7 @@ related:
 sources:
   - type: literature
     title: "The Art of Multiprocessor Programming"
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Race condition

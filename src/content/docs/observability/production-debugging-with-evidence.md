@@ -2,7 +2,7 @@
 title: Debug production behavior with evidence
 description: Diagnose production failures by combining scoped observations, explicit hypotheses, and safe verification steps.
 type: playbook
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -19,6 +19,9 @@ related:
   - testing/deterministic-tests
   - reliability/timeouts
   - performance/measure-before-optimizing
+homepage:
+  featured: true
+  order: 60
 sources:
   - type: literature
     title: "Effective Troubleshooting"
@@ -28,6 +31,7 @@ sources:
     title: "Being On-Call"
     url: "https://sre.google/sre-book/being-on-call/"
     note: The Google SRE book discusses the operational responsibilities and response practices around production failures.
+lastReviewed: "2026-09-08"
 ---
 
 # Debug production behavior with evidence

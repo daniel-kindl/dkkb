@@ -2,7 +2,7 @@
 title: Separate canonical domain entities from provider representations
 description: Model stable domain identity separately from records owned by external providers.
 type: pattern
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - derived-guidance
@@ -15,7 +15,7 @@ related:
   - patterns/adapter
   - architecture/ports-and-adapters
   - architecture/architecture-boundaries-and-dependency-direction
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Separate canonical domain entities from provider representations

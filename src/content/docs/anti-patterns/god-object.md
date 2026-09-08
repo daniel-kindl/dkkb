@@ -2,7 +2,7 @@
 title: God object
 description: A single object accumulates unrelated responsibilities and becomes a coordination point for too much of the system.
 type: anti-pattern
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -19,7 +19,7 @@ sources:
   - type: literature
     title: "AntiPatterns: Refactoring Software, Architectures, and Projects in Crisis"
     note: Describes recurring structural anti-patterns caused by concentrated responsibilities and poor decomposition.
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # God object

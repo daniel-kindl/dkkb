@@ -2,7 +2,7 @@
 title: Do not repeat knowledge
 description: Keep each important piece of system knowledge in one authoritative representation when practical.
 type: principle
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -13,11 +13,14 @@ topics:
   - knowledge
 related:
   - anti-patterns/shotgun-surgery
+homepage:
+  startHere: true
+  order: 20
 sources:
   - type: literature
     title: "The Pragmatic Programmer"
     note: Introduces DRY as avoiding duplicated knowledge rather than mechanically removing all repeated text.
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Do not repeat knowledge

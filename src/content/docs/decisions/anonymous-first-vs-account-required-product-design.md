@@ -2,7 +2,7 @@
 title: Anonymous-first versus account-required product design
 description: Decide whether identity is required for core product use or added progressively for user-specific capabilities.
 type: decision
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - derived-guidance
@@ -12,7 +12,7 @@ topics:
   - privacy
   - user-experience
 related: []
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Anonymous-first versus account-required product design
