@@ -4,6 +4,7 @@ import Default from '@astrojs/starlight/components/MarkdownContent.astro';
 import MermaidFlowchartViewport from './MermaidFlowchartViewport.astro';
 import EntryGrid from './EntryGrid.astro';
 import GlossaryBrowser from './GlossaryBrowser.astro';
+import KnowledgeGraph from './KnowledgeGraph.astro';
 import {
   selectHomepageSections,
   selectCategoryEntries,
@@ -14,6 +15,10 @@ import {
   selectGlossaryEntries,
   type MarkdownSource,
 } from '../lib/glossary';
+import {
+  contentIdFromSourcePath,
+  deriveKnowledgeGraph,
+} from '../lib/knowledge-graph-core.mjs';
 
 const { entry } = Astro.locals.starlightRoute;
 const docs = await getCollection('docs');
@@ -31,6 +36,7 @@ const toCard = (doc) => ({
 const isHomepage = entry.data.type === 'index' && entry.data.template === 'splash';
 const isGlossaryIndex = entry.id === 'glossary' && entry.data.type === 'index';
 const isGlossaryTerm = entry.data.type === 'glossary';
+const isKnowledgeGraph = entry.id === 'references/knowledge-graph';
 
 const { startHere, featured, recent, categories } = isHomepage
   ? selectHomepageSections(docs)
@@ -47,12 +53,35 @@ const rawMarkdown = import.meta.glob('../content/docs/**/*.md', {
   import: 'default',
   query: '?raw',
 }) as Record<string, string>;
-const markdownSources: MarkdownSource[] = isGlossaryTerm
+const needsMarkdownSources = isGlossaryTerm || isKnowledgeGraph;
+const markdownSources: MarkdownSource[] = needsMarkdownSources
   ? Object.entries(rawMarkdown).map(([path, content]) => ({ path, content }))
   : [];
 const glossaryBacklinks = isGlossaryTerm
   ? selectGlossaryBacklinks(docs, markdownSources, entry.id)
   : [];
+const sourceById = new Map(
+  markdownSources
+    .map((source) => [contentIdFromSourcePath(source.path), source] as const)
+    .filter(([id]) => id !== null)
+);
+const knowledgeGraph = isKnowledgeGraph
+  ? deriveKnowledgeGraph(docs.map((doc) => {
+      const source = sourceById.get(doc.id);
+      return {
+        id: doc.id,
+        title: doc.data.title,
+        description: doc.data.description,
+        type: doc.data.type,
+        status: doc.data.status,
+        hidden: doc.data.sidebar?.hidden === true,
+        system: doc.data.topics?.includes('system-page') === true,
+        related: doc.data.related ?? [],
+        path: source?.path ?? `src/content/docs/${doc.id}.md`,
+        markdown: source?.content ?? '',
+      };
+    }))
+  : { nodes: [], edges: [] };
 const relatedEntries = selectRelatedEntries(docs, entry);
 ---
 
@@ -84,6 +113,13 @@ const relatedEntries = selectRelatedEntries(docs, entry);
       aliases: doc.data.aliases ?? [],
     }))}
   />
+  {isKnowledgeGraph && (
+    <KnowledgeGraph
+      nodes={knowledgeGraph.nodes}
+      edges={knowledgeGraph.edges}
+      baseUrl={baseUrl}
+    />
+  )}
   <EntryGrid
     heading="Used in DKKB"
     headingId="used-in-dkkb"
