@@ -38,6 +38,7 @@ function parseEntry(file) {
     type: data.type,
     status: data.status,
     hidden: data.sidebar?.hidden === true,
+    system: Array.isArray(data.topics) && data.topics.includes('system-page'),
     related: Array.isArray(data.related) ? data.related : [],
     path: toPosix(path.relative(root, file)),
     markdown,

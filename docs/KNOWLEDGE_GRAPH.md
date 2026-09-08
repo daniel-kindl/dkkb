@@ -24,6 +24,7 @@ The report excludes:
 - draft entries;
 - deprecated entries;
 - entries hidden from the sidebar;
+- entries tagged `system-page`;
 - index pages and generated category listings;
 - navigation chrome;
 - plain-text term mentions;

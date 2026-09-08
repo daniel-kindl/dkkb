@@ -133,7 +133,8 @@ export function resolveKnowledgeLink(sourcePath, destination, knownIds) {
 function isGraphEntry(entry) {
   return visibleStatuses.has(entry.status)
     && entry.type !== 'index'
-    && entry.hidden !== true;
+    && entry.hidden !== true
+    && entry.system !== true;
 }
 
 function compareNodes(left, right) {

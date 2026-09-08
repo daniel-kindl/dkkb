@@ -46,12 +46,13 @@ describe('knowledge graph derivation', () => {
     });
   });
 
-  it('excludes draft, deprecated, hidden, and index entries from graph nodes and orphan candidates', () => {
+  it('excludes draft, deprecated, hidden, system, and index entries from graph nodes and orphan candidates', () => {
     const entries = [
       entry('kept'),
       entry('draft', { status: 'draft' }),
       entry('deprecated', { status: 'deprecated' }),
       entry('hidden', { hidden: true }),
+      entry('system', { system: true }),
       entry('category', { type: 'index', markdown: '[Kept](kept.md)\n' }),
     ];
 
