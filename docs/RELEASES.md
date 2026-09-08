@@ -28,6 +28,16 @@ The manifest starts at `0.1.0`. The workflow uses the documented DKKB SemVer pol
 
 The release version is stored in `version.txt` for automation. Git tags and GitHub Releases are the authoritative public release records. Published tags are never moved or deleted.
 
+## Generated changelog formatting
+
+`CHANGELOG.md` is owned by Release Please. Release Please can emit adjacent blank lines between generated release-note groups, as observed in PR #135.
+
+DKKB disables Markdownlint rule `MD012/no-multiple-blanks` only for the generated root `CHANGELOG.md`. The same narrow exception applies to `test/fixtures/release-please/CHANGELOG.md`, which deliberately preserves the PR #135 formatting pattern so the normal Markdown lint command verifies the exception.
+
+`MD012` remains enabled for authored Markdown. Other Markdown rules still apply to the changelog. Do not manually normalize generated blank lines only to satisfy `MD012`; review the release note content, version, and release impact instead.
+
+This exception changes formatting validation only. It does not change Release Please configuration, version calculation, generated notes, tags, release publication, workflow permissions, or the Pages deployment path.
+
 ## Required repository setup
 
 Configure a repository secret named `RELEASE_PLEASE_TOKEN` before merging a generated release pull request. Use a least-privilege fine-grained token that can read repository metadata and read/write repository contents, issues, pull requests, tags, and releases as required by Release Please. Do not grant package publication or deployment credentials.

@@ -11,6 +11,11 @@
       "filter": [".github/pull_request_template.md"],
       "config": { "MD041": false },
       "combine": "merge"
+    },
+    {
+      "filter": ["CHANGELOG.md", "test/fixtures/release-please/CHANGELOG.md"],
+      "config": { "MD012": false },
+      "combine": "merge"
     }
   ]
 }
