@@ -5,6 +5,7 @@ import MermaidFlowchartViewport from './MermaidFlowchartViewport.astro';
 import EntryGrid from './EntryGrid.astro';
 import GlossaryBrowser from './GlossaryBrowser.astro';
 import KnowledgeGraph from './KnowledgeGraph.astro';
+import SearchMetadata from './SearchMetadata.astro';
 import {
   selectHomepageSections,
   selectCategoryEntries,
@@ -84,6 +85,8 @@ const knowledgeGraph = isKnowledgeGraph
   : { nodes: [], edges: [] };
 const relatedEntries = selectRelatedEntries(docs, entry);
 ---
+
+<SearchMetadata entry={entry} />
 
 <Default>
   <slot />

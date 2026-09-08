@@ -31,6 +31,17 @@ export default defineConfig({
     starlight({
       title: 'DKKB',
       description: 'Daniel Kindl Knowledge Base for software engineering, architecture, AI, and LLM engineering.',
+      pagefind: {
+        ranking: {
+          metaWeights: {
+            title: 5,
+            aliases: 4,
+            description: 3,
+            topics: 1.5,
+            entry_id: 0.5
+          }
+        }
+      },
       customCss: ['./src/styles/starlight.css'],
       components: {
         MarkdownContent: './src/components/MarkdownContent.astro',
