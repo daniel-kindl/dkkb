@@ -6,6 +6,7 @@ import EntryGrid from './EntryGrid.astro';
 import GlossaryBrowser from './GlossaryBrowser.astro';
 import KnowledgeGraph from './KnowledgeGraph.astro';
 import SearchMetadata from './SearchMetadata.astro';
+import { categoryIconFor } from '../lib/category-icons';
 import {
   selectHomepageSections,
   selectCategoryEntries,
@@ -32,6 +33,10 @@ const toCard = (doc) => ({
   title: doc.data.title,
   href: routeFor(doc.id),
   description: doc.data.description,
+});
+const toCategoryCard = (doc) => ({
+  ...toCard(doc),
+  icon: categoryIconFor(doc.id),
 });
 
 const isHomepage = entry.data.type === 'index' && entry.data.template === 'splash';
@@ -101,7 +106,7 @@ const relatedEntries = selectRelatedEntries(docs, entry);
   <EntryGrid
     heading="Explore the knowledge base"
     headingId="explore-knowledge-base"
-    entries={categories.map(toCard)}
+    entries={categories.map(toCategoryCard)}
   />
   <EntryGrid
     heading={`Entries (${categoryEntries.length})`}
