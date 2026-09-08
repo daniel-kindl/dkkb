@@ -28,6 +28,10 @@ function contentId(file) {
   return withoutExtension.endsWith('/index') ? withoutExtension.slice(0, -'/index'.length) : withoutExtension;
 }
 
+function normalizeGlossaryName(value) {
+  return value.trim().replace(/\s+/g, ' ').toLocaleLowerCase('en-US');
+}
+
 function localTargetExists(file, target) {
   const resolved = path.resolve(path.dirname(file), target);
   const candidates = [resolved];
@@ -139,6 +143,34 @@ export function checkEntry(file, content) {
     errors.push(`${rel(file)}: 'related' must be an array of canonical content IDs.`);
   }
 
+  if (data?.aliases !== undefined && !Array.isArray(data.aliases)) {
+    errors.push(`${rel(file)}: 'aliases' must be an array of glossary aliases.`);
+  } else if (Array.isArray(data?.aliases)) {
+    const seenAliases = new Set();
+    const normalizedTitle = typeof data?.title === 'string' ? normalizeGlossaryName(data.title) : null;
+
+    for (const alias of data.aliases) {
+      if (typeof alias !== 'string' || alias.trim().length === 0) {
+        errors.push(`${rel(file)}: each 'aliases' value must be a non-empty string.`);
+        continue;
+      }
+
+      const normalized = normalizeGlossaryName(alias);
+      if (seenAliases.has(normalized)) {
+        errors.push(`${rel(file)}: duplicate glossary alias '${alias}'.`);
+      }
+      seenAliases.add(normalized);
+
+      if (normalizedTitle && normalized === normalizedTitle) {
+        errors.push(`${rel(file)}: glossary alias '${alias}' duplicates the canonical title.`);
+      }
+    }
+
+    if (data.aliases.length > 0 && data?.type !== 'glossary') {
+      errors.push(`${rel(file)}: only glossary entries can define aliases.`);
+    }
+  }
+
   // A reviewed or stable entry carries a review-freshness claim. Homepage promotion
   // and readers both rely on 'lastReviewed' to judge whether that claim is current.
   // Index pages are generated overviews, not reviewed knowledge, so they are exempt.
@@ -164,6 +196,14 @@ export function checkEntry(file, content) {
   }
 
   const id = contentId(file);
+  const isGlossaryTerm = id.startsWith('glossary/') && id !== 'glossary';
+
+  if (data?.type === 'glossary' && !isGlossaryTerm) {
+    errors.push(`${rel(file)}: glossary entries must live under 'src/content/docs/glossary/'.`);
+  }
+  if (isGlossaryTerm && data?.type !== 'glossary') {
+    errors.push(`${rel(file)}: files under the glossary term namespace must use type 'glossary'.`);
+  }
 
   if (data?.homepage !== undefined) {
     const homepage = data.homepage;
@@ -244,6 +284,45 @@ export function checkReferentialIntegrity(entries) {
       seen.add(relatedId);
       if (!byId.has(relatedId)) {
         errors.push(`${rel(entry.file)}: related content ID '${relatedId}' does not exist.`);
+      }
+    }
+  }
+
+  return { errors, warnings: [] };
+}
+
+/**
+ * Glossary names share one case-insensitive namespace. A canonical title or alias
+ * must not resolve to a different glossary entry.
+ */
+export function checkGlossaryAliases(entries) {
+  const errors = [];
+  const claimed = new Map();
+
+  for (const entry of entries) {
+    if (entry.data?.type !== 'glossary') continue;
+
+    const terms = [{ kind: 'title', value: entry.data.title }];
+    for (const alias of Array.isArray(entry.data.aliases) ? entry.data.aliases : []) {
+      if (typeof alias === 'string' && alias.trim().length > 0) {
+        terms.push({ kind: 'alias', value: alias });
+      }
+    }
+
+    for (const term of terms) {
+      if (typeof term.value !== 'string' || term.value.trim().length === 0) continue;
+      const normalized = normalizeGlossaryName(term.value);
+      const existing = claimed.get(normalized);
+
+      if (existing && existing.id !== entry.id) {
+        errors.push(
+          `${rel(entry.file)}: glossary ${term.kind} '${term.value}' conflicts with ${existing.kind} '${existing.value}' in '${existing.id}'.`
+        );
+        continue;
+      }
+
+      if (!existing) {
+        claimed.set(normalized, { id: entry.id, kind: term.kind, value: term.value });
       }
     }
   }

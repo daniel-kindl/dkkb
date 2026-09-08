@@ -8,6 +8,7 @@ import {
   checkLinks,
   checkEntry,
   checkReferentialIntegrity,
+  checkGlossaryAliases,
 } from './content-rules.mjs';
 
 // checkEntry never reads the file; it takes content directly and uses the path only
@@ -119,7 +120,6 @@ describe('checkEntry', () => {
     expect(entry).toBeNull();
     expect(errors).toContain(`src/content/docs/Bad_Name.md: file names must use lowercase kebab-case.`);
     expect(errors).toContain(`src/content/docs/Bad_Name.md: missing YAML frontmatter.`);
-    // No data-dependent rule ran.
     expect(errors.some((e) => e.includes('required frontmatter field'))).toBe(false);
   });
 
@@ -167,6 +167,46 @@ describe('checkEntry', () => {
     );
     expect(errors.some((e) => e.includes('can be promoted on the homepage'))).toBe(false);
   });
+
+  it('validates glossary alias shape and ownership', () => {
+    const notArray = checkEntry(
+      entryPath('glossary/example.md'),
+      entryContent({ type: 'glossary', aliases: 'LLM' })
+    );
+    expect(notArray.errors.some((e) => e.includes("'aliases' must be an array"))).toBe(true);
+
+    const duplicate = checkEntry(
+      entryPath('glossary/example.md'),
+      entryContent({ type: 'glossary', aliases: ['LLM', 'llm'] })
+    );
+    expect(duplicate.errors.some((e) => e.includes("duplicate glossary alias 'llm'"))).toBe(true);
+
+    const titleDuplicate = checkEntry(
+      entryPath('glossary/example.md'),
+      entryContent({ type: 'glossary', aliases: [' example '] })
+    );
+    expect(titleDuplicate.errors.some((e) => e.includes('duplicates the canonical title'))).toBe(true);
+
+    const wrongType = checkEntry(
+      entryPath('thing.md'),
+      entryContent({ aliases: ['alias'] })
+    );
+    expect(wrongType.errors.some((e) => e.includes('only glossary entries can define aliases'))).toBe(true);
+  });
+
+  it('keeps glossary entries in the glossary namespace', () => {
+    const wrongPath = checkEntry(
+      entryPath('concepts/example.md'),
+      entryContent({ type: 'glossary' })
+    );
+    expect(wrongPath.errors.some((e) => e.includes("glossary entries must live under 'src/content/docs/glossary/'"))).toBe(true);
+
+    const wrongType = checkEntry(
+      entryPath('glossary/example.md'),
+      entryContent({ type: 'concept' })
+    );
+    expect(wrongType.errors.some((e) => e.includes("must use type 'glossary'"))).toBe(true);
+  });
 });
 
 describe('checkReferentialIntegrity', () => {
@@ -193,5 +233,41 @@ describe('checkReferentialIntegrity', () => {
   it('passes clean for a valid related graph', () => {
     const entries = [entry('a', ['b']), entry('b', ['a'])];
     expect(checkReferentialIntegrity(entries)).toEqual({ errors: [], warnings: [] });
+  });
+});
+
+describe('checkGlossaryAliases', () => {
+  const entry = (id, title, aliases = []) => ({
+    id,
+    file: entryPath(`${id}.md`),
+    data: { type: 'glossary', title, aliases },
+  });
+
+  it('rejects aliases that collide across glossary entries', () => {
+    const entries = [
+      entry('glossary/large-language-model', 'Large language model', ['LLM']),
+      entry('glossary/llm-system', 'LLM system', ['llm']),
+    ];
+    const { errors } = checkGlossaryAliases(entries);
+    expect(errors).toHaveLength(1);
+    expect(errors[0]).toContain("glossary alias 'llm' conflicts with alias 'LLM'");
+  });
+
+  it('rejects an alias that collides with another canonical title', () => {
+    const entries = [
+      entry('glossary/cache', 'Cache'),
+      entry('glossary/cache-store', 'Cache store', [' cache ']),
+    ];
+    const { errors } = checkGlossaryAliases(entries);
+    expect(errors).toHaveLength(1);
+    expect(errors[0]).toContain("conflicts with title 'Cache'");
+  });
+
+  it('passes distinct glossary names', () => {
+    const entries = [
+      entry('glossary/cache', 'Cache', ['cache layer']),
+      entry('glossary/b-tree', 'B-tree', ['B tree']),
+    ];
+    expect(checkGlossaryAliases(entries)).toEqual({ errors: [], warnings: [] });
   });
 });
