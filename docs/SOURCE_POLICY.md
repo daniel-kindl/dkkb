@@ -12,6 +12,8 @@ Source count is not a quality score. One authoritative source can support a clai
 
 Use `pnpm audit:sources` to surface source/provenance inconsistencies and editorial review hints. The audit method and its deterministic-versus-semantic boundary are documented in `docs/SOURCE_AUDIT.md`.
 
+External reference availability is checked separately from deterministic content validation. See `docs/EXTERNAL_LINKS.md` for the scheduled checker and triage policy. A transient timeout, rate limit, or access restriction is not proof that a source is invalid.
+
 ## Literature
 
 Summarize useful knowledge in original wording and cite the work. Do not copy substantial protected passages, diagrams, tables, or code without permission or a compatible license.

@@ -14,6 +14,7 @@
     "validate:content": "node scripts/validate-content.mjs",
     "validate:links": "node scripts/validate-built-links.mjs",
     "audit:sources": "node scripts/audit-sources.mjs",
+    "check:external-links": "node scripts/check-external-links.mjs",
     "report:freshness": "node scripts/report-freshness.mjs",
     "report:orphans": "node scripts/report-orphans.mjs",
     "test": "vitest run",
