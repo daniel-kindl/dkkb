@@ -59,9 +59,9 @@ Topic branches may use force-push with lease when their owner must rebase or rev
 
 ### Hotfixes
 
-A hotfix starts from the latest `main` and uses a `fix/<issue>-<description>` branch. It follows the normal pull request and quality-gate path, but it may receive expedited review when the public site is affected. After the squash merge, the normal `main` deployment path provides the release path.
+A hotfix starts from the latest `main` and uses a `fix/<issue>-<description>` branch. It follows the normal pull request and quality-gate path, but it may receive expedited review when the public site is affected. After the squash merge, the normal `main` deployment path publishes the corrected state.
 
-A hotfix does not require a permanent `hotfix` branch. It still reaches production through the next reviewed Release Please pull request, unless the project explicitly defines an emergency deployment exception.
+A hotfix does not require a permanent `hotfix` branch. Whether the hotfix also creates a version bump depends on its release impact; deployment and release publication are separate decisions.
 
 ### Release preparation
 
@@ -101,18 +101,21 @@ Classify a release by the highest-impact change included in the published state:
 | Change | Version impact | DKKB examples |
 | --- | --- | --- |
 | Incompatible public change | Major after `1.0.0`; minor while still in `0.y.z` | remove a stable route without a redirect, remove required frontmatter, or change a documented contributor contract incompatibly |
-| Backward-compatible addition | Minor | add a canonical knowledge area, add a new stable route, add optional metadata, or add a backward-compatible site capability |
-| Backward-compatible correction | Patch | fix a factual error, broken link, typo, styling defect, or accessibility defect without changing the public contract |
+| Backward-compatible addition | Minor | add a stable site capability, add optional metadata, or extend a contributor-facing contract compatibly |
+| Backward-compatible correction | Patch | fix a broken route, styling defect, accessibility defect, or public behavior without changing the compatibility contract |
+| Knowledge-content update | No release by itself | add, expand, clarify, or correct a knowledge entry when the change does not alter a stable compatibility contract |
 | No public effect | No release by itself | internal refactoring, tests, CI maintenance, dependency maintenance, or build changes that do not alter the published site or contributor contract |
 
 Commit and pull request types provide intent, not an automatic version decision:
 
 - `feat` normally indicates a minor release;
 - `fix` normally indicates a patch release;
-- `docs` is classified by its public effect. A new canonical entry can be minor, while a correction can be patch;
-- `refactor`, `test`, `build`, `ci`, `chore`, and `perf` do not create a release by themselves unless their result changes the public contract or published site;
+- `docs` knowledge-content changes normally deploy without creating a release; use release-worthy commit semantics only when documentation changes a stable public or contributor contract;
+- `refactor`, `test`, `build`, `ci`, `chore`, and `perf` do not create a release by themselves unless their result changes the public contract or published site behavior;
 - `revert` is classified by the public effect of the resulting state;
 - `!` or a `BREAKING CHANGE:` footer indicates an incompatible change and requires a major release after `1.0.0`, or the corresponding minor increment during major version zero.
+
+A site deployment is not a release event. Every validated merge to `main` may be deployed to Pages, while version bumps, tags, and GitHub Releases are reserved for release-worthy compatibility or product changes.
 
 A single release can contain several change types. Use the highest applicable impact, and do not hide a breaking change behind a lower-impact commit type.
 
@@ -139,11 +142,11 @@ Use these tag formats:
 
 Create the tag on the exact validated commit on `main` that is being released. Do not move or delete a published tag. Create one GitHub Release for each published tag and mark pre-releases with GitHub's pre-release flag.
 
-Release notes should include the released version, the release date, user-visible site and knowledge changes, important fixes, breaking changes, upgrade or migration notes when needed, and links to the contributing pull requests. DKKB does not publish a package as part of a site release.
+Release notes should include the released version, the release date, user-visible site changes, important fixes, breaking changes, upgrade or migration notes when needed, and links to the contributing pull requests. Routine knowledge-content updates that deploy without a version bump do not require a GitHub Release entry.
 
 ### Release automation
 
-DKKB uses [release-please](https://github.com/googleapis/release-please-action) to prepare releases from the validated `main` history. The [release workflow](../.github/workflows/release-please.yml) runs after pushes to `main` and maintains one release pull request at a time.
+DKKB uses [release-please](https://github.com/googleapis/release-please-action) to prepare releases from the validated `main` history. The [release workflow](../.github/workflows/release-please.yml) runs after pushes to `main` and maintains one release pull request at a time when release-worthy commits exist.
 
 The workflow:
 
@@ -151,11 +154,11 @@ The workflow:
 - updates `version.txt` and [`CHANGELOG.md`](../CHANGELOG.md) in the release pull request;
 - applies the pre-1.0 rule that breaking changes increment the minor version;
 - creates the immutable `vX.Y.Z` tag and GitHub Release only after the release pull request is merged;
-- does not publish a package; the separate Pages workflow deploys production only after the release pull request merges.
+- does not publish a package or control Pages deployment.
 
 The release pull request must pass the normal Quality check and receive maintainer review. The workflow uses the `RELEASE_PLEASE_TOKEN` repository secret because resources created with GitHub's built-in token do not trigger follow-up workflows. Configure that secret with the least-privilege repository token described in [the release operations guide](RELEASES.md), and enable GitHub Actions to create and approve pull requests in repository settings.
 
-`version.txt` is the release automation's current version marker and the manifest records the same starting version. The immutable tags and GitHub Releases remain the authoritative public records for published states.
+`version.txt` is the release automation's current version marker and the manifest records the same starting version. The immutable tags and GitHub Releases remain the authoritative public records for published releases, while GitHub Pages reflects the latest successfully deployed `main` state.
 
 ## Merge policy
 

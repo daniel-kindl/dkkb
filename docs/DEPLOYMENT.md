@@ -8,7 +8,7 @@ DKKB is a static Astro site published through GitHub Pages. The repository uses 
 | --- | --- | --- | --- |
 | Local | Develop and inspect a checkout with Astro and the repository quality commands | The developer running the checkout | No |
 | Pull request validation | Validate a proposed change with CI, review, build output, and link checks | The pull request checks and maintainer review | No hosted preview |
-| Production | Serve the validated site to readers through GitHub Pages | A merged Release Please pull request targeting `main` | Yes |
+| Production | Serve the validated site to readers through GitHub Pages | The validated `main` branch | Yes |
 
 DKKB does not maintain a persistent `dev`, `develop`, or staging environment. A pull request has an ephemeral validation context, not a separately hosted site. This keeps the model aligned with the current static site and avoids a second deployment target that could drift from production.
 
@@ -20,12 +20,11 @@ Introduce a persistent staging environment only when the site gains a capability
 | --- | --- | --- |
 | Short-lived topic branch | Local checks and pull request CI when a pull request exists | No deployment |
 | Pull request | `Quality` check, review, and the normal pull request checks | No deployment |
-| Push to `main` after an ordinary pull request merge | CI verification | No deployment; changes wait for the next release |
-| Merged Release Please pull request targeting `main` | Release merge validation, Pages build, deployment, and URL verification | Automatic production deployment |
+| Push to `main` after merge | CI verification and Pages build | Automatic production deployment of the merged state |
 | `v*` version tag | CI release-state verification | No additional Pages deployment |
 | Manual CI dispatch | Validate the selected ref without publishing it | No deployment |
 
-The only automatic production promotion is a merged Release Please pull request targeting `main`. An ordinary pull request merge updates `main` but does not publish production. A branch name does not create an environment. Tags identify the release state and are created by the release workflow after the release merge.
+The only automatic production promotion is a push to `main`. This means knowledge-content changes can reach readers as soon as their reviewed pull request merges. Versioning is a separate concern: a Pages deployment does not imply a version bump, tag, or GitHub Release.
 
 ## Promotion authority
 
@@ -34,18 +33,16 @@ Promotion follows this sequence:
 1. A contributor changes a short-lived topic branch.
 2. A pull request targets `main`.
 3. The required `Quality` check passes and a maintainer reviews the change.
-4. The maintainer squash-merges the ordinary pull request into `main`.
-5. CI validates the updated `main` state, but Pages does not deploy it.
-6. Release Please opens or updates the release pull request.
-7. The release pull request passes Quality and maintainer review, then merges into `main`.
-8. The Pages workflow checks out the release pull request's exact merge commit, builds it, uploads its artifact, deploys it, and verifies the public URL.
-9. Release Please creates the version tag and GitHub Release for that same release merge.
+4. The maintainer squash-merges the pull request into `main`.
+5. CI validates the updated `main` state.
+6. The Pages workflow builds the exact `main` commit, uploads its artifact, deploys it, and verifies the public URL.
+7. Release Please independently evaluates the accepted commit history and only creates or updates a release pull request when the changes warrant a versioned release.
 
-The maintainer controls merge authority. The Pages workflow controls only the deployment after the merge. CI and Pages do not bypass review or create a separate production approval path.
+The maintainer controls merge authority. The Pages workflow controls only deployment after merge. CI and Pages do not bypass review or create a separate production approval path.
 
 ## Build and artifact identity
 
-The Pages workflow builds from the exact `merge_commit_sha` of the merged Release Please pull request. It runs `pnpm check` before uploading `dist`, and the deploy job requires the build job. GitHub Pages deploys the uploaded artifact from that same workflow run rather than rebuilding it in the deploy job.
+The Pages workflow builds from the exact commit that triggered the `main` push. It runs `pnpm check` before uploading `dist`, and the deploy job requires the build job. GitHub Pages deploys the uploaded artifact from that same workflow run rather than rebuilding it in the deploy job.
 
 The artifact is therefore associated with one `main` commit and one workflow run. If a build fails, no artifact reaches the deploy job. If deployment fails, the source commit remains in `main` and can be corrected or redeployed through the normal operational procedure.
 
@@ -65,7 +62,7 @@ The `github-pages` environment is already referenced by the deployment job. Envi
 
 ## Concurrency
 
-The Pages workflow groups runs by workflow and Git ref and does not cancel an in-progress deployment. This prevents a release deployment that already passed its build from being interrupted. Ordinary merges to `main` do not start Pages, so production changes occur only at release boundaries.
+The Pages workflow groups runs by workflow and Git ref and does not cancel an in-progress deployment. This prevents a deployment that already passed its build from being interrupted. Multiple merges to `main` may therefore complete in order, with the latest successful deployment becoming the final public state.
 
 Pull request validation uses the cancellation policy documented in [the CI contract](CI.md). CI and Pages have separate concurrency groups so a validation run cannot cancel a deployment run.
 
@@ -76,8 +73,7 @@ The normal recovery action is a roll-forward:
 1. Open a focused fix or revert pull request.
 2. Pass the required checks and review.
 3. Merge it into `main`.
-4. Wait for or create the next Release Please pull request.
-5. Merge the reviewed release pull request so the Pages workflow publishes the corrected state.
+4. Let the Pages workflow publish the corrected state.
 
 Never rewrite `main`, move a published tag, or delete history to recover a deployment. If a Pages deployment fails after the commit is merged, rerun the failed workflow or the same workflow run when GitHub permits it. If the public site needs an immediate return to a previously successful state, a maintainer may redeploy the known-good Pages run, then follow with a corrective pull request.
 
