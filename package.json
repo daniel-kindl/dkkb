@@ -13,6 +13,7 @@
     "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#dist\"",
     "validate:content": "node scripts/validate-content.mjs",
     "validate:links": "node scripts/validate-built-links.mjs",
+    "report:orphans": "node scripts/report-orphans.mjs",
     "test": "vitest run",
     "check": "pnpm validate:content && pnpm lint:markdown && pnpm test && pnpm build && pnpm validate:links"
   },
