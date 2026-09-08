@@ -1,17 +1,17 @@
 # Release operations
 
-DKKB publishes site releases from `main` with a reviewed Release Please pull request.
+DKKB deploys the validated `main` branch to GitHub Pages and publishes versioned releases independently through a reviewed Release Please pull request.
 
 ## Release lifecycle
 
 1. A change is merged into `main` with the normal pull request, review, and Quality check path.
-2. The Release Please workflow reads the Conventional Commit history and opens or updates one release pull request.
-3. The release pull request updates `version.txt` and [`CHANGELOG.md`](../CHANGELOG.md). Review the generated notes for public impact, breaking changes, and migration guidance.
-4. A maintainer confirms the Quality check passes and merges the release pull request.
-5. Release Please creates the immutable `vX.Y.Z` tag and the corresponding GitHub Release on the release pull request's merge commit.
-6. The Pages workflow remains separate and deploys only after this release pull request merges into `main`.
+2. The Pages workflow publishes the validated `main` commit independently of release creation.
+3. The Release Please workflow reads the Conventional Commit history and opens or updates a release pull request only when release-worthy commits exist.
+4. The release pull request updates `version.txt` and [`CHANGELOG.md`](../CHANGELOG.md). Review the generated notes for public impact, breaking changes, and migration guidance.
+5. A maintainer confirms the Quality check passes and merges the release pull request.
+6. Release Please creates the immutable `vX.Y.Z` tag and the corresponding GitHub Release on the release pull request's merge commit.
 
-Release Please does not publish a package or deploy production. The separate Pages workflow publishes the exact release merge commit after this release pull request merges. A release is a public record of that validated `main` commit.
+A Pages deployment is not a release event. Routine knowledge-content updates can reach the public site immediately without changing `version.txt`, creating a tag, or publishing a GitHub Release.
 
 ## Version rules
 
@@ -21,10 +21,12 @@ The manifest starts at `0.1.0`. The workflow uses the documented DKKB SemVer pol
 - `feat` commits normally produce a minor release;
 - breaking changes use a minor increment while the project is below `1.0.0`;
 - breaking changes use a major increment from `1.0.0` onward;
-- `docs`, `refactor`, `test`, `build`, `ci`, `chore`, and `perf` do not release by themselves unless their public effect warrants it;
+- routine `docs` knowledge-content commits do not release by themselves;
+- documentation that changes a stable public or contributor contract must use commit semantics that express the appropriate release impact;
+- `refactor`, `test`, `build`, `ci`, `chore`, and `perf` do not release by themselves unless their public effect warrants it;
 - stable tags use `vX.Y.Z`; intentional pre-releases remain explicitly managed as `vX.Y.Z-alpha.N`, `vX.Y.Z-beta.N`, or `vX.Y.Z-rc.N`.
 
-The release version is stored in `version.txt` for automation. Git tags and GitHub Releases are the authoritative public records. Published tags are never moved or deleted.
+The release version is stored in `version.txt` for automation. Git tags and GitHub Releases are the authoritative public release records. Published tags are never moved or deleted.
 
 ## Required repository setup
 
@@ -38,7 +40,7 @@ An invalid non-empty token still fails the workflow. Correct the repository conf
 
 Release Please updates the existing release pull request instead of opening conflicting release pull requests. If a run fails before publication, correct the workflow or repository configuration and rerun it. If a release pull request is merged, treat its tag and GitHub Release as immutable and use a new corrective release for any follow-up change.
 
-The normal site recovery path is a reviewed fix or revert merged into `main`, followed by the Pages workflow. Release publication and production deployment remain separate operations.
+The normal site recovery path is a reviewed fix or revert merged into `main`, followed by the Pages workflow. Release publication remains a separate operation and is required only when the corrective change is release-worthy.
 
 ## Sources
 
