@@ -26,7 +26,7 @@ lastReviewed: "2026-09-08"
 
 # Feature flags and controlled rollout
 
-A feature flag selects behavior at runtime without requiring a new deployment for every enable or disable decision.
+A [feature flag](../glossary/feature-flag.md) selects behavior at runtime without requiring a new deployment for every enable or disable decision.
 
 Flags can separate code deployment from product release and can limit exposure while production evidence is collected.
 

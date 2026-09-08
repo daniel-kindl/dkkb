@@ -26,7 +26,7 @@ lastReviewed: "2026-09-04"
 
 # Caching
 
-A cache stores the result of expensive work so a later request with the same input can reuse the result instead of repeating the work.
+A [cache](../glossary/cache.md) stores the result of expensive work so a later request with the same input can reuse the result instead of repeating the work.
 
 ```mermaid
 flowchart LR

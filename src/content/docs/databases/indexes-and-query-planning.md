@@ -36,13 +36,13 @@ lastReviewed: "2026-09-05"
 
 # Indexes and query planning
 
-An index is a secondary data structure that lets the database find matching rows without reading every row. It trades extra storage and slower writes for faster reads on the columns it covers.
+A [database index](../glossary/database-index.md) is a secondary data structure that lets the database find matching rows without reading every row. It trades extra storage and slower writes for faster reads on the columns it covers.
 
 The problem being solved is scan cost. Without a useful index, a query that filters on a column must examine every row in the table. As the table grows, that cost grows with it.
 
 ## The mechanism at a product-neutral level
 
-The most common index is an ordered structure, usually a B-tree, that keeps keys sorted.
+The most common index is an ordered structure, usually a [B-tree](../glossary/b-tree.md), that keeps keys sorted.
 
 Because the keys are ordered, the database can find a value, a range, or a prefix with a small number of steps instead of a full scan.
 
@@ -66,7 +66,7 @@ This means an index is an option, not a command. The planner uses an index only 
 
 For a query that matches a large fraction of the table, a full scan can be cheaper than many random index lookups.
 
-Read the chosen plan with the database's explain feature. A plan shows the scan type, the estimated rows, and the estimated cost, which reveals where the query spends its work.
+Read the chosen [query plan](../glossary/query-plan.md) with the database's explain feature. A plan shows the scan type, the estimated rows, and the estimated cost, which reveals where the query spends its work.
 
 ```text
 Index Scan using orders_customer_id_idx on orders

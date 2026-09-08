@@ -35,7 +35,7 @@ lastReviewed: "2026-09-05"
 
 A collection endpoint that returns every matching row is unbounded: its cost grows with the data, not with what the client needs.
 
-Pagination replaces one unbounded read with a sequence of bounded reads, each returning a page of limited size.
+[Pagination](../glossary/pagination.md) replaces one unbounded read with a sequence of bounded reads, each returning a page of limited size.
 
 The core rule is that no single read should scale with total collection size. This is the bounded work principle applied to an API boundary. The bounded work entry covers the principle in general.
 
