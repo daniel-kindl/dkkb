@@ -2,7 +2,7 @@
 title: Name for intent and domain meaning
 description: Choose names that expose the purpose, boundary, and domain meaning of code.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -19,6 +19,7 @@ sources:
   - type: literature
     title: "Refactoring: Improving the Design of Existing Code"
     note: Martin Fowler presents meaningful names as a primary way to make code easier to understand and change.
+lastReviewed: "2026-09-08"
 ---
 
 # Name for intent and domain meaning

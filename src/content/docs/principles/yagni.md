@@ -2,7 +2,7 @@
 title: You aren't gonna need it
 description: Implement capabilities when there is evidence that they are needed, not only because they may be useful later.
 type: principle
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -12,12 +12,15 @@ topics:
   - scope
   - design
 related: []
+homepage:
+  startHere: true
+  order: 30
 sources:
   - type: primary-source
     title: "Yagni"
     url: "https://martinfowler.com/bliki/Yagni.html"
     note: Martin Fowler describes YAGNI as avoiding capability that is not currently needed.
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # You aren't gonna need it

@@ -2,7 +2,7 @@
 title: Structured logging and correlation identifiers
 description: Record machine-readable events and stable request identifiers so related evidence can be found across boundaries.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -26,6 +26,7 @@ sources:
     title: "Trace Context"
     url: "https://www.w3.org/TR/trace-context/"
     note: The W3C specification defines a standard format for propagating trace context across distributed systems.
+lastReviewed: "2026-09-08"
 ---
 
 # Structured logging and correlation identifiers

@@ -2,7 +2,7 @@
 title: Safe online data migrations
 description: Change persisted representations without switching reads before the new representation is complete and verified.
 type: practice
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - derived-guidance
@@ -12,7 +12,10 @@ topics:
   - migrations
 related:
   - reliability/idempotency
-lastReviewed: "2026-09-03"
+homepage:
+  featured: true
+  order: 50
+lastReviewed: "2026-09-08"
 ---
 
 # Safe online data migrations

@@ -2,7 +2,7 @@
 title: Retrieval-augmented generation
 description: Retrieve external knowledge for a task and provide the selected evidence to the model at generation time.
 type: concept
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -15,7 +15,7 @@ sources:
   - type: literature
     title: "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
     url: "https://arxiv.org/abs/2005.11401"
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Retrieval-augmented generation

@@ -2,7 +2,7 @@
 title: Make invariants explicit at boundaries
 description: State and enforce the conditions that must remain true when data enters, changes, or leaves a system.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -18,6 +18,9 @@ related:
   - problems/race-condition
   - security/secure-defaults-and-fail-closed-behavior
   - testing/contract-testing
+homepage:
+  startHere: true
+  order: 60
 sources:
   - type: primary-source
     title: "Design by Contract"
@@ -26,6 +29,7 @@ sources:
   - type: literature
     title: "Object-Oriented Software Construction"
     note: Bertrand Meyer develops design by contract and the use of assertions to make software obligations explicit.
+lastReviewed: "2026-09-08"
 ---
 
 # Make invariants explicit at boundaries

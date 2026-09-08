@@ -2,7 +2,7 @@
 title: Keep monetization out of relevance ranking
 description: Separate commercial incentives from ranking when the product promises neutral relevance or quality ordering.
 type: principle
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - derived-guidance
@@ -13,7 +13,7 @@ topics:
   - trust
 related:
   - principles/separation-of-concerns
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Keep monetization out of relevance ranking

@@ -2,7 +2,7 @@
 title: Conventional Commits
 description: Use a small, explicit commit message structure to communicate change intent to people and automation.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -11,7 +11,7 @@ topics:
   - git
   - collaboration
   - release-engineering
-lastReviewed: "2026-09-07"
+lastReviewed: "2026-09-08"
 ---
 
 # Conventional Commits

@@ -2,7 +2,7 @@
 title: Separate concerns
 description: Keep distinct responsibilities behind boundaries that let engineers reason about and change them with limited unrelated impact.
 type: principle
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -19,6 +19,9 @@ related:
   - architecture/ports-and-adapters
   - architecture/event-driven-architecture
   - anti-patterns/god-object
+homepage:
+  startHere: true
+  order: 10
 sources:
   - type: primary-source
     title: "On the role of scientific thought"
@@ -27,7 +30,7 @@ sources:
   - type: literature
     title: "On the Criteria To Be Used in Decomposing Systems into Modules"
     note: David Parnas explains modular decomposition around design decisions that should be hidden from other modules.
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Separate concerns

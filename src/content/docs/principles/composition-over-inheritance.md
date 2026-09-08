@@ -2,7 +2,7 @@
 title: Prefer composition over inheritance
 description: Use composition as the default when behavior can vary independently from object identity.
 type: principle
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - literature
@@ -14,11 +14,14 @@ topics:
 related:
   - patterns/strategy
   - principles/dependency-inversion
+homepage:
+  startHere: true
+  order: 40
 sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"
     note: Describes object composition as a major technique for reusable object-oriented design.
-lastReviewed: "2026-09-02"
+lastReviewed: "2026-09-08"
 ---
 
 # Prefer composition over inheritance

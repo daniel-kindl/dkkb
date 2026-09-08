@@ -2,7 +2,7 @@
 title: Bound AI implementation work to one verifiable unit
 description: Size AI coding work so scope, validation, review, and handoff remain reliable within one bounded implementation unit.
 type: practice
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - derived-guidance
@@ -13,7 +13,7 @@ topics:
   - context-management
 related:
   - practices/safe-online-data-migrations
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Bound AI implementation work to one verifiable unit

@@ -2,7 +2,7 @@
 title: Gate data publication by explicit rights state
 description: Do not infer permission to publish data from the fact that the system can store or process it.
 type: practice
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - derived-guidance
@@ -14,7 +14,7 @@ topics:
 related:
   - architecture/architecture-boundaries-and-dependency-direction
   - principles/separation-of-concerns
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Gate data publication by explicit rights state

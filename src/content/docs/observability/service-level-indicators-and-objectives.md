@@ -2,7 +2,7 @@
 title: Service-level indicators and objectives
 description: Define measurable user-relevant signals and the target service level they should meet over a stated period.
 type: concept
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -26,6 +26,7 @@ sources:
     title: "Monitoring Distributed Systems"
     url: "https://sre.google/sre-book/monitoring-distributed-systems/"
     note: The Google SRE book discusses choosing monitoring signals that reflect user-visible service behavior.
+lastReviewed: "2026-09-08"
 ---
 
 # Service-level indicators and objectives

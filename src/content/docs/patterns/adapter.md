@@ -2,7 +2,7 @@
 title: Adapter pattern
 description: Translate one interface into another when useful behavior exists behind an incompatible boundary.
 type: pattern
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - literature
@@ -17,7 +17,7 @@ sources:
   - type: literature
     title: "Design Patterns: Elements of Reusable Object-Oriented Software"
     note: Defines Adapter as converting one interface into another interface clients expect.
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Adapter pattern

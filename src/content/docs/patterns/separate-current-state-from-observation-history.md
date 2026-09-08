@@ -2,7 +2,7 @@
 title: Separate current state from observation history
 description: Serve current reads from compact state while preserving append-only observations for history and provenance.
 type: pattern
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - derived-guidance
@@ -14,7 +14,7 @@ topics:
 related:
   - architecture/event-driven-architecture
   - practices/safe-online-data-migrations
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Separate current state from observation history

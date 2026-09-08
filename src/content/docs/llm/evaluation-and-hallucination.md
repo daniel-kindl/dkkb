@@ -2,7 +2,7 @@
 title: Evaluate LLM behavior and hallucination risk
 description: Measure model behavior against representative tasks and verify externally checkable claims instead of treating fluent output as evidence.
 type: practice
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -16,7 +16,7 @@ sources:
   - type: primary-source
     title: "NIST AI Risk Management Framework"
     url: "https://www.nist.gov/itl/ai-risk-management-framework"
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Evaluate LLM behavior and hallucination risk

@@ -2,7 +2,7 @@
 title: Retry storm
 description: Retries amplify an existing failure and create enough extra load to delay or prevent recovery.
 type: problem
-status: draft
+status: reviewed
 confidence: high
 provenance:
   - primary-source
@@ -18,7 +18,7 @@ sources:
   - type: primary-source
     title: "Timeouts, retries, and backoff with jitter"
     url: "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Retry storm

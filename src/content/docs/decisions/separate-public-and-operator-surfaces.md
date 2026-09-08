@@ -2,7 +2,7 @@
 title: Separate public and operator surfaces
 description: Compare shared and separate interfaces when public users and privileged operators have different trust and deployment needs.
 type: decision
-status: draft
+status: reviewed
 confidence: medium
 provenance:
   - derived-guidance
@@ -14,7 +14,7 @@ topics:
 related:
   - architecture/architecture-boundaries-and-dependency-direction
   - principles/separation-of-concerns
-lastReviewed: "2026-09-03"
+lastReviewed: "2026-09-08"
 ---
 
 # Separate public and operator surfaces
