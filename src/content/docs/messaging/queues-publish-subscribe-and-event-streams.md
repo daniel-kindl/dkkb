@@ -35,7 +35,7 @@ The channel model determines who receives a message, whether several consumers s
 
 ## Queue
 
-A queue normally represents work that one eligible consumer should process.
+A [message queue](../glossary/message-queue.md) normally represents work that one eligible consumer should process.
 
 Several workers can compete for messages so the system can spread work across consumers.
 
@@ -45,7 +45,7 @@ This model fits commands and background work where duplicate fan-out is not the 
 
 ## Publish-subscribe
 
-Publish-subscribe distributes one publication to several independent subscriptions.
+[Publish/subscribe](../glossary/publish-subscribe.md) distributes one publication to several independent subscriptions.
 
 Each subscription represents its own interest and delivery state. One subscriber completing its work does not mean another subscriber has processed the same publication.
 
@@ -53,7 +53,7 @@ This fits integration events when several downstream capabilities need to react 
 
 ## Event stream or log
 
-A durable event stream retains ordered records for some period and lets consumers track their own position.
+A durable [event stream](../glossary/event-stream.md) retains ordered records for some period and lets consumers track their own position.
 
 A consumer can process new records continuously and may be able to replay older records from a previous position.
 
