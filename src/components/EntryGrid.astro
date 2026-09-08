@@ -1,10 +1,19 @@
 ---
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import type { StarlightIcon } from '@astrojs/starlight/types';
+import IconLinkCard from './IconLinkCard.astro';
+
+interface Entry {
+  title: string;
+  href: string;
+  description?: string;
+  icon?: StarlightIcon;
+}
 
 interface Props {
   heading: string;
   headingId: string;
-  entries: { title: string; href: string; description?: string }[];
+  entries: Entry[];
 }
 
 const { heading, headingId, entries } = Astro.props;
@@ -15,9 +24,18 @@ const { heading, headingId, entries } = Astro.props;
     <section aria-labelledby={headingId}>
       <h2 id={headingId}>{heading}</h2>
       <CardGrid>
-        {entries.map((entry) => (
-          <LinkCard title={entry.title} href={entry.href} description={entry.description} />
-        ))}
+        {entries.map((entry) =>
+          entry.icon ? (
+            <IconLinkCard
+              title={entry.title}
+              href={entry.href}
+              description={entry.description}
+              icon={entry.icon}
+            />
+          ) : (
+            <LinkCard title={entry.title} href={entry.href} description={entry.description} />
+          )
+        )}
       </CardGrid>
     </section>
   )
