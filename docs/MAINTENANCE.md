@@ -46,7 +46,13 @@ The report shows age buckets, threshold exceedance, the oldest entries, missing 
 
 Age alone must not fail normal pull-request CI. Review an entry before changing `lastReviewed`; never update the date only to make the report newer.
 
-Review stale external links when they are reported or encountered during normal work. Do not add a scheduled crawler until broken links become a repeated maintenance problem.
+### External references
+
+External references are checked by the scheduled/manual `External references` workflow. Network availability is intentionally not part of the normal `pnpm check` pull-request gate.
+
+Use `pnpm check:external-links` for an on-demand local check. Triage classifications, retries, exclusions, and failure policy are documented in `docs/EXTERNAL_LINKS.md`.
+
+Do not bypass authentication, bot protection, or rate limits. Repair a source only after confirming that its canonical location or validity actually changed.
 
 ## Automation
 

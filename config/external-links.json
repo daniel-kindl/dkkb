@@ -1,0 +1,9 @@
+{
+  "concurrency": 4,
+  "timeoutMs": 10000,
+  "retries": 1,
+  "retryDelayMs": 750,
+  "userAgent": "DKKB external reference validator (+https://github.com/daniel-kindl/dkkb)",
+  "excludedHosts": [],
+  "excludedUrlPrefixes": []
+}
