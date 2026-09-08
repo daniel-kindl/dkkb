@@ -30,7 +30,7 @@ lastReviewed: "2026-09-04"
 
 # Latency vs throughput
 
-Latency is how long one operation takes from request to response. Throughput is how much work a system completes per unit of time.
+[Latency](../glossary/latency.md) is how long one operation takes from request to response. [Throughput](../glossary/throughput.md) is how much work a system completes per unit of time.
 
 The two measures are related but distinct, and a change that improves one can reduce the other.
 
