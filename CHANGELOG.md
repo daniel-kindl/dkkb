@@ -2,6 +2,17 @@
 
 All notable changes to DKKB will be documented in this file.
 
+## [0.3.0](https://github.com/daniel-kindl/dkkb/compare/v0.2.0...v0.3.0) (2026-09-08)
+
+### Features
+
+* **glossary:** add vocabulary browser and backlinks ([#147](https://github.com/daniel-kindl/dkkb/issues/147)) ([e92470d](https://github.com/daniel-kindl/dkkb/commit/e92470d07bd9161633a8a96943abe930dbf578e1))
+* **glossary:** define glossary aliases and linking policy ([#141](https://github.com/daniel-kindl/dkkb/issues/141)) ([7875fa0](https://github.com/daniel-kindl/dkkb/commit/7875fa00d14e1a6289c629339a044b4c3fbcb78b))
+
+### Bug Fixes
+
+* **ci:** deploy Pages independently of releases ([#134](https://github.com/daniel-kindl/dkkb/issues/134)) ([e20d1ab](https://github.com/daniel-kindl/dkkb/commit/e20d1ab9b5f699ff9058b44bcc95c354b8790176))
+
 ## [0.2.0](https://github.com/daniel-kindl/dkkb/compare/v0.1.0...v0.2.0) (2026-09-07)
 
 ### Features
