@@ -1,0 +1,212 @@
+---
+import { glossaryInitial } from '../lib/glossary';
+
+interface GlossaryItem {
+  title: string;
+  href: string;
+  description: string;
+  aliases: string[];
+}
+
+interface Props {
+  entries: GlossaryItem[];
+}
+
+const { entries } = Astro.props;
+const groups = new Map<string, GlossaryItem[]>();
+
+for (const entry of entries) {
+  const initial = glossaryInitial(entry.title);
+  const group = groups.get(initial) ?? [];
+  group.push(entry);
+  groups.set(initial, group);
+}
+
+const groupedEntries = [...groups.entries()].sort(([left], [right]) => left.localeCompare(right));
+const termLabel = entries.length === 1 ? 'term' : 'terms';
+---
+
+{
+  entries.length > 0 && (
+    <section class="glossary-browser" aria-labelledby="glossary-browser-heading" data-glossary-browser>
+      <h2 id="glossary-browser-heading">Browse terms</h2>
+
+      <div class="glossary-controls">
+        <label for="glossary-filter">Filter vocabulary</label>
+        <input
+          id="glossary-filter"
+          type="search"
+          placeholder="Filter by term, alias, or description"
+          autocomplete="off"
+          aria-describedby="glossary-filter-status"
+          data-glossary-filter
+        />
+        <p id="glossary-filter-status" class="glossary-status" aria-live="polite" data-glossary-status>
+          {entries.length} {termLabel}
+        </p>
+      </div>
+
+      <p class="glossary-empty" data-glossary-empty hidden>No matching glossary terms.</p>
+
+      <div class="glossary-groups">
+        {groupedEntries.map(([initial, terms]) => (
+          <section class="glossary-group" aria-labelledby={`glossary-letter-${initial}`} data-glossary-group>
+            <h3 id={`glossary-letter-${initial}`} class="glossary-letter">{initial}</h3>
+            <ul class="glossary-list">
+              {terms.map((term) => {
+                const searchable = [term.title, ...term.aliases, term.description]
+                  .join(' ')
+                  .toLocaleLowerCase('en-US');
+                return (
+                  <li class="glossary-term" data-glossary-item data-glossary-search={searchable}>
+                    <a class="glossary-title" href={term.href}>{term.title}</a>
+                    <p class="glossary-description">{term.description}</p>
+                    {term.aliases.length > 0 && (
+                      <p class="glossary-aliases">
+                        <span>Aliases:</span> {term.aliases.join(', ')}
+                      </p>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<script>
+  for (const browser of document.querySelectorAll('[data-glossary-browser]')) {
+    const input = browser.querySelector('[data-glossary-filter]');
+    const status = browser.querySelector('[data-glossary-status]');
+    const empty = browser.querySelector('[data-glossary-empty]');
+
+    if (!(input instanceof HTMLInputElement) || !(status instanceof HTMLElement)) continue;
+
+    const items = [...browser.querySelectorAll('[data-glossary-item]')];
+    const groups = [...browser.querySelectorAll('[data-glossary-group]')];
+
+    const update = () => {
+      const query = input.value.trim().toLocaleLowerCase('en-US');
+      let visibleCount = 0;
+
+      for (const item of items) {
+        if (!(item instanceof HTMLElement)) continue;
+        const searchable = item.dataset.glossarySearch ?? '';
+        const visible = query.length === 0 || searchable.includes(query);
+        item.hidden = !visible;
+        if (visible) visibleCount += 1;
+      }
+
+      for (const group of groups) {
+        if (!(group instanceof HTMLElement)) continue;
+        group.hidden = !group.querySelector('[data-glossary-item]:not([hidden])');
+      }
+
+      status.textContent = `${visibleCount} ${visibleCount === 1 ? 'term' : 'terms'}`;
+      if (empty instanceof HTMLElement) empty.hidden = visibleCount !== 0;
+    };
+
+    input.addEventListener('input', update);
+  }
+</script>
+
+<style>
+  .glossary-browser {
+    margin-block-start: var(--dkkb-space-8);
+  }
+
+  .glossary-controls {
+    display: grid;
+    gap: var(--dkkb-space-2);
+    margin-block: var(--dkkb-space-4) var(--dkkb-space-6);
+  }
+
+  .glossary-controls label {
+    font-weight: 600;
+  }
+
+  .glossary-controls input {
+    width: min(100%, 34rem);
+    border: var(--dkkb-border-width) solid var(--dkkb-color-border);
+    border-radius: var(--dkkb-radius-md);
+    background: var(--dkkb-color-surface);
+    color: var(--dkkb-color-text);
+    padding: var(--dkkb-space-3) var(--dkkb-space-4);
+    font: inherit;
+  }
+
+  .glossary-controls input::placeholder {
+    color: var(--dkkb-color-text-muted);
+  }
+
+  .glossary-status,
+  .glossary-empty,
+  .glossary-description,
+  .glossary-aliases {
+    color: var(--dkkb-color-text-muted);
+  }
+
+  .glossary-status,
+  .glossary-empty {
+    margin: 0;
+  }
+
+  .glossary-groups {
+    display: grid;
+    gap: var(--dkkb-space-8);
+  }
+
+  .glossary-group {
+    display: grid;
+    gap: var(--dkkb-space-3);
+  }
+
+  .glossary-letter {
+    margin: 0;
+    border-block-end: var(--dkkb-border-width) solid var(--dkkb-color-border);
+    padding-block-end: var(--dkkb-space-2);
+  }
+
+  .glossary-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: var(--dkkb-space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .glossary-term {
+    border: var(--dkkb-border-width) solid var(--dkkb-color-border);
+    border-radius: var(--dkkb-radius-md);
+    background: var(--dkkb-color-surface-raised);
+    padding: var(--dkkb-space-4);
+  }
+
+  .glossary-title {
+    color: var(--dkkb-color-link);
+    font-weight: 700;
+    text-underline-offset: 0.18em;
+  }
+
+  .glossary-description,
+  .glossary-aliases {
+    margin-block: var(--dkkb-space-2) 0;
+  }
+
+  .glossary-aliases {
+    font-size: 0.875rem;
+  }
+
+  .glossary-aliases span {
+    color: var(--dkkb-color-text);
+    font-weight: 600;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+</style>
