@@ -30,9 +30,9 @@ lastReviewed: "2026-09-08"
 
 # Locks, mutexes, and critical sections
 
-A critical section is code that accesses shared state under a mutual-exclusion rule.
+A [critical section](../glossary/critical-section.md) is code that accesses shared state under a mutual-exclusion rule.
 
-A lock or mutex grants one holder authority to enter that section while conflicting actors wait or fail to acquire the same protection.
+A lock or [mutex](../glossary/mutex.md) grants one holder authority to enter that section while conflicting actors wait or fail to acquire the same protection.
 
 ## Safety property
 
@@ -58,7 +58,7 @@ Do not hold a local lock across slow network calls or user interaction unless th
 
 ## Lock ordering
 
-Deadlock can occur when two actors hold different locks and each waits for the other lock.
+[Deadlock](../glossary/deadlock.md) can occur when two actors hold different locks and each waits for the other lock.
 
 A consistent global acquisition order can remove this cycle for a known lock set. Another option is to avoid holding several locks at once.
 
