@@ -7,8 +7,8 @@ This document defines what DKKB validates, when validation runs, and which workf
 | Workflow | Events | Responsibility | Merge gate |
 | --- | --- | --- | --- |
 | `CI` | Pull requests, pushes to `main`, `v*` tags, and manual dispatch | Run the repository quality gate | The `Quality` job is the required pull request check |
-| `Pages` | Merged Release Please pull requests targeting `main` | Validate and build the release merge commit, deploy the Pages artifact, and verify the public URL | Not a replacement for the `Quality` check |
-| `Release Please` | Pushes to `main` | Prepare a reviewed release pull request, then create the tag and GitHub Release after it merges | Not a merge gate; the release PR uses the normal `Quality` check |
+| `Pages` | Pushes to `main` | Validate and build the exact `main` commit, deploy the Pages artifact, and verify the public URL | Not a replacement for the `Quality` check |
+| `Release Please` | Pushes to `main` | Prepare a reviewed release pull request when release-worthy commits exist, then create the tag and GitHub Release after it merges | Not a merge gate; the release PR uses the normal `Quality` check |
 
 DKKB has no persistent `dev`, `develop`, release, or hotfix branch. The branch model is documented in [repository governance](GOVERNANCE.md). A future long-lived branch must be added to workflow triggers deliberately and documented here.
 
@@ -44,11 +44,11 @@ Pull request runs share a group for the pull request and cancel an older in-prog
 
 Runs for `main`, version tags, and manual dispatch are not canceled after they start. They provide evidence for integrated or published refs and must not disappear because another ref started validation.
 
-Pages runs use a workflow-and-ref concurrency group and do not cancel an in-progress deployment attempt. Pages repeats `pnpm check` because it owns the build artifact used for deployment and must validate the exact release merge commit from which it creates that artifact. This is intentional duplication between an independent deployment workflow and the merge gate. The workflow listens for closed pull requests targeting `main` and runs only when the merged pull request comes from Release Please.
+Pages runs use a workflow-and-ref concurrency group and do not cancel an in-progress deployment attempt. Pages repeats `pnpm check` because it owns the build artifact used for deployment and must validate the exact `main` commit from which it creates that artifact. This is intentional duplication between an independent deployment workflow and the merge gate.
 
 ## Deployment boundary
 
-CI validates code and content. Release Please prepares and publishes GitHub Releases after an approved release pull request. Pages builds, publishes, and verifies the site only after that release pull request merges into `main`. No workflow publishes packages, and ordinary pull request merges do not deploy production. The full environment and promotion policy is documented in [deployment environments and promotion](DEPLOYMENT.md).
+CI validates code and content. Pages publishes the current validated `main` state. Release Please manages versioned release records independently from deployment. A knowledge-content commit can therefore deploy immediately without producing a version bump. No workflow publishes packages. The full environment and promotion policy is documented in [deployment environments and promotion](DEPLOYMENT.md).
 
 ## Sources
 
