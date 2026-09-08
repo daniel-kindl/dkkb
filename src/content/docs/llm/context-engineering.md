@@ -18,7 +18,7 @@ lastReviewed: "2026-09-08"
 
 # Context engineering for LLM systems
 
-An [LLM](../../glossary/large-language-model/) can only reason from the information available in its active context and learned parameters. More context is not automatically better context.
+An [LLM](../glossary/large-language-model.md) can only reason from the information available in its active context and learned parameters. More context is not automatically better context.
 
 ```mermaid
 flowchart LR
