@@ -14,7 +14,7 @@ topics:
 related:
   - testing/property-based-testing
   - testing/deterministic-tests
-  - security/input-validation-output-encoding-and-injection
+  - security/threat-modeling
 sources:
   - type: literature
     title: "An Empirical Study of the Reliability of UNIX Utilities"
