@@ -34,6 +34,18 @@ Do not create `v2`, `new`, or `final` copies to preserve old text. Use `deprecat
 
 Review stable entries when their subject changes materially or when evidence challenges the current guidance. Do not change review dates without reviewing the content.
 
+### Freshness reporting
+
+Run `pnpm report:freshness` to inspect the age of `lastReviewed` metadata for reviewed and stable non-index entries.
+
+Reporting thresholds are repository-owned in `config/freshness-report.json`. The initial thresholds are 90, 180, and 365 days. They are reporting boundaries, not correctness deadlines.
+
+The command uses the current UTC date by default. Use `pnpm report:freshness -- --as-of YYYY-MM-DD` when a reproducible comparison needs a fixed date, and add `--json` for stable machine-readable output.
+
+The report shows age buckets, threshold exceedance, the oldest entries, missing or invalid required review dates, and category summaries. Draft, deprecated, and index entries are excluded from age reporting.
+
+Age alone must not fail normal pull-request CI. Review an entry before changing `lastReviewed`; never update the date only to make the report newer.
+
 Review stale external links when they are reported or encountered during normal work. Do not add a scheduled crawler until broken links become a repeated maintenance problem.
 
 ## Automation
