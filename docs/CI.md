@@ -14,7 +14,9 @@ DKKB has no persistent `dev`, `develop`, release, or hotfix branch. The branch m
 
 ## Quality gate
 
-`pnpm check` is the canonical repository-level quality command. It validates content, lints Markdown, runs tests, builds the site, and validates built links.
+`pnpm check` is the canonical repository-level quality command. It validates content, lints Markdown, runs tests, builds the site, validates built links, and scans representative rendered pages for machine-detectable accessibility violations.
+
+The accessibility scan uses the generated site rather than source markup alone. It checks the home page, glossary browser, knowledge graph, and a Mermaid-bearing knowledge entry in default and forced-dark rendering. The scanner runs WCAG 2.x Level A and AA rule tags, including the available WCAG 2.1 and 2.2 rules. Manual checks remain required for accessibility requirements that automation cannot prove; see [the accessibility standard](ACCESSIBILITY.md).
 
 The `CI` workflow exposes one stable job name, `Quality`, so branch protection can require that check without depending on step names. The pull request event runs it when a pull request is opened, reopened, or synchronized. A changed title alone does not require a complete quality run because the separate Conventional Commits workflow validates pull request titles.
 
@@ -22,13 +24,15 @@ The same check also runs on pushes to `main` and on version tags. These runs ver
 
 ## Dependency installation
 
-The repository commits `pnpm-lock.yaml`. Every workflow installs dependencies with:
+The repository commits `pnpm-lock.yaml`. Every workflow installs repository dependencies with:
 
 ```text
 pnpm install --frozen-lockfile
 ```
 
 The command fails when the lockfile is missing or does not match `package.json`. Contributors must update the lockfile together with intentional manifest changes. Node.js and pnpm versions are pinned in the workflow and package manifest.
+
+The accessibility runner invokes `@axe-core/cli` through `npx` with an exact version. This keeps the browser-oriented scanner out of the normal application dependency graph while preventing an unreviewed scanner-version change. The invocation still requires registry access when that exact package is not already cached.
 
 The workflows do not use a dependency cache currently. The repository has one small quality job, and avoiding a cache keeps dependency resolution and failure evidence direct. Add caching only with an explicit lockfile key and a measured maintenance benefit.
 
