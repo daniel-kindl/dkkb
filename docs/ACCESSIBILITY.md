@@ -107,6 +107,35 @@ Accessibility verification has three layers:
 
 A passing automated scanner does not prove WCAG conformance.
 
+## Automated verification
+
+The repository uses the Deque axe rules engine through a pinned `@axe-core/cli` invocation. The automated audit scans representative generated pages for WCAG 2.x Level A and AA rules, including WCAG 2.1 and 2.2 rule tags.
+
+The representative set currently covers:
+
+- the home page;
+- the glossary browser;
+- the knowledge graph;
+- a normal entry containing a Mermaid diagram.
+
+Each route is scanned in the default rendering and with Chrome's dark rendering preference forced. Confirmed violations fail the command and therefore fail the repository quality gate.
+
+Use:
+
+```text
+pnpm check:accessibility
+```
+
+to build the site and run the accessibility audit locally. If `dist` already contains the exact build to inspect, use:
+
+```text
+pnpm audit:accessibility
+```
+
+The scanner version is exact in the audit runner so CI does not silently move to a newer rules engine. Broad rule suppression is not allowed. A necessary exception must be narrow, documented, and tracked according to [the accessibility review checklist](ACCESSIBILITY_REVIEW.md).
+
+Automated scanning cannot reliably prove keyboard workflow quality, screen-reader usability, meaningful alternative-text quality, diagram equivalence, 200% zoom behavior, 320 CSS-pixel reflow, text-spacing resilience, or other criteria that require human judgment. These remain manual requirements.
+
 ## Manual review baseline
 
 For material UI or presentation changes, review representative pages with:

@@ -14,11 +14,13 @@
     "validate:content": "node scripts/validate-content.mjs",
     "validate:links": "node scripts/validate-built-links.mjs",
     "audit:sources": "node scripts/audit-sources.mjs",
+    "audit:accessibility": "node scripts/check-accessibility.mjs",
+    "check:accessibility": "pnpm build && pnpm audit:accessibility",
     "check:external-links": "node scripts/check-external-links.mjs",
     "report:freshness": "node scripts/report-freshness.mjs",
     "report:orphans": "node scripts/report-orphans.mjs",
     "test": "vitest run",
-    "check": "pnpm validate:content && pnpm lint:markdown && pnpm test && pnpm build && pnpm validate:links"
+    "check": "pnpm validate:content && pnpm lint:markdown && pnpm test && pnpm build && pnpm validate:links && pnpm audit:accessibility"
   },
   "dependencies": {
     "@astrojs/starlight": "0.41.11",
