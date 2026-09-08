@@ -1,0 +1,369 @@
+---
+interface GraphNode {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  path: string;
+}
+
+interface GraphEdge {
+  source: string;
+  target: string;
+  type: 'markdown' | 'related';
+}
+
+interface Props {
+  nodes: GraphNode[];
+  edges: GraphEdge[];
+  baseUrl: string;
+}
+
+const { nodes, edges, baseUrl } = Astro.props;
+const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+const hrefFor = (id: string) => `${normalizedBase}${id}/`;
+const categories = [...new Set(nodes.map((node) => node.category))]
+  .sort((left, right) => left.localeCompare(right));
+const payload = JSON.stringify({
+  nodes: nodes.map((node) => ({ ...node, href: hrefFor(node.id) })),
+  edges,
+}).replace(/</g, '\\u003c');
+---
+
+<section class="knowledge-graph" data-knowledge-graph>
+  <div class="graph-controls" aria-label="Knowledge graph controls">
+    <label>
+      Find entry
+      <input data-graph-search type="search" placeholder="Filter by title or ID" />
+    </label>
+    <label>
+      Category
+      <select data-graph-category>
+        <option value="">All categories</option>
+        {categories.map((category) => <option value={category}>{category}</option>)}
+      </select>
+    </label>
+    <label>
+      Focus entry
+      <select data-graph-focus>
+        {nodes.map((node) => <option value={node.id}>{node.title}</option>)}
+      </select>
+    </label>
+  </div>
+
+  <p class="graph-summary" data-graph-summary aria-live="polite"></p>
+
+  <div class="graph-viewport">
+    <svg
+      data-graph-svg
+      viewBox="0 0 960 560"
+      role="img"
+      aria-label="Focused DKKB relationship graph"
+    >
+      <defs>
+        <marker
+          id="knowledge-graph-arrow"
+          viewBox="0 0 10 10"
+          refX="9"
+          refY="5"
+          markerWidth="6"
+          markerHeight="6"
+          orient="auto-start-reverse"
+        >
+          <path d="M 0 0 L 10 5 L 0 10 z"></path>
+        </marker>
+      </defs>
+      <g data-graph-edges></g>
+      <g data-graph-nodes></g>
+    </svg>
+  </div>
+
+  <div class="graph-textual" aria-live="polite">
+    <h2>Focused relationships</h2>
+    <ul data-graph-list></ul>
+  </div>
+
+  <details class="graph-directory">
+    <summary>All graph entries ({nodes.length})</summary>
+    <ul>
+      {nodes.map((node) => (
+        <li>
+          <a href={hrefFor(node.id)}>{node.title}</a>
+          <span> ({node.category})</span>
+        </li>
+      ))}
+    </ul>
+  </details>
+
+  <script type="application/json" data-graph-data set:html={payload}></script>
+</section>
+
+<script>
+  const svgNamespace = 'http://www.w3.org/2000/svg';
+
+  function svgElement(name) {
+    return document.createElementNS(svgNamespace, name);
+  }
+
+  function shortLabel(value) {
+    return value.length > 22 ? `${value.slice(0, 20)}…` : value;
+  }
+
+  function initializeGraph(root) {
+    if (root.dataset.graphReady === 'true') return;
+    root.dataset.graphReady = 'true';
+
+    const dataElement = root.querySelector('[data-graph-data]');
+    const focusSelect = root.querySelector('[data-graph-focus]');
+    const categorySelect = root.querySelector('[data-graph-category]');
+    const searchInput = root.querySelector('[data-graph-search]');
+    const summary = root.querySelector('[data-graph-summary]');
+    const list = root.querySelector('[data-graph-list]');
+    const nodeLayer = root.querySelector('[data-graph-nodes]');
+    const edgeLayer = root.querySelector('[data-graph-edges]');
+    const svg = root.querySelector('[data-graph-svg]');
+
+    if (!dataElement || !focusSelect || !categorySelect || !searchInput
+      || !summary || !list || !nodeLayer || !edgeLayer || !svg) return;
+
+    const data = JSON.parse(dataElement.textContent ?? '{"nodes":[],"edges":[]}');
+    const nodes = data.nodes ?? [];
+    const edges = data.edges ?? [];
+    const byId = new Map(nodes.map((node) => [node.id, node]));
+
+    const relationshipLabel = (edge, outgoing) => {
+      if (edge.type === 'related') return outgoing ? 'Related to' : 'Related from';
+      return outgoing ? 'Links to' : 'Linked from';
+    };
+
+    const renderTextual = (focusId, incidentEdges) => {
+      list.replaceChildren();
+
+      if (incidentEdges.length === 0) {
+        const item = document.createElement('li');
+        item.textContent = 'No authored Markdown or related-metadata relationships.';
+        list.append(item);
+        return;
+      }
+
+      const sorted = [...incidentEdges].sort((left, right) => {
+        const leftOther = byId.get(left.source === focusId ? left.target : left.source)?.title ?? '';
+        const rightOther = byId.get(right.source === focusId ? right.target : right.source)?.title ?? '';
+        return leftOther.localeCompare(rightOther) || left.type.localeCompare(right.type);
+      });
+
+      for (const edge of sorted) {
+        const outgoing = edge.source === focusId;
+        const other = byId.get(outgoing ? edge.target : edge.source);
+        if (!other) continue;
+
+        const item = document.createElement('li');
+        item.append(`${relationshipLabel(edge, outgoing)} `);
+        const link = document.createElement('a');
+        link.href = other.href;
+        link.textContent = other.title;
+        item.append(link, ` (${edge.type === 'related' ? 'related metadata' : 'Markdown link'})`);
+        list.append(item);
+      }
+    };
+
+    const render = () => {
+      const focusId = focusSelect.value;
+      const focus = byId.get(focusId);
+      nodeLayer.replaceChildren();
+      edgeLayer.replaceChildren();
+
+      if (!focus) {
+        summary.textContent = 'No graph entry matches the current filters.';
+        list.replaceChildren();
+        return;
+      }
+
+      const incidentEdges = edges.filter((edge) => edge.source === focusId || edge.target === focusId);
+      const neighborIds = [...new Set(incidentEdges.map((edge) => (
+        edge.source === focusId ? edge.target : edge.source
+      )))];
+      const neighbors = neighborIds
+        .map((id) => byId.get(id))
+        .filter(Boolean)
+        .sort((left, right) => left.title.localeCompare(right.title) || left.id.localeCompare(right.id));
+      const visualNeighbors = neighbors.slice(0, 20);
+      const visibleIds = new Set([focusId, ...visualNeighbors.map((node) => node.id)]);
+      const positions = new Map([[focusId, { x: 480, y: 280 }]]);
+
+      visualNeighbors.forEach((node, index) => {
+        const angle = (Math.PI * 2 * index) / Math.max(visualNeighbors.length, 1) - Math.PI / 2;
+        positions.set(node.id, {
+          x: 480 + Math.cos(angle) * 220,
+          y: 280 + Math.sin(angle) * 190,
+        });
+      });
+
+      for (const edge of incidentEdges) {
+        if (!visibleIds.has(edge.source) || !visibleIds.has(edge.target)) continue;
+        const source = positions.get(edge.source);
+        const target = positions.get(edge.target);
+        if (!source || !target) continue;
+
+        const line = svgElement('line');
+        line.setAttribute('x1', String(source.x));
+        line.setAttribute('y1', String(source.y));
+        line.setAttribute('x2', String(target.x));
+        line.setAttribute('y2', String(target.y));
+        line.setAttribute('class', `graph-edge graph-edge-${edge.type}`);
+        line.setAttribute('marker-end', 'url(#knowledge-graph-arrow)');
+        edgeLayer.append(line);
+      }
+
+      for (const node of [focus, ...visualNeighbors]) {
+        const position = positions.get(node.id);
+        if (!position) continue;
+
+        const link = svgElement('a');
+        link.setAttribute('href', node.href);
+        link.setAttribute('aria-label', `Open ${node.title}`);
+
+        const group = svgElement('g');
+        group.setAttribute('class', node.id === focusId ? 'graph-node graph-node-focus' : 'graph-node');
+        group.setAttribute('transform', `translate(${position.x} ${position.y})`);
+
+        const circle = svgElement('circle');
+        circle.setAttribute('r', node.id === focusId ? '42' : '32');
+
+        const text = svgElement('text');
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('y', node.id === focusId ? '58' : '47');
+        text.textContent = shortLabel(node.title);
+
+        group.append(circle, text);
+        link.append(group);
+        nodeLayer.append(link);
+      }
+
+      const visualNote = neighbors.length > visualNeighbors.length
+        ? ` The diagram shows the first ${visualNeighbors.length}; the list below includes all relationships.`
+        : '';
+      summary.textContent = `${focus.title}: ${incidentEdges.length} relationships with ${neighbors.length} entries.${visualNote}`;
+      svg.setAttribute('aria-label', `Relationship neighborhood for ${focus.title}`);
+      renderTextual(focusId, incidentEdges);
+    };
+
+    const refreshOptions = () => {
+      const query = searchInput.value.trim().toLocaleLowerCase('en-US');
+      const category = categorySelect.value;
+      let firstMatch = null;
+
+      for (const option of focusSelect.options) {
+        const node = byId.get(option.value);
+        const matches = Boolean(node)
+          && (!category || node.category === category)
+          && (!query || node.title.toLocaleLowerCase('en-US').includes(query)
+            || node.id.toLocaleLowerCase('en-US').includes(query));
+        option.hidden = !matches;
+        option.disabled = !matches;
+        if (matches && firstMatch === null) firstMatch = option.value;
+      }
+
+      const current = focusSelect.selectedOptions[0];
+      if (!current || current.disabled) focusSelect.value = firstMatch ?? '';
+      render();
+    };
+
+    focusSelect.addEventListener('change', render);
+    categorySelect.addEventListener('change', refreshOptions);
+    searchInput.addEventListener('input', refreshOptions);
+    refreshOptions();
+  }
+
+  document.querySelectorAll('[data-knowledge-graph]').forEach(initializeGraph);
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('[data-knowledge-graph]').forEach(initializeGraph);
+  });
+</script>
+
+<style>
+  .knowledge-graph {
+    margin-block: 2rem;
+  }
+
+  .graph-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1rem;
+    margin-block: 1rem;
+  }
+
+  .graph-controls label {
+    display: grid;
+    gap: 0.35rem;
+    font-weight: 600;
+  }
+
+  .graph-controls input,
+  .graph-controls select {
+    width: 100%;
+    padding: 0.55rem 0.65rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.4rem;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-text);
+  }
+
+  .graph-summary {
+    min-height: 1.5rem;
+  }
+
+  .graph-viewport {
+    overflow-x: auto;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.6rem;
+    background: var(--sl-color-bg-nav);
+  }
+
+  .graph-viewport svg {
+    display: block;
+    min-width: 45rem;
+    width: 100%;
+    height: auto;
+  }
+
+  :global(.graph-edge) {
+    stroke: var(--sl-color-gray-3);
+    stroke-width: 1.7;
+  }
+
+  :global(.graph-edge-markdown) {
+    stroke-dasharray: 7 5;
+  }
+
+  :global(#knowledge-graph-arrow path) {
+    fill: var(--sl-color-gray-3);
+  }
+
+  :global(.graph-node circle) {
+    fill: var(--sl-color-bg);
+    stroke: var(--sl-color-accent);
+    stroke-width: 2;
+  }
+
+  :global(.graph-node-focus circle) {
+    fill: var(--sl-color-accent-low);
+    stroke-width: 3;
+  }
+
+  :global(.graph-node text) {
+    fill: var(--sl-color-text);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .graph-textual,
+  .graph-directory {
+    margin-block-start: 1.5rem;
+  }
+
+  .graph-directory summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+</style>
