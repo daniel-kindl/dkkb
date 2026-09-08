@@ -22,7 +22,7 @@ lastReviewed: "2026-09-08"
 
 # Race condition
 
-A race condition exists when correctness depends on which concurrent operation happens first.
+A [race condition](../glossary/race-condition.md) exists when correctness depends on which concurrent operation happens first.
 
 ```mermaid
 sequenceDiagram
