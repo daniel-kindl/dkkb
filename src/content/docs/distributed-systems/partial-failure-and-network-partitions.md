@@ -32,11 +32,11 @@ A distributed system can fail in parts while other parts continue to run.
 
 One node can be healthy while another node is down. A link can fail in one direction. A request can reach its destination while the response is lost. A slow node can be indistinguishable from a failed node for a bounded observer.
 
-This is partial failure.
+This is [partial failure](../glossary/partial-failure.md).
 
 ## A network partition creates uncertainty
 
-A network partition prevents some nodes from communicating while those nodes may still be running.
+A [network partition](../glossary/network-partition.md) prevents some nodes from communicating while those nodes may still be running.
 
 The important problem is not only missing packets. Each side lacks current evidence about the other side.
 
