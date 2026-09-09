@@ -29,6 +29,12 @@ jobs:
         run: npm install --global pnpm@11.25.0
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Record build identity
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          echo "DKKB_RELEASE=$RELEASE_TAG" >> "$GITHUB_ENV"
+          echo "DKKB_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
       - name: Validate and build
         run: pnpm check
       - name: Configure Pages
@@ -59,13 +65,21 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    permissions: {}
+    permissions:
+      contents: read
     steps:
+      - name: Checkout release source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22.13.1
+      - name: Resolve release identity
+        run: echo "DKKB_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
       - name: Verify deployed site
         env:
-          PAGE_URL: ${{ needs.deploy.outputs.page-url }}
-        run: |
-          test -n "$PAGE_URL"
-          curl --fail --silent --show-error --location \
-            --retry 5 --retry-delay 5 --retry-all-errors --max-time 30 \
-            "$PAGE_URL" > /dev/null
+          DEPLOYMENT_URL: ${{ needs.deploy.outputs.page-url }}
+          DKKB_RELEASE: ${{ github.event.release.tag_name }}
+        run: node scripts/verify-deployment.mjs
