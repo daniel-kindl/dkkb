@@ -44,11 +44,11 @@ The maintainer controls merge authority. Release Please controls release creatio
 
 ## Build and artifact identity
 
-The Pages workflow builds from the exact tag named by the published GitHub Release. It checks out `github.event.release.tag_name`, records the resolved commit, runs `pnpm check`, uploads `dist`, and deploys that artifact from the same workflow run. The deploy job does not perform a second source build.
+The Pages workflow builds from the exact tag named by the published GitHub Release. It checks out `github.event.release.tag_name`, records the resolved commit, runs `pnpm check`, and uploads the validated `dist` as one Pages artifact. The artifact name contains the release tag and resolved commit SHA, and its retention is 90 days. The deploy job receives that exact artifact name and does not perform a second source build.
 
 The deployed site is therefore associated with one immutable release tag, one release commit, one GitHub Release, and one Pages workflow run. If validation or build fails, no artifact reaches the deploy job. If deployment fails, the release remains immutable and the failed workflow can be rerun after the operational problem is corrected.
 
-A follow-up platform change may separate release validation/build from deployment and promote a previously validated artifact without rebuilding. Until then, the Pages workflow still validates and builds the exact release tag before publication.
+The artifact is scoped to the Pages workflow run. A later platform change may promote an artifact across workflow runs, but it must preserve the same release and commit identity.
 
 ## Configuration and secrets
 

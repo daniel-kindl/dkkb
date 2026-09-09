@@ -48,7 +48,7 @@ Pull request runs share a group for the pull request and cancel an older in-prog
 
 Runs for `main`, version tags, and manual dispatch are not canceled after they start. They provide evidence for integrated or published refs and must not disappear because another ref started validation.
 
-Pages runs use a workflow-and-ref concurrency group and do not cancel an in-progress deployment attempt. Pages repeats `pnpm check` because it owns the build artifact used for deployment and must validate the exact release tag from which it creates that artifact. The deploy job consumes that artifact and does not rebuild the source.
+Pages runs use a workflow-and-ref concurrency group and do not cancel an in-progress deployment attempt. Pages repeats `pnpm check` because it owns the build artifact used for deployment and must validate the exact release tag from which it creates that artifact. The build job uploads one Pages artifact named with the release tag and resolved commit SHA, retains it for 90 days, and exposes that name to the deploy job. The deploy job consumes that artifact and does not rebuild the source.
 
 ## Deployment boundary
 
