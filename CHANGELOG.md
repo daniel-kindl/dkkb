@@ -2,6 +2,13 @@
 
 All notable changes to DKKB will be documented in this file.
 
+## [0.5.0](https://github.com/daniel-kindl/dkkb/compare/v0.4.1...v0.5.0) (2026-09-09)
+
+
+### Features
+
+* **ui:** add category icons to discovery cards ([afed25f](https://github.com/daniel-kindl/dkkb/commit/afed25f159f0384400dc3cd1a1a5e19d7df03bdd))
+
 ## [0.4.1](https://github.com/daniel-kindl/dkkb/compare/v0.4.0...v0.4.1) (2026-09-08)
 
 
