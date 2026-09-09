@@ -22,7 +22,7 @@ sources:
   - type: literature
     title: "Lost in the Middle: How Language Models Use Long Contexts"
     url: "https://arxiv.org/abs/2307.03172"
-  - type: secondary-source
+  - type: literature
     title: "AI Hero: What Is The Context Window?"
     url: "https://www.aihero.dev/what-is-the-context-window"
 lastReviewed: "2026-09-04"
