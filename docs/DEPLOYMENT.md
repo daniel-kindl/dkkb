@@ -44,7 +44,7 @@ The maintainer controls merge authority. Release Please controls release creatio
 
 ## Build and artifact identity
 
-The Pages workflow builds from the exact tag named by the published GitHub Release. It checks out `github.event.release.tag_name`, runs `pnpm check`, uploads `dist`, and deploys that artifact from the same workflow run.
+The Pages workflow builds from the exact tag named by the published GitHub Release. It checks out `github.event.release.tag_name`, records the resolved commit, runs `pnpm check`, uploads `dist`, and deploys that artifact from the same workflow run. The deploy job does not perform a second source build.
 
 The deployed site is therefore associated with one immutable release tag, one release commit, one GitHub Release, and one Pages workflow run. If validation or build fails, no artifact reaches the deploy job. If deployment fails, the release remains immutable and the failed workflow can be rerun after the operational problem is corrected.
 
@@ -88,8 +88,11 @@ Never rewrite `main`, move a published tag, or delete release history to recover
 The Pages workflow performs these checks before and after deployment:
 
 - `pnpm check` validates content, Markdown, tests, the static build, and built links for the exact release tag before artifact upload;
-- the `Verify` job requests the URL returned by `actions/deploy-pages` with a failing HTTP response check and retries transient availability failures;
+- the build publishes `dkkb-meta.json`, which contains the schema version, application version, release tag, resolved source commit, and content counts;
+- the `Verify` job checks the homepage, glossary, knowledge graph, `llms.txt`, `dkkb-index.json`, and `dkkb-meta.json`. It parses JSON responses and checks the expected release and commit identity. Each route has three attempts and a 30-second request timeout;
 - visual review and content review remain human responsibilities when a change affects presentation or meaning.
+
+`dkkb-meta.json` is a public machine-readable contract. Its `schema` value identifies the document shape. The `version`, `release`, and `commit` fields identify the deployed source. The content counts are diagnostic and can change when content changes.
 
 The deployment URL is the source for the post-deploy availability check. This avoids hard-coding a second public URL in the workflow when the repository's Pages domain changes.
 
