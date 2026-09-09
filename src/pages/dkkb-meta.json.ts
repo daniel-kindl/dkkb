@@ -1,10 +1,10 @@
-import fs from 'node:fs';
+import packageJson from '../../package.json';
 import { getCollection } from 'astro:content';
 import { buildSiteMetadata } from '../lib/site-metadata';
 
 export const prerender = true;
 
-const version = fs.readFileSync(new URL('../../version.txt', import.meta.url), 'utf8').trim();
+const version = packageJson.version;
 
 function environment(name: string): string | null {
   return process.env[name]?.trim() || null;
