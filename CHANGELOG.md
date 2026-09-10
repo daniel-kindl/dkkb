@@ -2,6 +2,18 @@
 
 All notable changes to DKKB will be documented in this file.
 
+## [0.6.0](https://github.com/daniel-kindl/dkkb/compare/v0.5.0...v0.6.0) (2026-09-09)
+
+
+### Features
+
+* **llm:** add context window entry ([#226](https://github.com/daniel-kindl/dkkb/issues/226)) ([53291ba](https://github.com/daniel-kindl/dkkb/commit/53291ba250ee1637f21dd920e6fdc28c2bf27756))
+
+
+### Bug Fixes
+
+* **deploy:** publish production only from releases ([#223](https://github.com/daniel-kindl/dkkb/issues/223)) ([e580a47](https://github.com/daniel-kindl/dkkb/commit/e580a470a8c0c0d480a123fde861f8836ca67c3e))
+
 ## [0.5.0](https://github.com/daniel-kindl/dkkb/compare/v0.4.1...v0.5.0) (2026-09-09)
 
 
