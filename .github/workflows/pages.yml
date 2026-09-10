@@ -12,6 +12,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    outputs:
+      artifact-name: ${{ steps.identity.outputs.artifact_name }}
     timeout-minutes: 10
     permissions:
       contents: read
@@ -30,19 +32,26 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Record build identity
+        id: identity
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
+          commit=$(git rev-parse HEAD)
+          artifact_name="dkkb-pages-${RELEASE_TAG}-${commit}"
           echo "DKKB_RELEASE=$RELEASE_TAG" >> "$GITHUB_ENV"
-          echo "DKKB_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "DKKB_COMMIT=$commit" >> "$GITHUB_ENV"
+          echo "artifact_name=$artifact_name" >> "$GITHUB_OUTPUT"
+          printf 'Building release %s from commit %s\n' "$RELEASE_TAG" "$commit"
       - name: Validate and build
         run: pnpm check
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
-      - name: Upload Pages artifact
+      - name: Upload validated Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
+          name: ${{ steps.identity.outputs.artifact_name }}
           path: dist
+          retention-days: 90
   deploy:
     name: Deploy
     needs: build
@@ -57,9 +66,11 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy validated Pages artifact
         id: deployment
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+        with:
+          artifact_name: ${{ needs.build.outputs.artifact-name }}
   verify:
     name: Verify
     needs: deploy

@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { spawn } from 'node:child_process';
 
 const previewHost = '127.0.0.1';
@@ -34,6 +35,31 @@ function readBasePath()
 function buildUrls(basePath)
 {
     return representativeRoutes.map((route) => new URL(`${basePath}${route}`, previewOrigin).href);
+}
+
+function runnerChromeDriverPath()
+{
+    const configuredPath = process.env.CHROMEWEBDRIVER?.trim();
+
+    if (!configuredPath)
+    {
+        return null;
+    }
+
+    if (existsSync(configuredPath))
+    {
+        const executableName = process.platform === 'win32' ? 'chromedriver.exe' : 'chromedriver';
+        const executablePath = join(configuredPath, executableName);
+
+        if (existsSync(executablePath))
+        {
+            return executablePath;
+        }
+
+        return configuredPath;
+    }
+
+    return null;
 }
 
 function wait(milliseconds)
@@ -105,7 +131,7 @@ async function runAxe(urls, themeName, chromeOptions)
 {
     console.log(`\nAccessibility scan: ${themeName}`);
 
-    await runProcess(command('npx'), [
+    const args = [
         '--yes',
         scannerPackage,
         ...urls,
@@ -118,7 +144,16 @@ async function runAxe(urls, themeName, chromeOptions)
         '60',
         '--chrome-options',
         chromeOptions.join(','),
-    ]);
+    ];
+    const chromeDriverPath = runnerChromeDriverPath();
+
+    if (chromeDriverPath)
+    {
+        console.log(`Using ChromeDriver from ${chromeDriverPath}`);
+        args.push('--chromedriver-path', chromeDriverPath);
+    }
+
+    await runProcess(command('npx'), args);
 }
 
 async function main()

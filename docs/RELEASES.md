@@ -9,7 +9,7 @@ DKKB publishes versioned releases through a reviewed Release Please pull request
 3. The release pull request updates `version.txt` and [`CHANGELOG.md`](../CHANGELOG.md). Review the generated notes for public impact, breaking changes, and migration guidance.
 4. A maintainer confirms the Quality check passes and merges the release pull request.
 5. Release Please creates the immutable `vX.Y.Z` tag and the corresponding GitHub Release on the release pull request's merge commit.
-6. The Pages workflow receives the `release.published` event, checks out the exact release tag, runs the repository quality gate, builds the static site, deploys the generated Pages artifact, and verifies the public URL.
+6. The Pages workflow receives the `release.published` event, checks out the exact release tag, runs the repository quality gate, uploads the validated site as a 90-day artifact named with the release tag and commit SHA, deploys that exact artifact, and verifies the public URL.
 
 A normal push to `main` is not a production publication event. Accepted changes can accumulate on `main` until a release-worthy change causes Release Please to prepare a release. Production therefore represents an explicit versioned release rather than the latest arbitrary `main` state.
 
@@ -36,7 +36,7 @@ This boundary has these consequences:
 
 - ordinary merges to `main` do not immediately change the public site;
 - a release merge can change both the versioned release record and the public site;
-- Pages deployment history can be traced back to one release tag and GitHub Release;
+- Pages deployment history can be traced back to one release tag, commit SHA, retained workflow artifact, and GitHub Release;
 - a production rebuild cannot silently switch to a newer `main` commit because checkout is pinned to the published release tag.
 
 See [Deployment environments and promotion](DEPLOYMENT.md) for the full promotion, recovery, and environment model.
