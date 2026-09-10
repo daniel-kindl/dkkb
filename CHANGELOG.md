@@ -2,6 +2,13 @@
 
 All notable changes to DKKB will be documented in this file.
 
+## [0.7.0](https://github.com/daniel-kindl/dkkb/compare/v0.6.0...v0.7.0) (2026-09-10)
+
+
+### Features
+
+* **deploy:** add site provenance and deployment verification ([#227](https://github.com/daniel-kindl/dkkb/issues/227)) ([8528f0e](https://github.com/daniel-kindl/dkkb/commit/8528f0e611e745388f2747a7f01e509104c32c61))
+
 ## [0.6.0](https://github.com/daniel-kindl/dkkb/compare/v0.5.0...v0.6.0) (2026-09-09)
 
 
