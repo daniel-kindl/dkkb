@@ -52,7 +52,7 @@ Pages runs use a workflow-and-ref concurrency group and do not cancel an in-prog
 
 ## Deployment boundary
 
-CI validates code and content. Pages publishes the current validated `main` state. Release Please manages versioned release records independently from deployment. A knowledge-content commit can therefore deploy immediately without producing a version bump. No workflow publishes packages. The full environment and promotion policy is documented in [deployment environments and promotion](DEPLOYMENT.md).
+CI validates code and content. Pages publishes only a published GitHub Release tag. Release Please creates that release after a reviewed release pull request merges. Ordinary merges to `main` do not publish production. No workflow publishes packages. The full environment and promotion policy is documented in [deployment environments and promotion](DEPLOYMENT.md).
 
 ## Sources
 

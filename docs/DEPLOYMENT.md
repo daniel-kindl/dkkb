@@ -89,8 +89,22 @@ The Pages workflow performs these checks before and after deployment:
 
 - `pnpm check` validates content, Markdown, tests, the static build, and built links for the exact release tag before artifact upload;
 - the build publishes `dkkb-meta.json`, which contains the schema version, application version, release tag, resolved source commit, and content counts;
-- the `Verify` job checks the homepage, glossary, knowledge graph, `llms.txt`, `dkkb-index.json`, and `dkkb-meta.json`. It parses JSON responses and checks the expected release and commit identity. Each route has three attempts and a 30-second request timeout;
+- the `Verify` job runs `scripts/verify-deployment.mjs` against the deployment URL. It checks the homepage, the `principles/` knowledge route, glossary, knowledge graph, `llms.txt`, `dkkb-index.json`, and `dkkb-meta.json`. HTML routes must include a `<title>` and the expected page title. JSON routes are parsed. `dkkb-index.json` must expose `version: 1` and the configured site base. `dkkb-meta.json` must match the release tag and commit used to build the artifact. If the Pages URL omits `/dkkb/`, verification appends that base path. Each route has three attempts and a 30-second request timeout;
 - visual review and content review remain human responsibilities when a change affects presentation or meaning.
+
+### What verification proves
+
+- the published host served the representative human and machine routes;
+- those HTML routes contain expected title text;
+- the machine-readable files are valid JSON with the documented identity/base contracts;
+- the live `dkkb-meta.json` identity matches the release tag and commit that produced the Pages artifact.
+
+### What verification does not prove
+
+- exhaustive link, content, or accessibility correctness (that belongs to `pnpm check` and review);
+- visual layout, search, Mermaid, or client-side graph behavior;
+- third-party network health;
+- that every knowledge entry is present or unchanged.
 
 `dkkb-meta.json` is a public machine-readable contract. Its `schema` value identifies the document shape. The `version`, `release`, and `commit` fields identify the deployed source. The content counts are diagnostic and can change when content changes.
 
