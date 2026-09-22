@@ -92,13 +92,19 @@ describe('verifyDeployment', () => {
   });
 
   it('names the failing route and invariant', async () => {
+    const bodies = {
+      'https://example.test/dkkb/': '<title>DKKB</title>',
+      'https://example.test/dkkb/principles/': '<title>Principles</title>',
+      'https://example.test/dkkb/glossary/': '<title>Technical glossary</title>',
+    };
+
     await expect(verifyDeployment({
       deploymentUrl: 'https://example.test/dkkb/',
       attempts: 1,
       fetchImpl: async (url) => ({
         ok: url.toString() !== 'https://example.test/dkkb/glossary/',
         status: url.toString() === 'https://example.test/dkkb/glossary/' ? 404 : 200,
-        text: async () => '<title>DKKB</title>',
+        text: async () => bodies[url.toString()] ?? '<title>DKKB</title>',
       }),
     })).rejects.toThrow('glossary/: request failed after 1 attempts: HTTP 404');
   });
