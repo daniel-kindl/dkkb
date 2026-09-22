@@ -6,7 +6,7 @@ This document defines what DKKB validates, when validation runs, and which workf
 
 | Workflow | Events | Responsibility | Merge gate |
 | --- | --- | --- | --- |
-| `CI` | Pull requests, pushes to `main`, `v*` tags, and manual dispatch | Run the repository quality gate | The `Quality` job is the required pull request check |
+| `CI` | Pull requests, pushes to `main`, `v*` tags, and manual dispatch | Run the repository quality gate and browser smoke tests | The `Quality` and `Browser` jobs are pull request checks |
 | `Pages` | Published GitHub Releases | Validate and build the exact release tag, deploy the Pages artifact, and verify representative public routes and metadata | Not a replacement for the `Quality` check |
 | `Release Please` | Pushes to `main` | Prepare a reviewed release pull request when release-worthy commits exist, then create the tag and GitHub Release after it merges | Not a merge gate; the release PR uses the normal `Quality` check |
 
@@ -15,6 +15,14 @@ DKKB has no persistent `dev`, `develop`, release, or hotfix branch. The branch m
 ## Quality gate
 
 `pnpm check` is the canonical repository-level quality command. It validates content, lints Markdown, runs tests, builds the site, validates built links, and scans representative rendered pages for machine-detectable accessibility violations.
+
+Browser-level smoke tests are separate. After `pnpm build`, run:
+
+```text
+pnpm test:e2e
+```
+
+The first local run also needs Playwright's Chromium browser: `pnpm exec playwright install chromium`. The `CI` workflow job `Browser` builds the site, installs Chromium, and runs that suite against `astro preview` on the configured `/dkkb/` base path. Failure traces stay in `playwright-report/` and `test-results/`. The suite covers homepage and sidebar rendering, search, glossary filtering, knowledge-graph loading, Mermaid rendering, theme and mobile navigation, internal navigation, and 404 handling. It does not replace unit, link, or accessibility checks.
 
 The accessibility scan uses the generated site rather than source markup alone. It checks the home page, glossary browser, knowledge graph, and a Mermaid-bearing knowledge entry in default and forced-dark rendering. The scanner runs WCAG 2.x Level A and AA rule tags, including the available WCAG 2.1 and 2.2 rules. Manual checks remain required for accessibility requirements that automation cannot prove; see [the accessibility standard](ACCESSIBILITY.md).
 

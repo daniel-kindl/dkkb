@@ -53,6 +53,14 @@ Run the complete quality gate with:
 pnpm check
 ```
 
+After a production build, run browser smoke tests with:
+
+```sh
+pnpm build
+pnpm exec playwright install chromium
+pnpm test:e2e
+```
+
 ## Contribution
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before changing knowledge content. AI agents must also follow [AGENTS.md](AGENTS.md).

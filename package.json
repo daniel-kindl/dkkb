@@ -5,7 +5,9 @@
   "description": "Daniel Kindl Knowledge Base: a public, version-controlled software engineering knowledge base.",
   "type": "module",
   "packageManager": "pnpm@11.25.0",
-  "engines": { "node": ">=22.13.0" },
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -20,6 +22,7 @@
     "report:freshness": "node scripts/report-freshness.mjs",
     "report:orphans": "node scripts/report-orphans.mjs",
     "test": "vitest run",
+    "test:e2e": "playwright test",
     "check": "pnpm validate:content && pnpm lint:markdown && pnpm test && pnpm build && pnpm validate:links && pnpm audit:accessibility"
   },
   "dependencies": {
@@ -29,6 +32,7 @@
     "mermaid": "11.17.2"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "markdownlint-cli2": "0.23.2",
     "vitest": "5.0.0",
     "yaml": "2.9.0"
