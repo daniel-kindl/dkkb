@@ -7,6 +7,10 @@ updates:
     groups:
       site-toolchain:
         patterns: ["*"]
+    ignore:
+      # astro-mermaid 2.1.0 supports mermaid ^10 || ^11 only. Remove when it supports 12.
+      - dependency-name: "mermaid"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
