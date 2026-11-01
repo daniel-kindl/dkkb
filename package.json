@@ -23,15 +23,15 @@
     "check": "pnpm validate:content && pnpm lint:markdown && pnpm test && pnpm build && pnpm validate:links && pnpm audit:accessibility"
   },
   "dependencies": {
-    "@astrojs/markdown-remark": "7.3.2",
-    "@astrojs/starlight": "0.42.6",
-    "astro": "7.3.8",
-    "astro-mermaid": "2.1.0",
+    "@astrojs/markdown-remark": "7.3.5",
+    "@astrojs/starlight": "0.42.7",
+    "astro": "7.4.4",
+    "astro-mermaid": "2.2.0",
     "mermaid": "11.17.2"
   },
   "devDependencies": {
-    "markdownlint-cli2": "0.23.3",
-    "vitest": "5.0.4",
+    "markdownlint-cli2": "0.24.0",
+    "vitest": "5.0.5",
     "yaml": "2.9.1"
   }
 }
